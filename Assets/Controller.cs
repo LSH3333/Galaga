@@ -24,6 +24,12 @@ public class Controller : MonoBehaviour
     private void Start()
     {
         t = 0;
+
+        Vector2 res = new Vector2(1, 2) - new Vector2(3, 2);
+
+        Vector2 v1 = Vector2.zero;
+        Vector2 v2 = new Vector2(3, 4);
+        
     }
 
 
