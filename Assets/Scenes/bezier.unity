@@ -511,7 +511,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1061747338}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -627,11 +627,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b844b1e03654decb1848b8be940e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  line: {fileID: 1061747339}
-  p1: {fileID: 65484631}
-  p2: {fileID: 950917889}
-  p3: {fileID: 1560944754}
   obj: {fileID: 557300898}
+  pointsPos:
+  - {fileID: 65484631}
+  - {fileID: 950917889}
+  - {fileID: 1560944754}
 --- !u!1 &1226562360
 GameObject:
   m_ObjectHideFlags: 0
