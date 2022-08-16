@@ -6,11 +6,12 @@ public class Controller : MonoBehaviour
 {
     // 증가되는 t 값 
     private float t;
+    // 증가 값 
+    public float t_increase;
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
     public Transform[] pointsPos;
-
 
 
     private void Start()
@@ -32,14 +33,13 @@ public class Controller : MonoBehaviour
     private Vector3 MovePosition(Vector3 p1, Vector3 p2)
     {
         Vector3 newPos = GetPos(p1, p2, t);
-        if (newPos.x > p2.x && newPos.y > p2.y)
-        {
-            t = 0;
-        }
-
         return GetPos(p1, p2, t);
     }
 
+    // n개의 점을 이어 n-1개의 선분 만들고
+    // 각 선분의 t값에 비례하는 곳에 점을 찍는다
+    // 즉 재귀함수 한번 호출마다 점의 갯수는 1씩 줄어들고 점의 갯수가 1이되면
+    // 그 점의 위치가 다음 위치가 된다 
     Vector3 dfs(ref List<Vector3> points)
     {
         // 점이 하나 남으면 종료 
@@ -55,12 +55,14 @@ public class Controller : MonoBehaviour
 
     private void Update()
     {
-        t += 0.0015f;
+        t += t_increase;
+        if (t >= 1) t = 0; // 반복되도록 t=1 도달시 0으로 초기화함 
 
         List<Vector3> points = new List<Vector3>();
         foreach (var x in pointsPos) points.Add(x.position);
+        // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points);
-
+        // 점 이동 
         obj.transform.position = newPoint;
     }
 
