@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Controller : MonoBehaviour
+public class BezierController : MonoBehaviour
 {
     // 증가되는 t 값 
     private float t;
