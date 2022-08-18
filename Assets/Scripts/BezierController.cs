@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// 하나의 오브젝트에 대하여 베지어 곡선을 그려서 이동하도록함 
 public class BezierController : MonoBehaviour
 {
     // 증가되는 t 값 
@@ -13,6 +14,10 @@ public class BezierController : MonoBehaviour
     // 조절점들 
     public Transform[] pointsPos;
 
+
+    private void Awake()
+    {
+    }
 
     private void Start()
     {
@@ -32,7 +37,6 @@ public class BezierController : MonoBehaviour
     // 두 점 p1, p2을 잇는 선분 위의 점 t값에 따라 이동시킨 지점 리턴 
     private Vector3 MovePosition(Vector3 p1, Vector3 p2)
     {
-        Vector3 newPos = GetPos(p1, p2, t);
         return GetPos(p1, p2, t);
     }
 
