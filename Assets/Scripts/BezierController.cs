@@ -13,7 +13,15 @@ public class BezierController : MonoBehaviour
     public GameObject obj;
     // 조절점들 
     public Transform[] pointsPos;
+    // 도착 지점
+    private float arrival_xpos;
+    private float arrival_ypos;
 
+    public float Arrival_xpos { get => arrival_xpos; set => arrival_xpos = value; }
+    public float Arrival_ypos { get => arrival_ypos; set => arrival_ypos = value; }
+
+    // 곡선 이동 완료후 자리로 돌아가는 속도 
+    private float speed = 4f;
 
     private void Awake()
     {
@@ -57,10 +65,22 @@ public class BezierController : MonoBehaviour
         return dfs(ref newPoints);
     }
 
+    // 개체의 도착지점으로 이동  
+    private void MoveToArrivePos()
+    {
+        obj.transform.position = Vector3.MoveTowards(obj.transform.position, new Vector3(arrival_xpos, arrival_ypos, 0f), Time.deltaTime * speed);
+    }
+
     private void Update()
     {
         t += t_increase;
-        if (t >= 1) t = 0; // 반복되도록 t=1 도달시 0으로 초기화함 
+        // 곡선 이동 완료
+        // 해당 개체의 자리로 이동 
+        if(t >= 1)
+        {
+            MoveToArrivePos();
+            return;
+        }
 
         List<Vector3> points = new List<Vector3>();
         foreach (var x in pointsPos) points.Add(x.position);
