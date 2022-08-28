@@ -1117,8 +1117,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objs:
   - {fileID: 8891872207755545182, guid: d1387661cd81ed44aae2d6b8afff08f6, type: 3}
-  - {fileID: 8891872207755545182, guid: d1387661cd81ed44aae2d6b8afff08f6, type: 3}
-  - {fileID: 8891872207755545182, guid: d1387661cd81ed44aae2d6b8afff08f6, type: 3}
 --- !u!4 &1589184123
 Transform:
   m_ObjectHideFlags: 0
@@ -1306,7 +1304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1747202144
 Transform:
   m_ObjectHideFlags: 0

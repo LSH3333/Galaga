@@ -9,6 +9,13 @@ public class SpawnEnemy : MonoBehaviour
     public GameObject[] objs;
     private float time;
     private int idx;
+    private const float spawnTimeRate = 120;
+
+    // 소환될 오브젝트들 받아서 세팅 
+    public void SetSpawnObjs(List<GameObject> objList)
+    {
+
+    }
 
     // 개체의 최종 도착 지점 설정  
     void SetArrivePos(ref GameObject obj)
@@ -40,24 +47,22 @@ public class SpawnEnemy : MonoBehaviour
     }
 
 
-
-
     private void Start()
     {
         idx = 0;
-        time = 120;
+        time = spawnTimeRate;
     }
 
 
     private void Update()
     {
-        if(time == 120 && idx < objs.Length)
+        if(time == spawnTimeRate && idx < objs.Length)
         {
             StartSpawn(idx);
             idx++;
         }
 
         time -= 1;
-        if (time <= 0) time = 120;
+        if (time <= 0) time = spawnTimeRate;
     }
 }
