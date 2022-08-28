@@ -22,7 +22,6 @@ public class SpawnEnemy : MonoBehaviour
     {
         foreach(var x in objList)
         {
-            //print("A: " + x.GetComponent<BezierController>().Arrival_xpos);
             objs.Add(x);
         }
     }

@@ -8,6 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
+    // 도착 위치 저장된 적 오브젝트 만들어서 리턴 
     private GameObject Make(int arrivePosIdx)
     {
         GameObject bc = BC;
