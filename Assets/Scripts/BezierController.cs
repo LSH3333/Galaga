@@ -16,6 +16,9 @@ public class BezierController : MonoBehaviour
     // 도착 지점
     private float arrival_xpos;
     private float arrival_ypos;
+    // 조절점들 
+    public GameObject p1, p2, p3, p4;
+
 
     public float Arrival_xpos { get => arrival_xpos; set => arrival_xpos = value; }
     public float Arrival_ypos { get => arrival_ypos; set => arrival_ypos = value; }
@@ -26,6 +29,7 @@ public class BezierController : MonoBehaviour
 
     private void Awake()
     {
+
     }
 
     private void Start()

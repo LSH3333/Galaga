@@ -8,6 +8,7 @@ public class SpawnEnemy : MonoBehaviour
     // 소환되는 개체들 
     private List<GameObject> objs = new List<GameObject>();
     List<KeyValuePair<float, float>> arrivePos_List;
+    List<KeyValuePair<float, float>> controlPoints;
 
     private float time;
     private int idx;
@@ -31,10 +32,17 @@ public class SpawnEnemy : MonoBehaviour
     public void SetSpawnObjs(List<KeyValuePair<float, float>> lists)
     {
         arrivePos_List = lists;
+
         for(int i = 0; i < lists.Count; i++)
         {
             objs.Add(Resources.Load("BezierController") as GameObject);
         }
+    }
+
+    // 조절점 설정 
+    public void SetBezierControlPoint(List<KeyValuePair<float, float>> lists)
+    {
+        controlPoints = lists;
     }
 
     public void SetEnemySpeed(float _speed)
@@ -47,9 +55,14 @@ public class SpawnEnemy : MonoBehaviour
     void StartSpawn(int idx)
     {
         GameObject instantiated = Instantiate(objs[idx]);
-        instantiated.GetComponent<BezierController>().Arrival_xpos = arrivePos_List[idx].Key;
-        instantiated.GetComponent<BezierController>().Arrival_ypos = arrivePos_List[idx].Value;
-        instantiated.GetComponent<BezierController>().T_increase = enemySpeed;
+        BezierController bc = instantiated.GetComponent<BezierController>();
+        bc.Arrival_xpos = arrivePos_List[idx].Key;
+        bc.Arrival_ypos = arrivePos_List[idx].Value;
+        bc.T_increase = enemySpeed;
+        bc.p1.transform.position = new Vector3(controlPoints[0].Key, controlPoints[0].Value, 0f);
+        bc.p2.transform.position = new Vector3(controlPoints[1].Key, controlPoints[1].Value, 0f);
+        bc.p3.transform.position = new Vector3(controlPoints[2].Key, controlPoints[2].Value, 0f);
+        bc.p4.transform.position = new Vector3(controlPoints[3].Key, controlPoints[3].Value, 0f);
     }
 
 
