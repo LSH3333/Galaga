@@ -27,15 +27,28 @@ public class LevelManager : MonoBehaviour
         spawnEnemy.StartSpawn(true);
     }
 
-    private void Start()
+    private void TestCase()
     {
         List<int> idxs = new List<int>();
-        for(int i = 0; i < 42; i++)
+        for (int i = 0; i < arrivePos.Length; i++)
         {
             idxs.Add(i);
         }
 
-        SetWave(idxs, 200f, 0.0005f);
+        SetWave(idxs, 200f, 0.001f);
+    }
+
+    private void Case1()
+    {
+        List<int> idxs = new List<int>();
+
+    }
+
+    private void Start()
+    {
+        //TestCase();
+
+
 
     }
 }
