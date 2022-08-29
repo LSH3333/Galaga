@@ -8,26 +8,26 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
-    // 도착 위치 저장된 적 오브젝트 만들어서 리턴 
-    private GameObject Make(int arrivePosIdx)
+
+    // idxs : arrivePos[]의 인덱스 값
+    // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
+    // 리스트 idxs의 크기만큼 적들 소환됨  
+    private void SetWave(List<int> idxs)
     {
-        GameObject bc = BC;
-        bc.GetComponent<BezierController>().Arrival_xpos = arrivePos[arrivePosIdx].gameObject.transform.position.x;
-        bc.GetComponent<BezierController>().Arrival_ypos = arrivePos[arrivePosIdx].gameObject.transform.position.y;
-        print(bc.GetComponent<BezierController>().Arrival_xpos);
-        return bc;
+        List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
+        foreach (var x in idxs)
+        {
+            KeyValuePair<float, float> p = new KeyValuePair<float, float>(arrivePos[x].transform.position.x, arrivePos[x].transform.position.y);
+            arrive_list.Add(p);
+        }
+
+        spawnEnemy.SetSpawnObjs(arrive_list);
+        spawnEnemy.StartSpawn(true);
     }
 
     private void Start()
     {
-        List<GameObject> objs = new List<GameObject>();
-        GameObject res1 = Make(0);
-        GameObject res2 = Make(1);
-        print("after: " + res1.GetComponent<BezierController>().Arrival_xpos);
-        print("after: " + res2.GetComponent<BezierController>().Arrival_xpos);
-        objs.Add(res1);
-        objs.Add(res2);
-        spawnEnemy.SetSpawnObjs(objs);
-        spawnEnemy.StartSpawn(true);
+        SetWave(new List<int> { 0, 1, 2, 3, 4 });
+
     }
 }

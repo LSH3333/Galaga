@@ -6,10 +6,13 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     // 소환되는 개체들 
-    public List<GameObject> objs;
+    public List<GameObject> objs = new List<GameObject>();
+    List<KeyValuePair<float, float>> arrivePos_List;
+
     private float time;
     private int idx;
-    private const float spawnTimeRate = 120;
+    // 소환주기, 짧을 수록 적들이 연달아 소환됨
+    private const float spawnTimeRate = 30;
 
     private bool startSpawn = false;
 
@@ -18,12 +21,13 @@ public class SpawnEnemy : MonoBehaviour
         startSpawn = trig;
     }
 
-    public void SetSpawnObjs(List<GameObject> objList)
+    
+    public void SetSpawnObjs(List<KeyValuePair<float, float>> lists)
     {
-        foreach(var x in objList)
+        arrivePos_List = lists;
+        for(int i = 0; i < lists.Count; i++)
         {
-            //print(x.GetComponent<BezierController>().Arrival_xpos);
-            objs.Add(x);
+            objs.Add(Resources.Load("BezierController") as GameObject);
         }
     }
 
@@ -51,8 +55,8 @@ public class SpawnEnemy : MonoBehaviour
     void StartSpawn(int idx)
     {
         GameObject instantiated = Instantiate(objs[idx]);
-        instantiated.GetComponent<BezierController>().Arrival_xpos = objs[idx].GetComponent<BezierController>().Arrival_xpos;
-        instantiated.GetComponent<BezierController>().Arrival_ypos = objs[idx].GetComponent<BezierController>().Arrival_ypos;
+        instantiated.GetComponent<BezierController>().Arrival_xpos = arrivePos_List[idx].Key;
+        instantiated.GetComponent<BezierController>().Arrival_ypos = arrivePos_List[idx].Value;
     }
 
 
