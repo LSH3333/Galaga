@@ -7,8 +7,8 @@ public class BezierController : MonoBehaviour
 {
     // 증가되는 t 값 
     private float t;
-    // 증가 값 
-    public float t_increase;
+    // 증가 값, 클수록 적의 움직임이 빠름  
+    private float t_increase;
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
@@ -19,6 +19,7 @@ public class BezierController : MonoBehaviour
 
     public float Arrival_xpos { get => arrival_xpos; set => arrival_xpos = value; }
     public float Arrival_ypos { get => arrival_ypos; set => arrival_ypos = value; }
+    public float T_increase { get => t_increase; set => t_increase = value; }
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;

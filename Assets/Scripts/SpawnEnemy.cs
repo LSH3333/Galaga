@@ -13,6 +13,8 @@ public class SpawnEnemy : MonoBehaviour
     private int idx;
     // 소환주기, 짧을 수록 적들이 연달아 소환됨
     private float spawnTimeRate = 30;
+    // 적 움직임 속도 
+    private float enemySpeed;
 
     private bool startSpawn = false;
 
@@ -35,25 +37,11 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
-    // 개체의 최종 도착 지점 설정  
-    void SetArrivePos()
+    public void SetEnemySpeed(float _speed)
     {
-        
-    }
-
-    void SetControlPoint(ref GameObject obj)
-    {
-    }
-
-    void SetSpawnPos(ref GameObject obj)
-    {
+        enemySpeed = _speed;
     }
     
-    // 소환 진행전 개체 설정 
-    void SetObj()
-    {
-
-    }
 
     // objs의 idx번째 소환 
     void StartSpawn(int idx)
@@ -61,6 +49,7 @@ public class SpawnEnemy : MonoBehaviour
         GameObject instantiated = Instantiate(objs[idx]);
         instantiated.GetComponent<BezierController>().Arrival_xpos = arrivePos_List[idx].Key;
         instantiated.GetComponent<BezierController>().Arrival_ypos = arrivePos_List[idx].Value;
+        instantiated.GetComponent<BezierController>().T_increase = enemySpeed;
     }
 
 
@@ -68,14 +57,15 @@ public class SpawnEnemy : MonoBehaviour
     {
         idx = 0;
         time = spawnTimeRate;
+        
     }
 
 
     private void Update()
     {
         if (!startSpawn) return;
-
-        if(time == spawnTimeRate && idx < objs.Count)
+        
+        if (time == spawnTimeRate && idx < objs.Count)
         {
             StartSpawn(idx);
             idx++;

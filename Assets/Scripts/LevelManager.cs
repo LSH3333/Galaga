@@ -12,7 +12,7 @@ public class LevelManager : MonoBehaviour
     // idxs : arrivePos[]의 인덱스 값
     // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
     // 리스트 idxs의 크기만큼 적들 소환됨  
-    private void SetWave(List<int> idxs, float spawnTimeRate)
+    private void SetWave(List<int> idxs, float spawnTimeRate, float enemySpeed)
     {
         List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
         foreach (var x in idxs)
@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
         }
 
         spawnEnemy.SetSpawnTimeRate(spawnTimeRate);
+        spawnEnemy.SetEnemySpeed(enemySpeed);
         spawnEnemy.SetSpawnObjs(arrive_list);
         spawnEnemy.StartSpawn(true);
     }
@@ -34,7 +35,7 @@ public class LevelManager : MonoBehaviour
             idxs.Add(i);
         }
 
-        SetWave(idxs, 15f);
+        SetWave(idxs, 200f, 0.0005f);
 
     }
 }
