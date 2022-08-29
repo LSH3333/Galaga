@@ -13,14 +13,20 @@ public class LevelManager : MonoBehaviour
     {
         GameObject bc = BC;
         bc.GetComponent<BezierController>().Arrival_xpos = arrivePos[arrivePosIdx].gameObject.transform.position.x;
-        bc.GetComponent<BezierController>().Arrival_ypos = arrivePos[arrivePosIdx].gameObject.transform.position.y;      
+        bc.GetComponent<BezierController>().Arrival_ypos = arrivePos[arrivePosIdx].gameObject.transform.position.y;
+        print(bc.GetComponent<BezierController>().Arrival_xpos);
         return bc;
     }
 
     private void Start()
     {
         List<GameObject> objs = new List<GameObject>();
-        objs.Add(Make(0));
+        GameObject res1 = Make(0);
+        GameObject res2 = Make(1);
+        print("after: " + res1.GetComponent<BezierController>().Arrival_xpos);
+        print("after: " + res2.GetComponent<BezierController>().Arrival_xpos);
+        objs.Add(res1);
+        objs.Add(res2);
         spawnEnemy.SetSpawnObjs(objs);
         spawnEnemy.StartSpawn(true);
     }
