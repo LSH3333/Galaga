@@ -6,13 +6,13 @@ using UnityEngine;
 public class SpawnEnemy : MonoBehaviour
 {
     // 소환되는 개체들 
-    public List<GameObject> objs = new List<GameObject>();
+    private List<GameObject> objs = new List<GameObject>();
     List<KeyValuePair<float, float>> arrivePos_List;
 
     private float time;
     private int idx;
     // 소환주기, 짧을 수록 적들이 연달아 소환됨
-    private const float spawnTimeRate = 30;
+    private float spawnTimeRate = 30;
 
     private bool startSpawn = false;
 
@@ -21,7 +21,11 @@ public class SpawnEnemy : MonoBehaviour
         startSpawn = trig;
     }
 
-    
+    public void SetSpawnTimeRate(float _spawnTimeRate)
+    {
+        spawnTimeRate = _spawnTimeRate;
+    }
+
     public void SetSpawnObjs(List<KeyValuePair<float, float>> lists)
     {
         arrivePos_List = lists;
