@@ -8,10 +8,14 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
-    private float speed = 0.7f, spawnRate = 0.3f; 
+    private float speed = 0.5f, spawnRate = 0.3f; 
 
     // true면 해당 칸 이미 적이 자리 차지함 
     private bool[] markArrivePos = new bool[55];
+
+    private float t, timeSpeed = 0.2f;
+
+
 
     // 적들의 시작점인 p1의 위치들 
     KeyValueList<float, float> p1Pos = new KeyValueList<float, float>
@@ -94,7 +98,7 @@ public class LevelManager : MonoBehaviour
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
     // 리스트 idxs의 크기만큼 적들 소환됨  
-    private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float enemySpeed, float spawnTimeRate)
+    private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
     {
         List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
         foreach (var x in idxs)
@@ -120,35 +124,50 @@ public class LevelManager : MonoBehaviour
     // p2, p3 는 랜덤 
     private void TestCase()
     {
-        List<int> enemies = new List<int>();
-        List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
+        List<int> enemies;
+        List<KeyValuePair<float, float>> controlPoints;
 
         enemies = GetRandomIdxList();
         controlPoints = GetRandomControlPoints();
+        SetWave(enemies, controlPoints, spawnRate, speed);
 
+        enemies = GetRandomIdxList();
+        controlPoints = GetRandomControlPoints();
         SetWave(enemies, controlPoints, spawnRate, speed);
     }
 
-    private void Case1()
+    private void OneWave()
     {
-        List<int> enemies = new List<int>(); 
-        List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
-
-        enemies = new List<int> { GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx() };
-        controlPoints = GetPairs(pattern1, false);
-        SetWave(enemies, controlPoints, spawnRate, speed);
-
-        enemies = new List<int> { GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx() };
-        controlPoints = GetPairs(pattern1, true);
-        SetWave(enemies, controlPoints, spawnRate, speed);
+        List<int> enemies;
+        List<KeyValuePair<float, float>> controlPoints;
+        // 한번에 1 or 2의 wave  
+        int waveCnt = Random.Range(1, 3);
+        for(int i = 0; i < waveCnt; i++)
+        {
+            enemies = GetRandomIdxList();
+            controlPoints = GetRandomControlPoints();
+            SetWave(enemies, controlPoints, spawnRate, speed);
+        }
     }
+
 
     private void Start()
     {
-        TestCase();
+        //TestCase();
 
-        //Case1();
+        OneWave();
 
 
+    }
+
+    private void Update()
+    {
+        t += Time.deltaTime * timeSpeed;
+
+        if (t >= 1)
+        {
+            t = 0;
+            OneWave();
+        }
     }
 }
