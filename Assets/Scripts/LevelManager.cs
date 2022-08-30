@@ -8,11 +8,8 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
-<<<<<<< HEAD
-    public float speed = 2000f, spawnRate = 0.011f;
-=======
     private float speed = 0.7f, spawnRate = 0.3f; 
->>>>>>> test2
+
     // true면 해당 칸 이미 적이 자리 차지함 
     private bool[] markArrivePos = new bool[55];
 
