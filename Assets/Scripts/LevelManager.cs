@@ -8,9 +8,42 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
+    private float speed = 20f, spawnRate = 0.011f;
+
+    public class KeyValueList<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
+    {
+        public void Add(TKey key, TValue value)
+        {
+            Add(new KeyValuePair<TKey, TValue>(key, value));
+        }
+    }
+
+    // 우측 상단에서 좌측 하단으로 곡선 이동하면서 한바퀴 도는 패턴 
+    KeyValueList<float, float> pattern1 = new KeyValueList<float, float>
+    {
+        {2.37f, 5.58f }, {-5.18f, 0.75f}, {0.1f, -3.92f}, {0.23f, 1.99f}
+    };
+
+
+
+
+    // keyValList : pattern 전달하면 해당되는 List<KeyValuePair<>> 리턴함
+    // reverse : pattern 의 반전버전 리턴 
+    private List<KeyValuePair<float, float>> GetPairs(KeyValueList<float, float> keyValList, bool reverse)
+    {
+        List<KeyValuePair<float, float>> ret = new List<KeyValuePair<float, float>>();
+        foreach (var x in keyValList)
+        {
+            if (reverse) ret.Add(new KeyValuePair<float, float>(-1 * x.Key, x.Value));
+            else ret.Add(x);
+        }
+        return ret;
+    }
+
 
     // idxs : arrivePos[]의 인덱스 값
-    // controlPoints : 조절점들 위치 
+    // controlPoints : 조절점들 위치
+    // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
     // 리스트 idxs의 크기만큼 적들 소환됨  
     private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
@@ -21,50 +54,31 @@ public class LevelManager : MonoBehaviour
             KeyValuePair<float, float> p = new KeyValuePair<float, float>(arrivePos[x].transform.position.x, arrivePos[x].transform.position.y);
             arrive_list.Add(p);
         }
-
-        spawnEnemy.SetSpawnTimeRate(spawnTimeRate);
-        spawnEnemy.SetBezierControlPoint(controlPoints);
-        spawnEnemy.SetEnemySpeed(enemySpeed);
-        spawnEnemy.SetSpawnObjs(arrive_list);
-        spawnEnemy.StartSpawn(true);
+        // SpawnEnemy 인스턴스 만들어서 wave 소환하도록 함 
+        GameObject seResource = Resources.Load("SpawnEnemy") as GameObject;
+        GameObject instanitated = Instantiate(seResource);
+        SpawnEnemy se = instanitated.GetComponent<SpawnEnemy>();
+        se.SetSpawnTimeRate(spawnTimeRate);
+        se.SetBezierControlPoint(controlPoints);
+        se.SetEnemySpeed(enemySpeed);
+        se.SetSpawnObjs(arrive_list);
+        se.StartSpawn(true);
     }
 
-    private void TestCase()
-    {
-        List<int> idxs = new List<int>();
-        List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
-
-        for (int i = 0; i < 4; i++)
-        {
-            idxs.Add(i);
-        }
-
-        controlPoints.Add(new KeyValuePair<float, float>(2.37f, 5.58f));
-        controlPoints.Add(new KeyValuePair<float, float>(-5.18f, 0.75f));
-        controlPoints.Add(new KeyValuePair<float, float>(0.1f, -3.92f));
-        controlPoints.Add(new KeyValuePair<float, float>(0.23f, 1.99f));
-
-
-        SetWave(idxs, controlPoints, 200f, 0.001f);
-    }
 
     private void Case1()
     {
-        List<int> idxs = new List<int>();
+        List<int> enemies = new List<int>(); 
         List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
 
-        idxs.Add(37);
-        idxs.Add(38);
-        idxs.Add(48);
-        idxs.Add(49);
+        enemies = new List<int> { 37, 38, 48, 49 };
+        controlPoints = GetPairs(pattern1, false);
+        SetWave(enemies, controlPoints, speed, spawnRate);
 
-        controlPoints.Add(new KeyValuePair<float, float>(2.37f, 5.58f));
-        controlPoints.Add(new KeyValuePair<float, float>(-5.18f, 0.75f));
-        controlPoints.Add(new KeyValuePair<float, float>(0.1f, -3.92f));
-        controlPoints.Add(new KeyValuePair<float, float>(0.23f, 1.99f));
 
-        SetWave(idxs, controlPoints, 200f, 0.001f);
-
+        enemies = new List<int> { 40, 39, 51, 50 };
+        controlPoints = GetPairs(pattern1, true);
+        SetWave(enemies, controlPoints, speed, spawnRate);
     }
 
     private void Start()
