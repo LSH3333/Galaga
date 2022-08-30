@@ -9,6 +9,9 @@ public class LevelManager : MonoBehaviour
     public SpawnEnemy spawnEnemy;
 
     private float speed = 20f, spawnRate = 0.011f;
+    // true면 해당 칸 이미 적이 자리 차지함 
+    private bool[] markArrivePos = new bool[55];
+
 
     public class KeyValueList<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
     {
@@ -24,9 +27,6 @@ public class LevelManager : MonoBehaviour
         {2.37f, 5.58f }, {-5.18f, 0.75f}, {0.1f, -3.92f}, {0.23f, 1.99f}
     };
 
-
-
-
     // keyValList : pattern 전달하면 해당되는 List<KeyValuePair<>> 리턴함
     // reverse : pattern 의 반전버전 리턴 
     private List<KeyValuePair<float, float>> GetPairs(KeyValueList<float, float> keyValList, bool reverse)
@@ -38,6 +38,20 @@ public class LevelManager : MonoBehaviour
             else ret.Add(x);
         }
         return ret;
+    }
+
+    // 남은 도착자리 탐색해서 인덱스 리턴 
+    private int GetRandomPosIdx()
+    {               
+        while(true)
+        {
+            int res = Random.Range(0, 55);
+            if(!markArrivePos[res])
+            {
+                markArrivePos[res] = true;
+                return res;
+            }
+        }
     }
 
 
@@ -66,17 +80,26 @@ public class LevelManager : MonoBehaviour
     }
 
 
+
+
+    private void TestCase()
+    {
+        List<int> enemies = new List<int>();
+        List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
+
+        
+    }
+
     private void Case1()
     {
         List<int> enemies = new List<int>(); 
         List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
 
-        enemies = new List<int> { 37, 38, 48, 49 };
+        enemies = new List<int> { GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx() };
         controlPoints = GetPairs(pattern1, false);
         SetWave(enemies, controlPoints, speed, spawnRate);
 
-
-        enemies = new List<int> { 40, 39, 51, 50 };
+        enemies = new List<int> { GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx() };
         controlPoints = GetPairs(pattern1, true);
         SetWave(enemies, controlPoints, speed, spawnRate);
     }
