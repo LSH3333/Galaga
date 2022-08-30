@@ -12,6 +12,20 @@ public class LevelManager : MonoBehaviour
     // true면 해당 칸 이미 적이 자리 차지함 
     private bool[] markArrivePos = new bool[55];
 
+    // 적들의 시작점인 p1의 위치들 
+    KeyValueList<float, float> p1Pos = new KeyValueList<float, float>
+    {
+        {2.37f, 5.58f }, {-2.37f, 5.58f }, {4f, -2.78f}, {-4f, -2.78f}
+    };
+
+
+    // 우측 상단에서 좌측 하단으로 곡선 이동하면서 한바퀴 도는 패턴 
+    KeyValueList<float, float> pattern1 = new KeyValueList<float, float>
+    {
+        {2.37f, 5.58f }, {-5.18f, 0.75f}, {0.1f, -3.92f}, {0.23f, 1.99f}
+    };
+
+
 
     public class KeyValueList<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
     {
@@ -21,11 +35,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // 우측 상단에서 좌측 하단으로 곡선 이동하면서 한바퀴 도는 패턴 
-    KeyValueList<float, float> pattern1 = new KeyValueList<float, float>
-    {
-        {2.37f, 5.58f }, {-5.18f, 0.75f}, {0.1f, -3.92f}, {0.23f, 1.99f}
-    };
 
     // keyValList : pattern 전달하면 해당되는 List<KeyValuePair<>> 리턴함
     // reverse : pattern 의 반전버전 리턴 
@@ -37,6 +46,19 @@ public class LevelManager : MonoBehaviour
             if (reverse) ret.Add(new KeyValuePair<float, float>(-1 * x.Key, x.Value));
             else ret.Add(x);
         }
+        return ret;
+    }
+
+    // 랜덤한 4개의 컨트롤 포인트 리턴 
+    private List<KeyValuePair<float, float>> GetRandomControlPoints()
+    {
+        List<KeyValuePair<float, float>> ret = new List<KeyValuePair<float, float>>();
+
+        int idx = Random.Range(0, p1Pos.Count);
+        ret.Add(new KeyValuePair<float, float>(p1Pos[idx].Key, p1Pos[idx].Value));
+        ret.Add(new KeyValuePair<float, float>(Random.Range(-2.3f, 2.3f), Random.Range(2f, -4f)));
+        ret.Add(new KeyValuePair<float, float>(Random.Range(-2.3f, 2.3f), Random.Range(2f, -4f)));
+        ret.Add(new KeyValuePair<float, float>(0.23f, 1.99f));
         return ret;
     }
 
@@ -52,6 +74,17 @@ public class LevelManager : MonoBehaviour
                 return res;
             }
         }
+    }
+
+    // 중복되지 않는 랜덤 숫자가 담긴 리스트 리턴 
+    private List<int> GetRandomIdxList()
+    {
+        List<int> ret = new List<int>();
+        ret.Add(GetRandomPosIdx());
+        ret.Add(GetRandomPosIdx());
+        ret.Add(GetRandomPosIdx());
+        ret.Add(GetRandomPosIdx());
+        return ret;
     }
 
 
@@ -81,13 +114,18 @@ public class LevelManager : MonoBehaviour
 
 
 
-
+    // 조절점 p1, p2, p3, p4
+    // 시작점인 p1은 네곳중 랜덤으로 도착지점인 p4는 고정
+    // p2, p3 는 랜덤 
     private void TestCase()
     {
         List<int> enemies = new List<int>();
         List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
 
-        
+        enemies = GetRandomIdxList();
+        controlPoints = GetRandomControlPoints();
+
+        SetWave(enemies, controlPoints, speed, spawnRate);
     }
 
     private void Case1()
@@ -106,9 +144,9 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        //TestCase();
+        TestCase();
 
-        Case1();
+        //Case1();
 
 
     }
