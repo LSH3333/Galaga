@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
-    private float speed = 20f, spawnRate = 0.011f;
+    public float speed = 2000f, spawnRate = 0.011f;
     // true면 해당 칸 이미 적이 자리 차지함 
     private bool[] markArrivePos = new bool[55];
 
@@ -125,7 +125,7 @@ public class LevelManager : MonoBehaviour
         enemies = GetRandomIdxList();
         controlPoints = GetRandomControlPoints();
 
-        SetWave(enemies, controlPoints, speed, spawnRate);
+        SetWave(enemies, controlPoints, spawnRate, speed);
     }
 
     private void Case1()
@@ -135,11 +135,11 @@ public class LevelManager : MonoBehaviour
 
         enemies = new List<int> { GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx() };
         controlPoints = GetPairs(pattern1, false);
-        SetWave(enemies, controlPoints, speed, spawnRate);
+        SetWave(enemies, controlPoints, spawnRate, speed);
 
         enemies = new List<int> { GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx(), GetRandomPosIdx() };
         controlPoints = GetPairs(pattern1, true);
-        SetWave(enemies, controlPoints, speed, spawnRate);
+        SetWave(enemies, controlPoints, spawnRate, speed);
     }
 
     private void Start()
