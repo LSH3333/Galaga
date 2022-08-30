@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
-    private float speed = 20f, spawnRate = 0.011f;
+    private float speed = 0.7f, spawnRate = 0.3f; 
     // true면 해당 칸 이미 적이 자리 차지함 
     private bool[] markArrivePos = new bool[55];
 
@@ -93,7 +93,7 @@ public class LevelManager : MonoBehaviour
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
     // 리스트 idxs의 크기만큼 적들 소환됨  
-    private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
+    private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float enemySpeed, float spawnTimeRate)
     {
         List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
         foreach (var x in idxs)

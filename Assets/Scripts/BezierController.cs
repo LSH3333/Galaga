@@ -78,7 +78,7 @@ public class BezierController : MonoBehaviour
 
     private void Update()
     {
-        t += t_increase;
+        t += Time.deltaTime * t_increase;
         // 곡선 이동 완료
         // 해당 개체의 자리로 이동 
         if(t >= 1)

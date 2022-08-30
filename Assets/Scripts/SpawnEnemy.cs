@@ -84,7 +84,7 @@ public class SpawnEnemy : MonoBehaviour
             idx++;
         }
 
-        time -= 1;
+        time -= Time.deltaTime;
         if (time <= 0) time = spawnTimeRate;
     }
 }
