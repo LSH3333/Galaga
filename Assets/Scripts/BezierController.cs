@@ -62,7 +62,11 @@ public class BezierController : MonoBehaviour
     Vector3 dfs(ref List<Vector3> points)
     {
         // 점이 하나 남으면 종료 
-        if (points.Count == 1) return points[0];
+        if (points.Count == 1)
+        {
+            RotateDir(points[0]);
+            return points[0];
+        }
 
         List<Vector3> newPoints = new List<Vector3>(); 
         for (int i = 0; i < points.Count - 1; i++)
@@ -72,11 +76,21 @@ public class BezierController : MonoBehaviour
         return dfs(ref newPoints);
     }
 
+    // obj가 베지어 곡선의 방향으로 바라보도록 함 
+    private void RotateDir(Vector3 nextPos)
+    {
+        Vector3 dir = nextPos - obj.transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        obj.transform.rotation = Quaternion.Euler(0, 0, angle);
+    }
+
     // 개체의 도착지점으로 이동  
     private void MoveToArrivePos()
     {
         obj.transform.position = Vector3.MoveTowards(obj.transform.position, new Vector3(arrivePoint.transform.position.x, arrivePoint.transform.position.y, 0f), Time.deltaTime * speed);
     }
+
+  
 
     private void Update()
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 // 적의 본체 obj 
 public class BezierObjManager : MonoBehaviour
