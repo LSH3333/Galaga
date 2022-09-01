@@ -103,6 +103,7 @@ public class BezierController : MonoBehaviour
             // obj가 최종 도착지점에 도착했음  
             if (obj.transform.position == ArrivePoint.transform.position)
             {
+                obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
                 arrived = true;
             }
             return;
