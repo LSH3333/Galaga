@@ -102,7 +102,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    // idxs : arrivePos[]의 인덱스 값
+    // idxs : arrivePos[]의 인덱스 값, obj는 해당 인덱스의 ArrivePos로 이동함 
     // controlPoints : 조절점들 위치
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
@@ -110,6 +110,7 @@ public class LevelManager : MonoBehaviour
     private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
     {
         List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
+        
         foreach (var x in idxs)
         {
             KeyValuePair<float, float> p = new KeyValuePair<float, float>(arrivePos[x].transform.position.x, arrivePos[x].transform.position.y);
