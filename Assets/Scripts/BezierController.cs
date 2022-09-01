@@ -19,11 +19,15 @@ public class BezierController : MonoBehaviour
     // 조절점들 
     public GameObject p1, p2, p3, p4;
 
-    public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
-    public float T_increase { get => t_increase; set => t_increase = value; }
-
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;
+    // 최종 도착지점에 도착했음
+    private bool arrived = false;
+
+
+    public bool Arrived { get => arrived; set => arrived = value; }
+    public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
+    public float T_increase { get => t_increase; set => t_increase = value; }
 
     private void Awake()
     {
@@ -82,6 +86,11 @@ public class BezierController : MonoBehaviour
         if(t >= 1)
         {
             MoveToArrivePos();
+            // obj가 최종 도착지점에 도착했음  
+            if (obj.transform.position == ArrivePoint.transform.position)
+            {
+                arrived = true;
+            }
             return;
         }
 

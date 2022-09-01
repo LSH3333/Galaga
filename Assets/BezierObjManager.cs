@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class BezierObjManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public BezierController bc;
 
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
-        
+        if(bc.ArrivePoint != null && bc.Arrived)
+        {
+            Vector3 arrviePos = bc.ArrivePoint.transform.position;
+            gameObject.transform.position = arrviePos;
+        }
     }
 }
