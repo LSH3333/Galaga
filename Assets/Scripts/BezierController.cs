@@ -13,15 +13,13 @@ public class BezierController : MonoBehaviour
     public GameObject obj;
     // 조절점들 
     public Transform[] pointsPos;
-    // 도착 지점
-    private float arrival_xpos;
-    private float arrival_ypos;
+    // 도착 지점 오브젝트 
+    private GameObject arrivePoint;
+
     // 조절점들 
     public GameObject p1, p2, p3, p4;
 
-
-    public float Arrival_xpos { get => arrival_xpos; set => arrival_xpos = value; }
-    public float Arrival_ypos { get => arrival_ypos; set => arrival_ypos = value; }
+    public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
     public float T_increase { get => t_increase; set => t_increase = value; }
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
@@ -73,7 +71,7 @@ public class BezierController : MonoBehaviour
     // 개체의 도착지점으로 이동  
     private void MoveToArrivePos()
     {
-        obj.transform.position = Vector3.MoveTowards(obj.transform.position, new Vector3(arrival_xpos, arrival_ypos, 0f), Time.deltaTime * speed);
+        obj.transform.position = Vector3.MoveTowards(obj.transform.position, new Vector3(arrivePoint.transform.position.x, arrivePoint.transform.position.y, 0f), Time.deltaTime * speed);
     }
 
     private void Update()

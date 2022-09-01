@@ -87,35 +87,31 @@ public class LevelManager : MonoBehaviour
         return -1;
     }
 
-    // 중복되지 않는 랜덤 숫자가 담긴 리스트 리턴 
-    private List<int> GetRandomIdxList()
+    // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴   
+    private List<GameObject> GetRandomIdxList()
     {
-        List<int> ret = new List<int>();
+        //List<int> ret = new List<int>();
+        List<GameObject> ret = new List<GameObject>();
         for(int i = 0; i < 4; i++)
         {
             int idx = GetRandomPosIdx();
             if (idx == -1) break;
-            ret.Add(idx);
+            ret.Add(arrivePos[idx]);
         }
 
         return ret;
     }
 
 
-    // idxs : arrivePos[]의 인덱스 값, obj는 해당 인덱스의 ArrivePos로 이동함 
+    // arrivePoints : 도착 지점 오브젝트 레퍼런스  
     // controlPoints : 조절점들 위치
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
     // 리스트 idxs의 크기만큼 적들 소환됨  
-    private void SetWave(List<int> idxs, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
+    private void SetWave(List<GameObject> arrivePoints, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
     {
         List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
-        
-        foreach (var x in idxs)
-        {
-            KeyValuePair<float, float> p = new KeyValuePair<float, float>(arrivePos[x].transform.position.x, arrivePos[x].transform.position.y);
-            arrive_list.Add(p);
-        }
+
         // SpawnEnemy 인스턴스 만들어서 wave 소환하도록 함 
         GameObject seResource = Resources.Load("SpawnEnemy") as GameObject;
         GameObject instanitated = Instantiate(seResource);
@@ -123,32 +119,14 @@ public class LevelManager : MonoBehaviour
         se.SetSpawnTimeRate(spawnTimeRate);
         se.SetBezierControlPoint(controlPoints);
         se.SetEnemySpeed(enemySpeed);
-        se.SetSpawnObjs(arrive_list);
+        se.SetSpawnObjs(arrivePoints);
         se.StartSpawn(true);
     }
 
 
-
-    // 조절점 p1, p2, p3, p4
-    // 시작점인 p1은 네곳중 랜덤으로 도착지점인 p4는 고정
-    // p2, p3 는 랜덤 
-    private void TestCase()
-    {
-        List<int> enemies;
-        List<KeyValuePair<float, float>> controlPoints;
-
-        enemies = GetRandomIdxList();
-        controlPoints = GetRandomControlPoints();
-        SetWave(enemies, controlPoints, spawnRate, speed);
-
-        enemies = GetRandomIdxList();
-        controlPoints = GetRandomControlPoints();
-        SetWave(enemies, controlPoints, spawnRate, speed);
-    }
-
     private void OneWave()
     {
-        List<int> enemies;
+        List<GameObject> enemies;
         List<KeyValuePair<float, float>> controlPoints;
         // 한번에 1 or 2의 wave  
         int waveCnt = Random.Range(1, 3);
