@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
-{    
+{
+    // 적들 도착 위치 
     public GameObject[] arrivePos;
+    // 남은 도착 위치 갯수 0이면 남은 자리가 없다는것 
+    private int arrivePosLeft; 
+
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
@@ -70,25 +74,30 @@ public class LevelManager : MonoBehaviour
     // 남은 도착자리 탐색해서 인덱스 리턴 
     private int GetRandomPosIdx()
     {               
-        while(true)
+        while(arrivePosLeft > 0)
         {
             int res = Random.Range(0, 55);
             if(!markArrivePos[res])
             {
                 markArrivePos[res] = true;
+                arrivePosLeft--;
                 return res;
             }
         }
+        return -1;
     }
 
     // 중복되지 않는 랜덤 숫자가 담긴 리스트 리턴 
     private List<int> GetRandomIdxList()
     {
         List<int> ret = new List<int>();
-        ret.Add(GetRandomPosIdx());
-        ret.Add(GetRandomPosIdx());
-        ret.Add(GetRandomPosIdx());
-        ret.Add(GetRandomPosIdx());
+        for(int i = 0; i < 4; i++)
+        {
+            int idx = GetRandomPosIdx();
+            if (idx == -1) break;
+            ret.Add(idx);
+        }
+
         return ret;
     }
 
@@ -153,15 +162,15 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        //TestCase();
-
-        OneWave();
+        arrivePosLeft = arrivePos.Length;
 
 
     }
 
     private void Update()
     {
+        if (arrivePosLeft <= 0) return;
+
         t += Time.deltaTime * timeSpeed;
 
         if (t >= 1)
