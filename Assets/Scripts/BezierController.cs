@@ -108,6 +108,34 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
+    ////////////////////////////////////////////
+
+    // 제 자리에서 반 원 그리고 player에게 이동하도록 controlPoints 위치 설정함 
+    private void SetMoveAttackControlPoints()
+    {
+        // p1 
+        controlPoints[0].position = obj.transform.position;
+        // p2 
+        controlPoints[1].position = new Vector3(
+            controlPoints[0].position.x + 1f,
+            controlPoints[0].position.y + 1f,
+            0f);
+        // p3 
+        controlPoints[2].position = new Vector3(
+            controlPoints[1].position.x + 1f,
+            controlPoints[0].position.y,
+            0f);
+
+    }
+
+    // obj가 player에게 제자리에서 돌고 이동하도록함  
+    public void MoveAttack()
+    {
+
+    }
+
+    ////////////////////////////////////////////
+
     private void Update()
     {
         t += Time.deltaTime * t_increase;

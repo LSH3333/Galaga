@@ -441,7 +441,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5058876196642261241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.66, y: 2.06, z: 0}
+  m_LocalPosition: {x: -0.5, y: 2.06, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 5058876197508039974}
@@ -518,15 +518,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 8246041812673854844}
-  pointsPos:
-  - {fileID: 5058876196642261246}
-  - {fileID: 5058876197534983339}
-  - {fileID: 5058876198015705048}
-  - {fileID: 5058876198189716999}
-  p1: {fileID: 5058876196642261241}
-  p2: {fileID: 5058876197534983511}
-  p3: {fileID: 5058876198015705028}
-  p4: {fileID: 5058876198189716998}
+  controlPoints: []
+  cpCnt: 0
 --- !u!120 &5058876197534983336
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -632,7 +625,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5058876197534983511}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.48, y: 3.12, z: 0}
+  m_LocalPosition: {x: 0.5, y: 3, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children: []
   m_Father: {fileID: 5058876197508039974}
