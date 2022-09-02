@@ -13,11 +13,15 @@ public class BezierController : MonoBehaviour
     public GameObject obj;
     // 조절점들 
     public Transform[] controlPoints;
+    //public List<Vector3> controlPoints = new List<Vector3>();
+    // 베지어 곡선에 영향 미치는 조절점 갯수
+    public int cpCnt;
+
     // 도착 지점 오브젝트 
     private GameObject arrivePoint;
 
-    // 조절점들 
-    //public GameObject p1, p2, p3, p4;
+    
+   
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;
@@ -95,7 +99,7 @@ public class BezierController : MonoBehaviour
     private void MoveBezierCurve()
     {
         List<Vector3> points = new List<Vector3>();
-        foreach (var x in controlPoints) points.Add(x.position);
+        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);
 
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points);
