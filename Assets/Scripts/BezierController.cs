@@ -99,11 +99,16 @@ public class BezierController : MonoBehaviour
         // 해당 개체의 자리로 이동 
         if(t >= 1)
         {
-            MoveToArrivePos();
-            // obj가 최종 도착지점에 도착했음  
-            if (obj.transform.position == ArrivePoint.transform.position)
+            if(!arrived)
             {
                 obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
+                MoveToArrivePos();
+            }
+            
+                        
+            // obj가 최종 도착지점에 도착했음
+            if (obj.transform.position == ArrivePoint.transform.position)
+            {
                 arrived = true;
             }
             return;
