@@ -8,6 +8,6 @@ public class TestClass : MonoBehaviour
 
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, -1 * Time.deltaTime * 4f);
+
     }
 }

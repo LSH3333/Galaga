@@ -41,7 +41,7 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
-    // 조절점 설정 
+    // 조절점 설정, LevelManager에서 조절점 리스트 받아옴  
     public void SetBezierControlPoint(List<KeyValuePair<float, float>> lists)
     {
         controlPoints = lists;
@@ -61,10 +61,11 @@ public class SpawnEnemy : MonoBehaviour
         bc.ArrivePoint = arrivePos_List[idx];
 
         bc.T_increase = enemySpeed;
-        bc.p1.transform.position = new Vector3(controlPoints[0].Key, controlPoints[0].Value, 0f);
-        bc.p2.transform.position = new Vector3(controlPoints[1].Key, controlPoints[1].Value, 0f);
-        bc.p3.transform.position = new Vector3(controlPoints[2].Key, controlPoints[2].Value, 0f);
-        bc.p4.transform.position = new Vector3(controlPoints[3].Key, controlPoints[3].Value, 0f);
+
+        for(int i = 0; i < controlPoints.Count; i++)
+        {
+            bc.controlPoints[i].transform.position = new Vector3(controlPoints[i].Key, controlPoints[i].Value, 0f);
+        }
     }
 
 

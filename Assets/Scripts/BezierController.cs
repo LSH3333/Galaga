@@ -12,12 +12,12 @@ public class BezierController : MonoBehaviour
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
-    public Transform[] pointsPos;
+    public Transform[] controlPoints;
     // 도착 지점 오브젝트 
     private GameObject arrivePoint;
 
     // 조절점들 
-    public GameObject p1, p2, p3, p4;
+    //public GameObject p1, p2, p3, p4;
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;
@@ -36,6 +36,7 @@ public class BezierController : MonoBehaviour
 
     private void Start()
     {
+        if (t_increase == 0) t_increase = 0.2f;
         t = 0;
     }
 
@@ -64,7 +65,7 @@ public class BezierController : MonoBehaviour
         // 점이 하나 남으면 종료 
         if (points.Count == 1)
         {
-            RotateDir(points[0]);
+            RotateDir(points[0]); // 다음 지점의 방향으로 obj의 방향 돌림 
             return points[0];
         }
 
@@ -90,7 +91,18 @@ public class BezierController : MonoBehaviour
         obj.transform.position = Vector3.MoveTowards(obj.transform.position, new Vector3(arrivePoint.transform.position.x, arrivePoint.transform.position.y, 0f), Time.deltaTime * speed);
     }
 
-  
+    // 베지어 곡선 따라 이동 
+    private void MoveBezierCurve()
+    {
+        List<Vector3> points = new List<Vector3>();
+        foreach (var x in controlPoints) points.Add(x.position);
+
+        // newPoint 에는 점의 다음 위치정보 
+        Vector3 newPoint = dfs(ref points);
+        
+        // 점 이동 
+        obj.transform.position = newPoint;
+    }
 
     private void Update()
     {
@@ -114,12 +126,7 @@ public class BezierController : MonoBehaviour
             return;
         }
 
-        List<Vector3> points = new List<Vector3>();
-        foreach (var x in pointsPos) points.Add(x.position);
-        // newPoint 에는 점의 다음 위치정보 
-        Vector3 newPoint = dfs(ref points);
-        // 점 이동 
-        obj.transform.position = newPoint;
+        MoveBezierCurve();
     }
 
 }

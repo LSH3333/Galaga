@@ -58,15 +58,19 @@ public class LevelManager : MonoBehaviour
         return ret;
     }
 
-    // 랜덤한 4개의 컨트롤 포인트 리턴 
-    private List<KeyValuePair<float, float>> GetRandomControlPoints()
+    // 랜덤한 (시작점 + cnt개 + 도착점)  의 컨트롤 포인트 리턴 
+    private List<KeyValuePair<float, float>> GetRandomControlPoints(int cnt)
     {
         List<KeyValuePair<float, float>> ret = new List<KeyValuePair<float, float>>();
 
+        // 시작점 p1 
         int idx = Random.Range(0, p1Pos.Count);
         ret.Add(new KeyValuePair<float, float>(p1Pos[idx].Key, p1Pos[idx].Value));
-        ret.Add(new KeyValuePair<float, float>(Random.Range(-2.3f, 2.3f), Random.Range(2f, -4f)));
-        ret.Add(new KeyValuePair<float, float>(Random.Range(-2.3f, 2.3f), Random.Range(2f, -4f)));
+        for(int i = 0; i < cnt; i++)
+        {
+            ret.Add(new KeyValuePair<float, float>(Random.Range(-2.3f, 2.3f), Random.Range(2f, -4f)));
+        }
+
         ret.Add(new KeyValuePair<float, float>(0.23f, 1.99f));
         return ret;
     }
@@ -133,7 +137,7 @@ public class LevelManager : MonoBehaviour
         for(int i = 0; i < waveCnt; i++)
         {
             enemies = GetRandomIdxList();
-            controlPoints = GetRandomControlPoints();
+            controlPoints = GetRandomControlPoints(2);
             SetWave(enemies, controlPoints, spawnRate, speed);
         }
     }

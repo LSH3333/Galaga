@@ -668,15 +668,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 5709764873150542338}
-  pointsPos:
+  controlPoints:
   - {fileID: 8891872207427323776}
   - {fileID: 8891872207774755797}
   - {fileID: 8891872206107365542}
   - {fileID: 8891872206818351481}
-  p1: {fileID: 8891872207427323783}
-  p2: {fileID: 8891872207774755369}
-  p3: {fileID: 8891872206107365562}
-  p4: {fileID: 8891872206818351480}
 --- !u!1 &8891872207774755369
 GameObject:
   m_ObjectHideFlags: 0
