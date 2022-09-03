@@ -58,6 +58,8 @@ public class SpawnEnemy : MonoBehaviour
     {
         GameObject instantiated = Instantiate(objs[idx]);
         BezierController bc = instantiated.GetComponent<BezierController>();
+        LevelManager.singleton.enemiesList.Add(bc); // 소환한 적 레퍼런스 저장 
+
         bc.ArrivePoint = arrivePos_List[idx];
 
         bc.T_increase = enemySpeed;

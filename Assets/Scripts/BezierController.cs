@@ -6,9 +6,9 @@ using UnityEngine;
 public class BezierController : MonoBehaviour
 {
     // 증가되는 t 값 
-    private float t;
+    public float t;
     // 증가 값, 클수록 적의 움직임이 빠름  
-    private float t_increase;
+    public float t_increase;
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
@@ -20,13 +20,13 @@ public class BezierController : MonoBehaviour
     // 도착 지점 오브젝트 
     private GameObject arrivePoint;
 
-    
-   
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;
-    // 최종 도착지점에 도착했음
+    // 최종 도착지점에 도착했음, true시 hovering 상태 
     private bool arrived = false;
+    // 이동 공격중인 상태  
+    private bool moveAttack = false;
 
 
     public bool Arrived { get => arrived; set => arrived = value; }
@@ -110,27 +110,38 @@ public class BezierController : MonoBehaviour
 
     ////////////////////////////////////////////
 
+
     // 제 자리에서 반 원 그리고 player에게 이동하도록 controlPoints 위치 설정함 
     private void SetMoveAttackControlPoints()
     {
+        print("SetMoveAttackCP");
+
+        cpCnt = 4;
+
         // p1 시작점 
-        controlPoints[0].position = obj.transform.position;
+        controlPoints[0].transform.position = obj.transform.position;
         // p2 
-        controlPoints[1].position = new Vector3(
+        controlPoints[1].transform.position = new Vector3(
             controlPoints[0].position.x + 1f,
             controlPoints[0].position.y + 1f,
             0f);
         // p3 
-        controlPoints[2].position = new Vector3(
+        controlPoints[2].transform.position = new Vector3(
             controlPoints[1].position.x + 1f,
             controlPoints[0].position.y,
             0f);
 
+        //
+        controlPoints[3].transform.position = new Vector3(
+            0f, -0.45f, 0f);
     }
 
     // obj가 player에게 제자리에서 돌고 이동하도록함  
-    public void MoveAttack()
+    public void StartMoveAttack()
     {
+        SetMoveAttackControlPoints();        
+        t = 0;
+
 
     }
 
@@ -139,6 +150,7 @@ public class BezierController : MonoBehaviour
     private void Update()
     {
         t += Time.deltaTime * t_increase;
+
         // 곡선 이동 완료
         // 해당 개체의 자리로 이동 
         if(t >= 1)
@@ -155,10 +167,15 @@ public class BezierController : MonoBehaviour
             {
                 arrived = true;
             }
-            return;
-        }
 
-        MoveBezierCurve();
+        }
+        else
+        {
+            MoveBezierCurve();
+        }
+        
+
+
     }
 
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    public static LevelManager singleton;
+
     // 적들 도착 위치 
     public GameObject[] arrivePos;
     // 남은 도착 위치 갯수 0이면 남은 자리가 없다는것 
@@ -18,6 +20,9 @@ public class LevelManager : MonoBehaviour
     private bool[] markArrivePos = new bool[55];
 
     private float t, timeSpeed = 0.2f;
+
+    // 소환된 적들 레퍼런스 
+    public List<BezierController> enemiesList = new List<BezierController>();
 
 
 
@@ -114,8 +119,6 @@ public class LevelManager : MonoBehaviour
     // 리스트 idxs의 크기만큼 적들 소환됨  
     private void SetWave(List<GameObject> arrivePoints, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
     {
-        List<KeyValuePair<float, float>> arrive_list = new List<KeyValuePair<float, float>>();
-
         // SpawnEnemy 인스턴스 만들어서 wave 소환하도록 함 
         GameObject seResource = Resources.Load("SpawnEnemy") as GameObject;
         GameObject instanitated = Instantiate(seResource);
@@ -143,23 +146,40 @@ public class LevelManager : MonoBehaviour
     }
 
 
+    private void Awake()
+    {
+        if (singleton == null)
+        {
+            singleton = this;
+        }
+    }
+
     private void Start()
     {
         arrivePosLeft = arrivePos.Length;
-
-
     }
 
+    bool test = false;
     private void Update()
     {
-        if (arrivePosLeft <= 0) return;
 
         t += Time.deltaTime * timeSpeed;
 
-        if (t >= 1)
+        if (arrivePosLeft > 0 && t >= 1)
         {
             t = 0;
             OneWave();
         }
+
+        // arrivePos 꽉참 (모두 소환 완료) 
+        if(arrivePosLeft <= 0)
+        {
+            if(!test)
+            {
+                enemiesList[0].StartMoveAttack();
+                test = true;
+            }
+            print(enemiesList[0].t + " " + enemiesList[0].t_increase);
+        }        
     }
 }
