@@ -36,6 +36,7 @@ public class testBezier : MonoBehaviour
     private void Start()
     {
         if (t_increase == 0) t_increase = 0.2f;
+       
         t = 0;
     }
 

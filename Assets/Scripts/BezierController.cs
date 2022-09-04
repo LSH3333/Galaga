@@ -41,6 +41,8 @@ public class BezierController : MonoBehaviour
     private void Start()
     {
         if (t_increase == 0) t_increase = 0.2f;
+        //t_increase = 0.5f;
+        //print(t_increase);
         t = 0;
     }
 
@@ -115,7 +117,7 @@ public class BezierController : MonoBehaviour
     private void SetMoveAttackControlPoints()
     {
 
-        cpCnt = 6;
+        cpCnt = 7;
 
         // p1 시작점 
         controlPoints[0].transform.position = obj.transform.position;
@@ -132,14 +134,18 @@ public class BezierController : MonoBehaviour
 
         // p4 
         controlPoints[3].transform.position = new Vector3(
-            0f, -4.5f, 0f);
+            1.3f, -8f, 0f);
 
         // p5
         controlPoints[4].transform.position = new Vector3(
-            -2f, 0f, 0f);
+            -1.4f, -7f, 0f);
 
         // p6
-        controlPoints[5].transform.position = controlPoints[0].transform.position;
+        controlPoints[5].transform.position = new Vector3(
+            -1.7f, -0.3f, 0f);
+
+        // p7, 시작지점으로 복귀 
+        controlPoints[6].transform.position = controlPoints[0].transform.position;
     }
 
     // obj가 player에게 제자리에서 돌고 이동하도록함  
@@ -150,8 +156,6 @@ public class BezierController : MonoBehaviour
         arrived = false;
         moveAttack = true;
 
-
-
     }
 
     ////////////////////////////////////////////
@@ -159,7 +163,7 @@ public class BezierController : MonoBehaviour
     private void Update()
     {
         t += Time.deltaTime * t_increase;
-
+        
         // 곡선 이동 완료
         // 해당 개체의 자리로 이동 
         if(t >= 1)
