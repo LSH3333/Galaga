@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // 하나의 오브젝트에 대하여 베지어 곡선을 그려서 이동하도록함 
-public class BezierController : MonoBehaviour
+public class testBezier : MonoBehaviour
 {
     // 증가되는 t 값 
     private float t;
@@ -13,12 +13,10 @@ public class BezierController : MonoBehaviour
     public GameObject obj;
     // 조절점들 
     public Transform[] controlPoints;
-    //public List<Vector3> controlPoints = new List<Vector3>();
     // 베지어 곡선에 영향 미치는 조절점 갯수
     public int cpCnt;
 
-    // 도착 지점 오브젝트 
-    private GameObject arrivePoint;
+
 
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
@@ -29,9 +27,6 @@ public class BezierController : MonoBehaviour
     public bool moveAttack = false;
 
 
-    public bool Arrived { get => arrived; set => arrived = value; }
-    public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
-    public float T_increase { get => t_increase; set => t_increase = value; }
 
     private void Awake()
     {
@@ -73,7 +68,7 @@ public class BezierController : MonoBehaviour
             return points[0];
         }
 
-        List<Vector3> newPoints = new List<Vector3>(); 
+        List<Vector3> newPoints = new List<Vector3>();
         for (int i = 0; i < points.Count - 1; i++)
         {
             newPoints.Add(MovePosition(points[i], points[i + 1]));
@@ -89,109 +84,28 @@ public class BezierController : MonoBehaviour
         obj.transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
-    // 개체의 도착지점으로 이동  
-    private void MoveToArrivePos()
-    {
-        obj.transform.position = Vector3.MoveTowards(obj.transform.position, new Vector3(arrivePoint.transform.position.x, arrivePoint.transform.position.y, 0f), Time.deltaTime * speed);
-    }
 
     // 베지어 곡선 따라 이동 
     private void MoveBezierCurve()
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);        
-        
+        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);
+
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points);
-        
+
         // 점 이동 
         obj.transform.position = newPoint;
     }
 
-    ////////////////////////////////////////////
 
-
-    // 제 자리에서 반 원 그리고 player에게 이동하도록 controlPoints 위치 설정함 
-    private void SetMoveAttackControlPoints()
-    {
-
-        cpCnt = 6;
-
-        // p1 시작점 
-        controlPoints[0].transform.position = obj.transform.position;
-        // p2 
-        controlPoints[1].transform.position = new Vector3(
-            controlPoints[0].position.x + 1f,
-            controlPoints[0].position.y + 1f,
-            0f);
-        // p3 
-        controlPoints[2].transform.position = new Vector3(
-            controlPoints[1].position.x + 1f,
-            controlPoints[0].position.y,
-            0f);
-
-        // p4 
-        controlPoints[3].transform.position = new Vector3(
-            0f, -4.5f, 0f);
-
-        // p5
-        controlPoints[4].transform.position = new Vector3(
-            -2f, 0f, 0f);
-
-        // p6
-        controlPoints[5].transform.position = controlPoints[0].transform.position;
-    }
-
-    // obj가 player에게 제자리에서 돌고 이동하도록함  
-    public void StartMoveAttack()
-    {
-        SetMoveAttackControlPoints();        
-        t = 0;
-        arrived = false;
-        moveAttack = true;
-
-
-
-    }
-
-    ////////////////////////////////////////////
 
     private void Update()
     {
         t += Time.deltaTime * t_increase;
 
-        // 곡선 이동 완료
-        // 해당 개체의 자리로 이동 
-        if(t >= 1)
-        {
-            if(!moveAttack)
-            {
-                if (!arrived)
-                {
-                    obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
-                    MoveToArrivePos();
-                }
 
-
-                // obj가 최종 도착지점에 도착했음
-                if (obj.transform.position == ArrivePoint.transform.position)
-                {
-                    arrived = true;
-                }
-            }
-            else
-            {
-
-            }
-            
-
-        }
-        else
-        {
-            MoveBezierCurve();
-        }
-        
-
+        MoveBezierCurve();
 
     }
 
