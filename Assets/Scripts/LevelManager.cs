@@ -179,7 +179,9 @@ public class LevelManager : MonoBehaviour
                 enemiesList[0].StartMoveAttack();
                 test = true;
             }
-            print(enemiesList[0].t + " " + enemiesList[0].t_increase);
+
+            
+            
         }        
     }
 }

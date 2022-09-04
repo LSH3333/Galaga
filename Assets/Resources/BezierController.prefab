@@ -177,7 +177,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5312930025904340957}
-  m_Text: 4
+  m_Text: 5
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -512,7 +512,7 @@ TextMesh:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6449937718229575972}
-  m_Text: 4
+  m_Text: 6
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1051,6 +1051,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b844b1e03654decb1848b8be940e9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  t: 0
+  t_increase: 0
   obj: {fileID: 5709764873150542338}
   controlPoints:
   - {fileID: 8891872207427323776}
@@ -1059,6 +1061,8 @@ MonoBehaviour:
   - {fileID: 8891872206818351481}
   - {fileID: 6186502348014237797}
   - {fileID: 5107207289411060442}
+  cpCnt: 0
+  moveAttack: 0
 --- !u!1 &8891872207774755369
 GameObject:
   m_ObjectHideFlags: 0

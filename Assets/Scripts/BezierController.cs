@@ -25,8 +25,8 @@ public class BezierController : MonoBehaviour
     private float speed = 4f;
     // 최종 도착지점에 도착했음, true시 hovering 상태 
     private bool arrived = false;
-    // 이동 공격중인 상태  
-    private bool moveAttack = false;
+    // false 시 소환 후 arrivePos로 이동, hovering 상태, true 시 이동 공격중인 상태  
+    public bool moveAttack = false;
 
 
     public bool Arrived { get => arrived; set => arrived = value; }
@@ -99,8 +99,8 @@ public class BezierController : MonoBehaviour
     private void MoveBezierCurve()
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);
-
+        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);        
+        
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points);
         
@@ -114,9 +114,8 @@ public class BezierController : MonoBehaviour
     // 제 자리에서 반 원 그리고 player에게 이동하도록 controlPoints 위치 설정함 
     private void SetMoveAttackControlPoints()
     {
-        print("SetMoveAttackCP");
 
-        cpCnt = 4;
+        cpCnt = 6;
 
         // p1 시작점 
         controlPoints[0].transform.position = obj.transform.position;
@@ -131,9 +130,16 @@ public class BezierController : MonoBehaviour
             controlPoints[0].position.y,
             0f);
 
-        //
+        // p4 
         controlPoints[3].transform.position = new Vector3(
-            0f, -0.45f, 0f);
+            0f, -4.5f, 0f);
+
+        // p5
+        controlPoints[4].transform.position = new Vector3(
+            -2f, 0f, 0f);
+
+        // p6
+        controlPoints[5].transform.position = controlPoints[0].transform.position;
     }
 
     // obj가 player에게 제자리에서 돌고 이동하도록함  
@@ -141,6 +147,9 @@ public class BezierController : MonoBehaviour
     {
         SetMoveAttackControlPoints();        
         t = 0;
+        arrived = false;
+        moveAttack = true;
+
 
 
     }
@@ -155,18 +164,26 @@ public class BezierController : MonoBehaviour
         // 해당 개체의 자리로 이동 
         if(t >= 1)
         {
-            if(!arrived)
+            if(!moveAttack)
             {
-                obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
-                MoveToArrivePos();
+                if (!arrived)
+                {
+                    obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
+                    MoveToArrivePos();
+                }
+
+
+                // obj가 최종 도착지점에 도착했음
+                if (obj.transform.position == ArrivePoint.transform.position)
+                {
+                    arrived = true;
+                }
+            }
+            else
+            {
+
             }
             
-                        
-            // obj가 최종 도착지점에 도착했음
-            if (obj.transform.position == ArrivePoint.transform.position)
-            {
-                arrived = true;
-            }
 
         }
         else
