@@ -131,9 +131,8 @@ public class BezierController : MonoBehaviour
 
 
     // 제 자리에서 반 원 그리고 player에게 이동하도록 controlPoints 위치 설정함 
-    private void SetMoveAttackControlPoints()
+    private void SetMoveAttack_UTurnControlPoints()
     {
-
         cpCnt = 7;
         t_increase = 0.2f;
 
@@ -166,10 +165,83 @@ public class BezierController : MonoBehaviour
         controlPoints[6].transform.position = controlPoints[0].transform.position;
     }
 
-    // obj가 player에게 제자리에서 돌고 이동하도록함  
-    public void StartMoveAttack()
+    // obj가 맵 아래까지 이동후 되돌아옴 
+    public void StartMoveAttack_UTurn()
     {
-        SetMoveAttackControlPoints();        
+        SetMoveAttack_UTurnControlPoints();        
+        t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
+        arrived = false;
+        moveAttack = true;
+    }
+
+    ////////////////////////////////////////////
+
+    private void SetMoveAttack_DownControlPoints()
+    {
+        cpCnt = 7;
+        t_increase = 0.2f;
+
+        Vector3[] P =
+        {
+            new Vector3(1.1f ,4f ,0f),
+            new Vector3(-1.7f ,2.7f ,0f),
+            new Vector3(-1.7f ,0.7f ,0f),
+            new Vector3(0.1f ,0f ,0f),
+            new Vector3(2.5f ,-0.4f ,0f),
+            new Vector3(2.5f ,-3.3f ,0f),
+            new Vector3(-0.7f ,-5.5f ,0f),
+        };
+
+        // p1 시작점 
+        controlPoints[0].transform.position = obj.transform.position;
+        // p2
+        controlPoints[1].transform.position = new Vector3(
+            controlPoints[1 - 1].transform.position.x - Mathf.Abs(P[1].x - P[1 - 1].x),
+            controlPoints[1 - 1].transform.position.y - Mathf.Abs(P[1].y - P[1 - 1].y),
+            0f);
+        // p3
+        controlPoints[2].transform.position = new Vector3(
+            controlPoints[2 - 1].transform.position.x - Mathf.Abs(P[2].x - P[2 - 1].x),
+            controlPoints[2 - 1].transform.position.y - Mathf.Abs(P[2].y - P[2 - 1].y),
+            0f);
+        // p4
+        controlPoints[3].transform.position = new Vector3(
+            controlPoints[3 - 1].transform.position.x + Mathf.Abs(P[3].x - P[3 - 1].x),
+            controlPoints[3 - 1].transform.position.y - Mathf.Abs(P[3].y - P[3 - 1].y),
+            0f);
+        // p5
+        controlPoints[4].transform.position = new Vector3(
+            controlPoints[4 - 1].transform.position.x + Mathf.Abs(P[4].x - P[4 - 1].x),
+            controlPoints[4 - 1].transform.position.y - Mathf.Abs(P[4].y - P[4 - 1].y),
+            0f);
+        // p6
+        controlPoints[5].transform.position = new Vector3(
+            controlPoints[5 - 1].transform.position.x + Mathf.Abs(P[5].x - P[5 - 1].x),
+            controlPoints[5 - 1].transform.position.y - Mathf.Abs(P[5].y - P[5 - 1].y),
+            0f);
+        // p7
+        controlPoints[6].transform.position = new Vector3(
+            controlPoints[6 - 1].transform.position.x - Mathf.Abs(P[6].x - P[6 - 1].x),
+            controlPoints[6 - 1].transform.position.y - Mathf.Abs(P[6].y - P[6 - 1].y),
+            0f);
+
+        //for (int i = 1; i < cpCnt; i++)
+        //{
+        //    float before_x = controlPoints[i - 1].transform.position.x;
+        //    float before_y = controlPoints[i - 1].transform.position.y;
+        //    controlPoints[i].transform.position =
+        //        new Vector3(
+        //            before_x - Mathf.Abs(P[i].x - P[i - 1].x),
+        //            before_y - Mathf.Abs(P[i].y - P[i-1].y),
+        //            0f);
+        //}
+
+    }
+
+    // obj가 맵 아래로 사라지고 맵 위에서 다시 나타남 
+    public void StartMoveAttack_Down()
+    {
+        SetMoveAttack_DownControlPoints();
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
