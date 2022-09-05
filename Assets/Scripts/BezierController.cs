@@ -238,6 +238,16 @@ public class BezierController : MonoBehaviour
 
     }
 
+    private void SetRepeatingControlPoints()
+    {
+        // p1 
+        controlPoints[0].transform.position = new Vector3(
+            controlPoints[controlPoints.Length-1].transform.position.x,
+            5f, 0f);
+
+    }
+
+    bool Repeating = false;
     // obj가 맵 아래로 사라지고 맵 위에서 다시 나타남 
     public void StartMoveAttack_Down()
     {
@@ -245,7 +255,7 @@ public class BezierController : MonoBehaviour
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
-
+        Repeating = true;
     }
 
     ////////////////////////////////////////////
@@ -257,19 +267,17 @@ public class BezierController : MonoBehaviour
         // 곡선 이동 완료
         if(t >= 1)
         {
-            if(!moveAttack) // 소환 후 베지어 곡선 그리기 완료 -> hovering 상태로 전환 
+            if(Repeating)
             {
-                StartHovering();
+                SetRepeatingControlPoints();
+                t = 0;
             }
-            // hovering 상태에서 moveAttack 베지어 곡선 그리기 완료 -> 다시 hovering 상태로 전환 
             else
             {
                 StartHovering();
-            }
-            
-
+            }            
         }
-        else
+        else // 베지어 곡선 따라 이동 중  
         {
             MoveBezierCurve();
         }
