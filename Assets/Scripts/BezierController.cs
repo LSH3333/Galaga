@@ -33,6 +33,8 @@ public class BezierController : MonoBehaviour
     public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
     public float T_increase { get => t_increase; set => t_increase = value; }
 
+
+
     private void Awake()
     {
 
@@ -110,6 +112,21 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
+    private void StartHovering()
+    {
+        if (!arrived)
+        {
+            obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
+            MoveToArrivePos();
+        }
+
+        // obj가 최종 도착지점에 도착했음
+        if (obj.transform.position == ArrivePoint.transform.position)
+        {
+            arrived = true;
+        }
+    }
+
     ////////////////////////////////////////////
 
 
@@ -118,6 +135,7 @@ public class BezierController : MonoBehaviour
     {
 
         cpCnt = 7;
+        t_increase = 0.2f;
 
         // p1 시작점 
         controlPoints[0].transform.position = obj.transform.position;
@@ -152,7 +170,7 @@ public class BezierController : MonoBehaviour
     public void StartMoveAttack()
     {
         SetMoveAttackControlPoints();        
-        t = 0;
+        t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
 
@@ -165,27 +183,16 @@ public class BezierController : MonoBehaviour
         t += Time.deltaTime * t_increase;
         
         // 곡선 이동 완료
-        // 해당 개체의 자리로 이동 
         if(t >= 1)
         {
-            if(!moveAttack)
+            if(!moveAttack) // 소환 후 베지어 곡선 그리기 완료 -> hovering 상태로 전환 
             {
-                if (!arrived)
-                {
-                    obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
-                    MoveToArrivePos();
-                }
-
-
-                // obj가 최종 도착지점에 도착했음
-                if (obj.transform.position == ArrivePoint.transform.position)
-                {
-                    arrived = true;
-                }
+                StartHovering();
             }
+            // hovering 상태에서 moveAttack 베지어 곡선 그리기 완료 -> 다시 hovering 상태로 전환 
             else
             {
-
+                StartHovering();
             }
             
 
