@@ -96,15 +96,15 @@ public class LevelManager : MonoBehaviour
         return -1;
     }
 
-    // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴   
-    private List<GameObject> GetRandomIdxList()
+    // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴
+    // cnt : 하나의 wave에 적들의 수 
+    private List<GameObject> GetRandomIdxList(int cnt)
     {
-        //List<int> ret = new List<int>();
         List<GameObject> ret = new List<GameObject>();
-        for(int i = 0; i < 4; i++)
+        for(int i = 0; i < cnt; i++)
         {
             int idx = GetRandomPosIdx();
-            if (idx == -1) break;
+            if (idx == -1) break; 
             ret.Add(arrivePos[idx]);
         }
 
@@ -130,8 +130,8 @@ public class LevelManager : MonoBehaviour
         se.StartSpawn(true);
     }
 
-
-    private void OneWave()
+    // cnt : 하나의 wave에 적들의 수 
+    private void OneWave(int cnt)
     {
         List<GameObject> enemies;
         List<KeyValuePair<float, float>> controlPoints;
@@ -139,7 +139,7 @@ public class LevelManager : MonoBehaviour
         int waveCnt = Random.Range(1, 3);
         for(int i = 0; i < waveCnt; i++)
         {
-            enemies = GetRandomIdxList();
+            enemies = GetRandomIdxList(cnt);
             controlPoints = GetRandomControlPoints(2);
             SetWave(enemies, controlPoints, spawnRate, speed);
         }
@@ -168,7 +168,7 @@ public class LevelManager : MonoBehaviour
         if (arrivePosLeft > 0 && t >= 1)
         {
             t = 0;
-            OneWave();
+            OneWave(Random.Range(1, 10));
         }
 
         // arrivePos 꽉참 (모두 소환 완료) 
