@@ -27,12 +27,27 @@ public class BezierController : MonoBehaviour
     private bool arrived = false;
     // false 시 소환 후 arrivePos로 이동, hovering 상태, true 시 이동 공격중인 상태  
     public bool moveAttack = false;
-
+    // MoveAttack 반복 여부 
+    bool Repeating = false;
+    //
+    int moveStatus = 0;
 
     public bool Arrived { get => arrived; set => arrived = value; }
     public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
     public float T_increase { get => t_increase; set => t_increase = value; }
 
+
+    // 구불구불 
+    Vector3[] P1 =
+      {
+            new Vector3(1.1f ,4f ,0f),
+            new Vector3(-1.7f ,2.7f ,0f),
+            new Vector3(-1.7f ,0.7f ,0f),
+            new Vector3(0.1f ,0f ,0f),
+            new Vector3(2.5f ,-0.4f ,0f),
+            new Vector3(2.5f ,-3.3f ,0f),
+            new Vector3(-0.7f ,-5.5f ,0f),
+        };
 
 
     private void Awake()
@@ -165,32 +180,23 @@ public class BezierController : MonoBehaviour
         controlPoints[6].transform.position = controlPoints[0].transform.position;
     }
 
-    // obj가 맵 아래까지 이동후 되돌아옴 
+    // (1) obj가 맵 아래까지 이동후 되돌아옴 
     public void StartMoveAttack_UTurn()
     {
         SetMoveAttack_UTurnControlPoints();        
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
+        Repeating = true;
+        moveStatus = 1;
     }
 
     ////////////////////////////////////////////
 
-    private void SetMoveAttack_DownControlPoints()
+    private void SetMoveAttack_DownControlPoints(Vector3[] P)
     {
         cpCnt = 7;
-        t_increase = 0.2f;
-
-        Vector3[] P =
-        {
-            new Vector3(1.1f ,4f ,0f),
-            new Vector3(-1.7f ,2.7f ,0f),
-            new Vector3(-1.7f ,0.7f ,0f),
-            new Vector3(0.1f ,0f ,0f),
-            new Vector3(2.5f ,-0.4f ,0f),
-            new Vector3(2.5f ,-3.3f ,0f),
-            new Vector3(-0.7f ,-5.5f ,0f),
-        };
+        t_increase = 0.2f;      
 
         // p1 시작점 
         controlPoints[0].transform.position = obj.transform.position;
@@ -224,18 +230,6 @@ public class BezierController : MonoBehaviour
             controlPoints[6 - 1].transform.position.x - Mathf.Abs(P[6].x - P[6 - 1].x),
             controlPoints[6 - 1].transform.position.y - Mathf.Abs(P[6].y - P[6 - 1].y),
             0f);
-
-        //for (int i = 1; i < cpCnt; i++)
-        //{
-        //    float before_x = controlPoints[i - 1].transform.position.x;
-        //    float before_y = controlPoints[i - 1].transform.position.y;
-        //    controlPoints[i].transform.position =
-        //        new Vector3(
-        //            before_x - Mathf.Abs(P[i].x - P[i - 1].x),
-        //            before_y - Mathf.Abs(P[i].y - P[i-1].y),
-        //            0f);
-        //}
-
     }
 
     private void SetRepeatingControlPoints()
@@ -247,19 +241,21 @@ public class BezierController : MonoBehaviour
 
     }
 
-    bool Repeating = false;
-    // obj가 맵 아래로 사라지고 맵 위에서 다시 나타남 
+    
+    // (2) obj가 맵 아래로 사라지고 맵 위에서 다시 나타남 
     public void StartMoveAttack_Down()
     {
-        SetMoveAttack_DownControlPoints();
+        SetMoveAttack_DownControlPoints(P1);
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
         Repeating = true;
+        moveStatus = 2;
     }
 
     ////////////////////////////////////////////
 
+    float t2 = 0;
     private void Update()
     {
         t += Time.deltaTime * t_increase;
@@ -269,8 +265,19 @@ public class BezierController : MonoBehaviour
         {
             if(Repeating)
             {
-                SetRepeatingControlPoints();
-                t = 0;
+                if(moveStatus == 1) // UTurn 
+                {                    
+                    if(t2 >= 1) { Repeating = true; t = 0; t2 = 0; }
+                    else
+                    {
+                        StartHovering();
+                        t2 += Time.deltaTime * t_increase;
+                    }
+                }
+                if (moveStatus == 2) // MoveDown
+                { 
+                    SetRepeatingControlPoints(); t = 0;  
+                }
             }
             else
             {

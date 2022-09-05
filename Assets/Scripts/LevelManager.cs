@@ -176,8 +176,8 @@ public class LevelManager : MonoBehaviour
         {
             if(!test)
             {
-                //enemiesList[0].StartMoveAttack_UTurn();
-                enemiesList[0].StartMoveAttack_Down();
+                enemiesList[0].StartMoveAttack_UTurn();
+                //enemiesList[0].StartMoveAttack_Down();
                 test = true;
             }
 
