@@ -8,17 +8,21 @@ public class LevelManager : MonoBehaviour
 
     // 적들 도착 위치 
     public GameObject[] arrivePos;
+    // true면 해당 칸 이미 적이 자리 차지함 
+    private bool[] markArrivePos = new bool[55];
     // 남은 도착 위치 갯수 0이면 남은 자리가 없다는것 
-    private int arrivePosLeft; 
+    private int arrivePosLeft;
+
+    
+    // true시 이동 할당된 enemy 
+    private bool[] movingEnemy = new bool[55];
+    private int movingEnemyLeft;
 
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
     private float speed = 0.5f, spawnRate = 0.3f; 
-
-    // true면 해당 칸 이미 적이 자리 차지함 
-    private bool[] markArrivePos = new bool[55];
-
+   
     private float t, timeSpeed = 0.2f;
 
     // 소환된 적들 레퍼런스 
@@ -96,6 +100,21 @@ public class LevelManager : MonoBehaviour
         return -1;
     }
 
+    private int GetRandomEnemyIdx()
+    {
+        while (movingEnemyLeft > 0)
+        {
+            int res = Random.Range(0, 55);
+            if (!movingEnemy[res])
+            {
+                movingEnemy[res] = true;
+                movingEnemyLeft--;
+                return res;
+            }
+        }
+        return -1;
+    }
+
     // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴
     // cnt : 하나의 wave에 적들의 수 
     private List<GameObject> GetRandomIdxList(int cnt)
@@ -157,9 +176,12 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         arrivePosLeft = arrivePos.Length;
+        movingEnemyLeft = movingEnemy.Length;
     }
 
-    bool test = false;
+
+    float t2 = 0;
+    float moveCoolTime = 1f;
     private void Update()
     {
 
@@ -174,11 +196,15 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if(arrivePosLeft <= 0)
         {
-            if(!test)
+            t2 += Time.deltaTime * timeSpeed;
+            if(t2 >= moveCoolTime)
             {
-                //enemiesList[0].StartMoveAttack_UTurn();
-                enemiesList[0].StartMoveAttack_Down();
-                test = true;
+                moveCoolTime = Random.Range(0.3f, 2f);
+                t2 = 0;
+                int move = Random.Range(0, 2);
+                int enemyIdx = GetRandomEnemyIdx();
+                if (move == 0) enemiesList[enemyIdx].StartMoveAttack_Down();
+                else if (move == 1) enemiesList[enemyIdx].StartMoveAttack_UTurn();
             }
 
         }        
