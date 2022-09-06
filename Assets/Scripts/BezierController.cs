@@ -25,8 +25,7 @@ public class BezierController : MonoBehaviour
     private float speed = 4f;
     // 최종 도착지점에 도착했음, true시 BezierObjManager에 의해 hovering 상태 됨 
     private bool arrived = false;
-    // false 시 소환 후 arrivePos로 이동, hovering 상태, true 시 이동 공격중인 상태  
-    public bool moveAttack = false;
+
     
     //
     int moveStatus = 0;
@@ -185,7 +184,6 @@ public class BezierController : MonoBehaviour
         SetMoveAttack_UTurnControlPoints();        
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
-        moveAttack = true;
         moveStatus = 1;
     }
 
@@ -246,7 +244,6 @@ public class BezierController : MonoBehaviour
         SetMoveAttack_DownControlPoints(P1);
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
-        moveAttack = true;
         moveStatus = 2;
     }
 
@@ -295,7 +292,16 @@ public class BezierController : MonoBehaviour
 
         else if(moveStatus == 2)
         {
-
+            // 곡선 이동 완료
+            if (t >= 1)
+            {
+                SetRepeatingControlPoints();
+                t = 0;
+            }
+            else // 베지어 곡선 따라 이동 중  
+            {
+                MoveBezierCurve();
+            }
         }
 
     }
