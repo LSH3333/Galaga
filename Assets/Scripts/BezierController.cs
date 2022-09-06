@@ -23,12 +23,11 @@ public class BezierController : MonoBehaviour
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;
-    // 최종 도착지점에 도착했음, true시 hovering 상태 
+    // 최종 도착지점에 도착했음, true시 BezierObjManager에 의해 hovering 상태 됨 
     private bool arrived = false;
     // false 시 소환 후 arrivePos로 이동, hovering 상태, true 시 이동 공격중인 상태  
     public bool moveAttack = false;
-    // MoveAttack 반복 여부 
-    bool Repeating = false;
+    
     //
     int moveStatus = 0;
 
@@ -187,7 +186,6 @@ public class BezierController : MonoBehaviour
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
-        Repeating = true;
         moveStatus = 1;
     }
 
@@ -249,7 +247,6 @@ public class BezierController : MonoBehaviour
         t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
         arrived = false;
         moveAttack = true;
-        Repeating = true;
         moveStatus = 2;
     }
 
@@ -259,37 +256,47 @@ public class BezierController : MonoBehaviour
     private void Update()
     {
         t += Time.deltaTime * t_increase;
-        
-        // 곡선 이동 완료
-        if(t >= 1)
+
+        if(moveStatus == 0)
         {
-            if(Repeating)
-            {
-                if(moveStatus == 1) // UTurn 
-                {                    
-                    if(t2 >= 1) { Repeating = true; t = 0; t2 = 0; }
-                    else
-                    {
-                        StartHovering();
-                        t2 += Time.deltaTime * t_increase;
-                    }
-                }
-                if (moveStatus == 2) // MoveDown
-                { 
-                    SetRepeatingControlPoints(); t = 0;  
-                }
-            }
-            else
+            // 곡선 이동 완료
+            if (t >= 1)
             {
                 StartHovering();
-            }            
+            }
+            else // 베지어 곡선 따라 이동 중  
+            {
+                MoveBezierCurve();
+            }
         }
-        else // 베지어 곡선 따라 이동 중  
-        {
-            MoveBezierCurve();
-        }
-        
 
+        else if(moveStatus == 1)
+        {
+            // 곡선 이동 완료
+            if (t >= 1)
+            {
+                t2 += Time.deltaTime * t_increase;
+                arrived = true;
+                obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
+
+                if (t2 >= 1) // repeat 쿨타임 돌아옴 
+                {
+                    t = 0; // t = 0 함으로서 다시 베지어 곡선 따라 이동 
+                    t2 = 0;
+                    arrived = false; // arrived = false 해야 obj 이동함 
+                }
+
+            }
+            else // 베지어 곡선 따라 이동 중  
+            {
+                MoveBezierCurve();
+            }
+        }
+
+        else if(moveStatus == 2)
+        {
+
+        }
 
     }
 

@@ -181,8 +181,6 @@ public class LevelManager : MonoBehaviour
                 test = true;
             }
 
-            
-            
         }        
     }
 }
