@@ -17,7 +17,10 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
-		
+		// 화면 위로 나가면 탄 파괴 
+		if (transform.position.y > Camera.main.transform.position.y +
+			Camera.main.orthographicSize)
+			Destroy(gameObject);
     }
 
     void FixedUpdate()
