@@ -24,7 +24,8 @@ public class BezierObjManager : MonoBehaviour
         if (collision.gameObject.tag == "bullet")
         {
             Destroy(collision.gameObject);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
