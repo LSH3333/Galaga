@@ -1030,6 +1030,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 4
   bullet: {fileID: 7939892663943369133, guid: afd03e0c20dfa40628dc6cfb42255392, type: 3}
+  bulletCoolSpeed: 0.5
 --- !u!1 &213616944
 GameObject:
   m_ObjectHideFlags: 0

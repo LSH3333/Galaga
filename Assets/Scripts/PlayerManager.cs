@@ -8,36 +8,48 @@ public class PlayerManager : MonoBehaviour
 	public GameObject bullet;
 
 	private float bulletCoolTime;
-	private float bulletCoolSpeed = 4f;
-	private int bulletCnt;
+	public float bulletCoolSpeed = .5f;
+	private int bulletTotalCnt = 3; // bulletCoolTime 동안 쏠수 있는 탄환의 수 
+	private int bulletCnt; 
+	
 
 	private void Awake()
     {
+		bulletCnt = bulletTotalCnt;
 		rb = GetComponent<Rigidbody2D>();
     }
 
+
 	bool startTime = false;
-	bool canFire = true;
     void Update()
 	{		
 		// move input
 		movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
 
 		
-		// bullet 
+		// bullet
+        // 일정 시간 동안 bulletTotalCnt 개의 탄만 쏠수 있음 
 		if (Input.GetKeyDown("space"))
         {
-			if (canFire)
+			if (bulletCnt > 0)
 			{
+				// 첫 한 발 쏜 상황 
+				if (bulletCnt == bulletTotalCnt) startTime = true;
+
 				Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
-				bulletCnt++;
+				bulletCnt--;
 			}
 		}
-		print(bulletCoolTime);
-		if (bulletCnt == 1) startTime = true;
-		if (startTime) bulletCoolTime += Time.deltaTime * bulletCoolSpeed;
-		if (bulletCoolTime < 1 && bulletCnt >= 2) canFire = false;
-		if (bulletCoolTime >= 1) { bulletCoolTime = 0; canFire = true; startTime = false; }
+
+		if(startTime) bulletCoolTime += Time.deltaTime * bulletCoolSpeed;
+		// 쿨 다됨 
+		if(bulletCoolTime > 1)
+        {
+			bulletCoolTime = 0;
+			startTime = false;
+			bulletCnt = bulletTotalCnt; // 탄 충전 
+        }
+
 	}
 
 	void FixedUpdate()
