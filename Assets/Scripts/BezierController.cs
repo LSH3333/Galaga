@@ -13,8 +13,7 @@ public class BezierController : MonoBehaviour
     public GameObject obj;
     // 조절점들 
     public Transform[] controlPoints;
-    //public List<Vector3> controlPoints = new List<Vector3>();
-    // 베지어 곡선에 영향 미치는 조절점 갯수
+    // 베지어 곡선에 실제로 영향 미치는 조절점 갯수 
     public int cpCnt;
 
     // 도착 지점 오브젝트 
