@@ -6,7 +6,7 @@ using UnityEngine;
 public class BezierController : MonoBehaviour
 {
     // 증가되는 t 값 
-    private float t;
+    //private float t;
     // 증가 값, 클수록 적의 움직임이 빠름  
     private float t_increase;
     // 움직이는 대상 
@@ -72,7 +72,7 @@ public class BezierController : MonoBehaviour
     }
 
     // 두 점 p1, p2을 잇는 선분 위의 점 t값에 따라 이동시킨 지점 리턴 
-    private Vector3 MovePosition(Vector3 p1, Vector3 p2)
+    private Vector3 MovePosition(Vector3 p1, Vector3 p2, float t)
     {
         return GetPos(p1, p2, t);
     }
@@ -81,7 +81,7 @@ public class BezierController : MonoBehaviour
     // 각 선분의 t값에 비례하는 곳에 점을 찍는다
     // 즉 재귀함수 한번 호출마다 점의 갯수는 1씩 줄어들고 점의 갯수가 1이되면
     // 그 점의 위치가 다음 위치가 된다 
-    Vector3 dfs(ref List<Vector3> points)
+    Vector3 dfs(ref List<Vector3> points, float t)
     {
         // 점이 하나 남으면 종료 
         if (points.Count == 1)
@@ -93,9 +93,9 @@ public class BezierController : MonoBehaviour
         List<Vector3> newPoints = new List<Vector3>(); 
         for (int i = 0; i < points.Count - 1; i++)
         {
-            newPoints.Add(MovePosition(points[i], points[i + 1]));
+            newPoints.Add(MovePosition(points[i], points[i + 1], t));
         }
-        return dfs(ref newPoints);
+        return dfs(ref newPoints, t);
     }
 
     // obj가 베지어 곡선의 방향으로 바라보도록 함 
@@ -113,17 +113,50 @@ public class BezierController : MonoBehaviour
     }
 
     // 베지어 곡선 따라 이동 
-    private void MoveBezierCurve()
+    private void MoveBezierCurve(float t)
     {
         List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);        
         
         // newPoint 에는 점의 다음 위치정보 
-        Vector3 newPoint = dfs(ref points);
-        
+        Vector3 newPoint = dfs(ref points, t);
+
         // 점 이동 
         obj.transform.position = newPoint;
     }
+
+
+    /////////////////////// Render Gizmo 
+    Vector3 dfsRenderGizmo(ref List<Vector3> points, float t)
+    {
+        // 점이 하나 남으면 종료 
+        if (points.Count == 1)
+        {
+            Gizmos.DrawSphere(points[0], 0.1f);
+            return points[0];
+        }
+
+        List<Vector3> newPoints = new List<Vector3>();
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            newPoints.Add(MovePosition(points[i], points[i + 1], t));
+        }
+        return dfsRenderGizmo(ref newPoints, t);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        List<Vector3> points = new List<Vector3>();
+        for (int i = 0; i < controlPoints.Length; i++) points.Add(controlPoints[i].position);
+
+        for (float t = 0; t <= 1; t += 0.05f)
+        {
+            Vector3 newPoint = dfsRenderGizmo(ref points, t);
+        }
+    }
+
+    ///////////////////////
 
     private void StartHovering()
     {
@@ -249,6 +282,7 @@ public class BezierController : MonoBehaviour
 
     ////////////////////////////////////////////
 
+    float t = 0;
     float t2 = 0;
     private void Update()
     {
@@ -263,7 +297,7 @@ public class BezierController : MonoBehaviour
             }
             else // 베지어 곡선 따라 이동 중  
             {
-                MoveBezierCurve();
+                MoveBezierCurve(t);
             }
         }
 
@@ -286,7 +320,7 @@ public class BezierController : MonoBehaviour
             }
             else // 베지어 곡선 따라 이동 중  
             {
-                MoveBezierCurve();
+                MoveBezierCurve(t);
             }
         }
 
@@ -300,7 +334,7 @@ public class BezierController : MonoBehaviour
             }
             else // 베지어 곡선 따라 이동 중  
             {
-                MoveBezierCurve();
+                MoveBezierCurve(t);
             }
         }
 

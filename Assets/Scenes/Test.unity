@@ -4339,7 +4339,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5058876197508039974}
   - component: {fileID: 5058876197508039975}
-  - component: {fileID: 5058876197508039969}
   m_Layer: 0
   m_Name: BezierController
   m_TagString: Untagged
@@ -4347,32 +4346,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &5058876197508039969
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5058876197508039968}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 749d5b301004741839195c5c4c6d64a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlPoints:
-  - {fileID: 5058876196642261246}
-  - {fileID: 5058876197534983339}
-  - {fileID: 5058876198015705048}
-  - {fileID: 5058876198189716999}
-  - {fileID: 780749591}
-  - {fileID: 134776886}
-  - {fileID: 50570708}
-  - {fileID: 213616945}
-  - {fileID: 1559184719}
-  - {fileID: 35348504}
-  - {fileID: 695665440}
-  - {fileID: 487594718}
-  - {fileID: 39481550}
 --- !u!4 &5058876197508039974
 Transform:
   m_ObjectHideFlags: 0
@@ -5069,7 +5042,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8246041812673854844}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0.735937, w: 0.67705}
   m_LocalPosition: {x: 0, y: 5, z: 0}
   m_LocalScale: {x: 0.25, y: 0.3, z: 1}
   m_Children: []
