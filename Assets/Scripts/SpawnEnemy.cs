@@ -7,7 +7,6 @@ public class SpawnEnemy : MonoBehaviour
 {
     // 소환되는 개체들 
     private List<GameObject> objs = new List<GameObject>();
-    //List<KeyValuePair<float, float>> arrivePos_List;
     List<GameObject> arrivePos_List;
     List<KeyValuePair<float, float>> controlPoints;
 

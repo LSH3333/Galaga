@@ -25,7 +25,7 @@ public class BezierController : MonoBehaviour
     // 최종 도착지점에 도착했음, true시 BezierObjManager에 의해 hovering 상태 됨 
     private bool arrived = false;
 
-    
+
     //
     int moveStatus = 0;
 
@@ -34,17 +34,6 @@ public class BezierController : MonoBehaviour
     public float T_increase { get => t_increase; set => t_increase = value; }
 
 
-    // 구불구불 
-    Vector3[] P1 =
-      {
-            new Vector3(1.1f ,4f ,0f),
-            new Vector3(-1.7f ,2.7f ,0f),
-            new Vector3(-1.7f ,0.7f ,0f),
-            new Vector3(0.1f ,0f ,0f),
-            new Vector3(2.5f ,-0.4f ,0f),
-            new Vector3(2.5f ,-3.3f ,0f),
-            new Vector3(-0.7f ,-5.5f ,0f),
-        };
 
 
     private void Awake()
@@ -55,8 +44,6 @@ public class BezierController : MonoBehaviour
     private void Start()
     {
         if (t_increase == 0) t_increase = 0.2f;
-        //t_increase = 0.5f;
-        //print(t_increase);
         t = 0;
     }
 
@@ -89,7 +76,7 @@ public class BezierController : MonoBehaviour
             return points[0];
         }
 
-        List<Vector3> newPoints = new List<Vector3>(); 
+        List<Vector3> newPoints = new List<Vector3>();
         for (int i = 0; i < points.Count - 1; i++)
         {
             newPoints.Add(MovePosition(points[i], points[i + 1], t));
@@ -115,8 +102,8 @@ public class BezierController : MonoBehaviour
     private void MoveBezierCurve(float t)
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);        
-        
+        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);
+
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points, t);
 
@@ -174,169 +161,20 @@ public class BezierController : MonoBehaviour
 
     ////////////////////////////////////////////
 
-
-    // 제 자리에서 반 원 그리고 player에게 이동하도록 controlPoints 위치 설정함 
-    private void SetMoveAttack_UTurnControlPoints()
-    {
-        cpCnt = 7;
-        t_increase = 0.2f;
-
-        // p1 시작점 
-        controlPoints[0].transform.position = obj.transform.position;
-        // p2 
-        controlPoints[1].transform.position = new Vector3(
-            controlPoints[0].position.x + 1f,
-            controlPoints[0].position.y + 1f,
-            0f);
-        // p3 
-        controlPoints[2].transform.position = new Vector3(
-            controlPoints[1].position.x + 1f,
-            controlPoints[0].position.y,
-            0f);
-
-        // p4 
-        controlPoints[3].transform.position = new Vector3(
-            1.3f, -8f, 0f);
-
-        // p5
-        controlPoints[4].transform.position = new Vector3(
-            -1.4f, -7f, 0f);
-
-        // p6
-        controlPoints[5].transform.position = new Vector3(
-            -1.7f, -0.3f, 0f);
-
-        // p7, 시작지점으로 복귀 
-        controlPoints[6].transform.position = controlPoints[0].transform.position;
-    }
-
-    // (1) obj가 맵 아래까지 이동후 되돌아옴 
-    public void StartMoveAttack_UTurn()
-    {
-        SetMoveAttack_UTurnControlPoints();        
-        t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
-        arrived = false;
-        moveStatus = 1;
-    }
-
-    ////////////////////////////////////////////
-
-    private void SetMoveAttack_DownControlPoints(Vector3[] P)
-    {
-        cpCnt = 7;
-        t_increase = 0.2f;      
-
-        // p1 시작점 
-        controlPoints[0].transform.position = obj.transform.position;
-        // p2
-        controlPoints[1].transform.position = new Vector3(
-            controlPoints[1 - 1].transform.position.x - Mathf.Abs(P[1].x - P[1 - 1].x),
-            controlPoints[1 - 1].transform.position.y - Mathf.Abs(P[1].y - P[1 - 1].y),
-            0f);
-        // p3
-        controlPoints[2].transform.position = new Vector3(
-            controlPoints[2 - 1].transform.position.x - Mathf.Abs(P[2].x - P[2 - 1].x),
-            controlPoints[2 - 1].transform.position.y - Mathf.Abs(P[2].y - P[2 - 1].y),
-            0f);
-        // p4
-        controlPoints[3].transform.position = new Vector3(
-            controlPoints[3 - 1].transform.position.x + Mathf.Abs(P[3].x - P[3 - 1].x),
-            controlPoints[3 - 1].transform.position.y - Mathf.Abs(P[3].y - P[3 - 1].y),
-            0f);
-        // p5
-        controlPoints[4].transform.position = new Vector3(
-            controlPoints[4 - 1].transform.position.x + Mathf.Abs(P[4].x - P[4 - 1].x),
-            controlPoints[4 - 1].transform.position.y - Mathf.Abs(P[4].y - P[4 - 1].y),
-            0f);
-        // p6
-        controlPoints[5].transform.position = new Vector3(
-            controlPoints[5 - 1].transform.position.x + Mathf.Abs(P[5].x - P[5 - 1].x),
-            controlPoints[5 - 1].transform.position.y - Mathf.Abs(P[5].y - P[5 - 1].y),
-            0f);
-        // p7
-        controlPoints[6].transform.position = new Vector3(
-            controlPoints[6 - 1].transform.position.x - Mathf.Abs(P[6].x - P[6 - 1].x),
-            controlPoints[6 - 1].transform.position.y - Mathf.Abs(P[6].y - P[6 - 1].y),
-            0f);
-    }
-
-    private void SetRepeatingControlPoints()
-    {
-        // p1 
-        controlPoints[0].transform.position = new Vector3(
-            controlPoints[controlPoints.Length-1].transform.position.x,
-            5f, 0f);
-
-    }
-
-    
-    // (2) obj가 맵 아래로 사라지고 맵 위에서 다시 나타남 
-    public void StartMoveAttack_Down()
-    {
-        SetMoveAttack_DownControlPoints(P1);
-        t = 0; // t=0 으로 초기화하면 베지어 곡선 따라 다시 이동하게됨 
-        arrived = false;
-        moveStatus = 2;
-    }
-
-    ////////////////////////////////////////////
-
     float t = 0;
-    float t2 = 0;
     private void Update()
     {
         t += Time.deltaTime * t_increase;
 
-        if(moveStatus == 0)
+        // 곡선 이동 완료
+        if (t >= 1)
         {
-            // 곡선 이동 완료
-            if (t >= 1)
-            {
-                StartHovering();
-            }
-            else // 베지어 곡선 따라 이동 중  
-            {
-                MoveBezierCurve(t);
-            }
+            StartHovering();
         }
-
-        else if(moveStatus == 1)
+        else // 베지어 곡선 따라 이동 중  
         {
-            // 곡선 이동 완료
-            if (t >= 1)
-            {
-                t2 += Time.deltaTime * t_increase;
-                arrived = true;
-                obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
-
-                if (t2 >= 1) // repeat 쿨타임 돌아옴 
-                {
-                    t = 0; // t = 0 함으로서 다시 베지어 곡선 따라 이동 
-                    t2 = 0;
-                    arrived = false; // arrived = false 해야 obj 이동함 
-                }
-
-            }
-            else // 베지어 곡선 따라 이동 중  
-            {
-                MoveBezierCurve(t);
-            }
+            MoveBezierCurve(t);
         }
-
-        else if(moveStatus == 2)
-        {
-            // 곡선 이동 완료
-            if (t >= 1)
-            {
-                SetRepeatingControlPoints();
-                t = 0;
-            }
-            else // 베지어 곡선 따라 이동 중  
-            {
-                MoveBezierCurve(t);
-            }
-        }
-
     }
 
 }

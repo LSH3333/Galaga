@@ -28,23 +28,6 @@ public class LevelManager : MonoBehaviour
     // 소환된 적들 레퍼런스 
     public List<BezierController> enemiesList = new List<BezierController>();
 
-
-
-    // 적들의 시작점인 p1의 위치들 
-    KeyValueList<float, float> p1Pos = new KeyValueList<float, float>
-    {
-        {2.37f, 5.58f }, {-2.37f, 5.58f }, {4f, -2.78f}, {-4f, -2.78f}
-    };
-
-
-    // 우측 상단에서 좌측 하단으로 곡선 이동하면서 한바퀴 도는 패턴 
-    KeyValueList<float, float> pattern1 = new KeyValueList<float, float>
-    {
-        {2.37f, 5.58f }, {-5.18f, 0.75f}, {0.1f, -3.92f}, {0.23f, 1.99f}
-    };
-
-
-
     public class KeyValueList<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
     {
         public void Add(TKey key, TValue value)
@@ -52,6 +35,19 @@ public class LevelManager : MonoBehaviour
             Add(new KeyValuePair<TKey, TValue>(key, value));
         }
     }
+
+    ///////////////////////////////////////////////////
+    public GameObject pattern_1_1;
+
+    private void SetPattern(int patternIdx)
+    {
+
+    }
+
+
+
+
+    ///////////////////////////////////////////////////
 
 
     // keyValList : pattern 전달하면 해당되는 List<KeyValuePair<>> 리턴함
@@ -64,23 +60,6 @@ public class LevelManager : MonoBehaviour
             if (reverse) ret.Add(new KeyValuePair<float, float>(-1 * x.Key, x.Value));
             else ret.Add(x);
         }
-        return ret;
-    }
-
-    // 랜덤한 (시작점 + cnt개 + 도착점)  의 컨트롤 포인트 리턴 
-    private List<KeyValuePair<float, float>> GetRandomControlPoints(int cnt)
-    {
-        List<KeyValuePair<float, float>> ret = new List<KeyValuePair<float, float>>();
-
-        // 시작점 p1 
-        int idx = Random.Range(0, p1Pos.Count);
-        ret.Add(new KeyValuePair<float, float>(p1Pos[idx].Key, p1Pos[idx].Value));
-        for(int i = 0; i < cnt; i++)
-        {
-            ret.Add(new KeyValuePair<float, float>(Random.Range(-2.3f, 2.3f), Random.Range(2f, -4f)));
-        }
-
-        ret.Add(new KeyValuePair<float, float>(0.23f, 1.99f));
         return ret;
     }
 
@@ -150,18 +129,15 @@ public class LevelManager : MonoBehaviour
     }
 
     // cnt : 하나의 wave에 적들의 수 
-    private void OneWave(int cnt)
+    private void OneWave(int cnt, List<KeyValuePair<float, float>> controlPoints)
     {
         List<GameObject> enemies;
-        List<KeyValuePair<float, float>> controlPoints;
-        // 한번에 1 or 2의 wave  
-        int waveCnt = Random.Range(1, 3);
-        for(int i = 0; i < waveCnt; i++)
-        {
-            enemies = GetRandomIdxList(cnt);
-            controlPoints = GetRandomControlPoints(2);
-            SetWave(enemies, controlPoints, spawnRate, speed);
-        }
+
+        enemies = GetRandomIdxList(cnt);
+        // 여기서 기존에는 랜덤 조절점 좌표 받았는데
+        // 이제 정해진 조절점 좌표 받도록 수정해야함 
+        //controlPoints = GetRandomControlPoints(2);
+        SetWave(enemies, controlPoints, spawnRate, speed);
     }
 
 
@@ -180,13 +156,15 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    float t2 = 0;
+
     float moveCoolTime = 1f;
+    int patternIdx = 0;
     private void Update()
     {
 
         t += Time.deltaTime * timeSpeed;
 
+        // 소환중  
         if (arrivePosLeft > 0 && t >= 1)
         {
             t = 0;
@@ -196,17 +174,8 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if(arrivePosLeft <= 0)
         {
-            t2 += Time.deltaTime * timeSpeed;
-            if(t2 >= moveCoolTime)
-            {
-                moveCoolTime = Random.Range(0.3f, 2f);
-                t2 = 0;
-                int move = Random.Range(0, 2);
-                int enemyIdx = GetRandomEnemyIdx();
-                if (move == 0) enemiesList[enemyIdx].StartMoveAttack_Down();
-                else if (move == 1) enemiesList[enemyIdx].StartMoveAttack_UTurn();
-            }
 
-        }        
+        }
+
     }
 }
