@@ -171,14 +171,13 @@ public class LevelManager : MonoBehaviour
     int patternIdx = 0;
     private void Update()
     {
-
         t += Time.deltaTime * timeSpeed;
 
         // 소환중  
         if (arrivePosLeft > 0 && t >= 1 && patternIdx < patterns.Length)
         {
             t = 0;
-            OneWave(Random.Range(1, 10), patterns[patternIdx++]);
+            OneWave(patterns[patternIdx].GetComponent<PatternInfo>().enemyCnt, patterns[patternIdx++]);
         }
 
         // arrivePos 꽉참 (모두 소환 완료) 
