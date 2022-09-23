@@ -248,6 +248,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyCnt: 10
+  mirror: 1
 --- !u!1 &2627378460311829064
 GameObject:
   m_ObjectHideFlags: 0

@@ -127,15 +127,22 @@ public class LevelManager : MonoBehaviour
 
     // cnt : 하나의 wave에 적들의 수 
     private void OneWave(int cnt, GameObject pattern)
-    {
-        List<GameObject> enemies;
-
-        enemies = GetRandomIdxList(cnt);
-        // 여기서 기존에는 랜덤 조절점 좌표 받았는데
-        // 이제 정해진 조절점 좌표 받도록 수정해야함 
-        //controlPoints = GetRandomControlPoints(2);
+    {        
+        List<GameObject> enemies = GetRandomIdxList(cnt);
         List<KeyValuePair<float, float>> controlPoints = GetPatternControlPoints(pattern);
         SetWave(enemies, controlPoints, spawnRate, speed);
+        
+        // 대칭 소환 
+        if (pattern.GetComponent<PatternInfo>().mirror)
+        {
+            enemies = GetRandomIdxList(cnt);
+            for(int i = 0; i < controlPoints.Count; i++)
+            {
+                // 대칭점 
+                controlPoints[i] = new KeyValuePair<float, float>(controlPoints[i].Key * -1, controlPoints[i].Value);
+            }
+            SetWave(enemies, controlPoints, spawnRate, speed);
+        }
     }
 
     // pattern의 조절점의 x,y 좌표 List에 저장 후 리턴  
