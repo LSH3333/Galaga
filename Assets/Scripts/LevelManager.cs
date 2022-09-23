@@ -129,30 +129,34 @@ public class LevelManager : MonoBehaviour
     private void OneWave(int cnt, GameObject pattern)
     {        
         List<GameObject> enemies = GetRandomIdxList(cnt);
-        List<KeyValuePair<float, float>> controlPoints = GetPatternControlPoints(pattern);
+        List<KeyValuePair<float, float>> controlPoints = GetPatternControlPoints(pattern, false);
         SetWave(enemies, controlPoints, spawnRate, speed);
-        
+
         // 대칭 소환 
         if (pattern.GetComponent<PatternInfo>().mirror)
         {
-            enemies = GetRandomIdxList(cnt);
-            for(int i = 0; i < controlPoints.Count; i++)
-            {
-                // 대칭점 
-                controlPoints[i] = new KeyValuePair<float, float>(controlPoints[i].Key * -1, controlPoints[i].Value);
-            }
-            SetWave(enemies, controlPoints, spawnRate, speed);
+            List<GameObject> mirrorEnemies = GetRandomIdxList(cnt);
+            List<KeyValuePair<float, float>> mirrorControlPoints = GetPatternControlPoints(pattern, true);
+            SetWave(mirrorEnemies, mirrorControlPoints, spawnRate, speed);
         }
     }
 
     // pattern의 조절점의 x,y 좌표 List에 저장 후 리턴  
-    private List<KeyValuePair<float, float>> GetPatternControlPoints(GameObject pattern)
+    private List<KeyValuePair<float, float>> GetPatternControlPoints(GameObject pattern, bool mirror)
     {
         List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
 
         foreach(Transform child in pattern.transform)
         {
-            controlPoints.Add(new KeyValuePair<float, float>(child.transform.position.x, child.transform.position.y));
+            if(!mirror)
+            {
+                controlPoints.Add(new KeyValuePair<float, float>(child.transform.position.x, child.transform.position.y));
+            }
+            else
+            {
+                controlPoints.Add(new KeyValuePair<float, float>(child.transform.position.x * -1, child.transform.position.y));
+            }
+            
         }
 
         return controlPoints;
