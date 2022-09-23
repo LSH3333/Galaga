@@ -37,12 +37,9 @@ public class LevelManager : MonoBehaviour
     }
 
     ///////////////////////////////////////////////////
-    public GameObject pattern_1_1;
+    
+    public GameObject[] patterns;
 
-    private void SetPattern(int patternIdx)
-    {
-
-    }
 
 
 
@@ -129,7 +126,7 @@ public class LevelManager : MonoBehaviour
     }
 
     // cnt : 하나의 wave에 적들의 수 
-    private void OneWave(int cnt, List<KeyValuePair<float, float>> controlPoints)
+    private void OneWave(int cnt, GameObject pattern)
     {
         List<GameObject> enemies;
 
@@ -137,9 +134,22 @@ public class LevelManager : MonoBehaviour
         // 여기서 기존에는 랜덤 조절점 좌표 받았는데
         // 이제 정해진 조절점 좌표 받도록 수정해야함 
         //controlPoints = GetRandomControlPoints(2);
+        List<KeyValuePair<float, float>> controlPoints = GetPatternControlPoints(pattern);
         SetWave(enemies, controlPoints, spawnRate, speed);
     }
 
+    // pattern의 조절점의 x,y 좌표 List에 저장 후 리턴  
+    private List<KeyValuePair<float, float>> GetPatternControlPoints(GameObject pattern)
+    {
+        List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
+
+        foreach(Transform child in pattern.transform)
+        {
+            controlPoints.Add(new KeyValuePair<float, float>(child.transform.position.x, child.transform.position.y));
+        }
+
+        return controlPoints;
+    }
 
     private void Awake()
     {
@@ -165,10 +175,10 @@ public class LevelManager : MonoBehaviour
         t += Time.deltaTime * timeSpeed;
 
         // 소환중  
-        if (arrivePosLeft > 0 && t >= 1)
+        if (arrivePosLeft > 0 && t >= 1 && patternIdx < patterns.Length)
         {
             t = 0;
-            OneWave(Random.Range(1, 10));
+            OneWave(Random.Range(1, 10), patterns[patternIdx++]);
         }
 
         // arrivePos 꽉참 (모두 소환 완료) 
