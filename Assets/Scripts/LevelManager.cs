@@ -72,7 +72,7 @@ public class LevelManager : MonoBehaviour
     {               
         while(arrivePosLeft > 0)
         {
-            int res = Random.Range(0, 55);
+            int res = Random.Range(0, arrivePos.Length);
             if(!markArrivePos[res])
             {
                 markArrivePos[res] = true;
