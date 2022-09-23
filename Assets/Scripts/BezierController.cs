@@ -25,15 +25,9 @@ public class BezierController : MonoBehaviour
     // 최종 도착지점에 도착했음, true시 BezierObjManager에 의해 hovering 상태 됨 
     private bool arrived = false;
 
-
-    //
-    int moveStatus = 0;
-
     public bool Arrived { get => arrived; set => arrived = value; }
     public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
     public float T_increase { get => t_increase; set => t_increase = value; }
-
-
 
 
     private void Awake()
