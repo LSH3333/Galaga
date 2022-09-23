@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     // 적들 도착 위치 
     public GameObject[] arrivePos;
     // true면 해당 칸 이미 적이 자리 차지함 
-    private bool[] markArrivePos = new bool[55];
+    private bool[] markArrivePos;
     // 남은 도착 위치 갯수 0이면 남은 자리가 없다는것 
     private int arrivePosLeft;
 
@@ -21,43 +21,50 @@ public class LevelManager : MonoBehaviour
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
 
-    private float speed = 0.5f, spawnRate = 0.3f; 
+    private float speed = 0.4f, spawnRate = 0.1f; 
    
     private float t, timeSpeed = 0.2f;
 
     // 소환된 적들 레퍼런스 
     public List<BezierController> enemiesList = new List<BezierController>();
 
-    public class KeyValueList<TKey, TValue> : List<KeyValuePair<TKey, TValue>>
+    // 패턴의 조절점들 식별용 오브젝트 
+    public GameObject[] patterns;
+    private int patternIdx = 0;
+
+
+    private void Awake()
     {
-        public void Add(TKey key, TValue value)
+        if (singleton == null)
         {
-            Add(new KeyValuePair<TKey, TValue>(key, value));
+            singleton = this;
         }
     }
 
-    ///////////////////////////////////////////////////
-    
-    public GameObject[] patterns;
-
-
-
-
-
-    ///////////////////////////////////////////////////
-
-
-    // keyValList : pattern 전달하면 해당되는 List<KeyValuePair<>> 리턴함
-    // reverse : pattern 의 반전버전 리턴 
-    private List<KeyValuePair<float, float>> GetPairs(KeyValueList<float, float> keyValList, bool reverse)
+    private void Start()
     {
-        List<KeyValuePair<float, float>> ret = new List<KeyValuePair<float, float>>();
-        foreach (var x in keyValList)
+        arrivePosLeft = arrivePos.Length;
+        markArrivePos = new bool[arrivePos.Length];
+        movingEnemyLeft = movingEnemy.Length;
+    }
+    
+    private void Update()
+    {
+        t += Time.deltaTime * timeSpeed;
+
+        // 소환중  
+        if (arrivePosLeft > 0 && t >= 1 && patternIdx < patterns.Length)
         {
-            if (reverse) ret.Add(new KeyValuePair<float, float>(-1 * x.Key, x.Value));
-            else ret.Add(x);
+            t = 0;
+            OneWave(patterns[patternIdx].GetComponent<PatternInfo>().enemyCnt, patterns[patternIdx++]);
         }
-        return ret;
+
+        // arrivePos 꽉참 (모두 소환 완료) 
+        if (arrivePosLeft <= 0)
+        {
+
+        }
+
     }
 
     // 남은 도착자리 탐색해서 인덱스 리턴 
@@ -162,40 +169,5 @@ public class LevelManager : MonoBehaviour
         return controlPoints;
     }
 
-    private void Awake()
-    {
-        if (singleton == null)
-        {
-            singleton = this;
-        }
-    }
-
-    private void Start()
-    {
-        arrivePosLeft = arrivePos.Length;
-        movingEnemyLeft = movingEnemy.Length;
-    }
-
-
-
-    float moveCoolTime = 1f;
-    int patternIdx = 0;
-    private void Update()
-    {
-        t += Time.deltaTime * timeSpeed;
-
-        // 소환중  
-        if (arrivePosLeft > 0 && t >= 1 && patternIdx < patterns.Length)
-        {
-            t = 0;
-            OneWave(patterns[patternIdx].GetComponent<PatternInfo>().enemyCnt, patterns[patternIdx++]);
-        }
-
-        // arrivePos 꽉참 (모두 소환 완료) 
-        if(arrivePosLeft <= 0)
-        {
-
-        }
-
-    }
+   
 }
