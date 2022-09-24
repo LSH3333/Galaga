@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 0
-  arrivePos: 1
+  arrivePos: 5
 --- !u!61 &1423179861949110803
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -626,7 +626,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 0
-  arrivePos: 3
+  arrivePos: 15
 --- !u!61 &5826193537935854162
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 1
-  arrivePos: 4
+  arrivePos: 32
 --- !u!61 &4888156276596178248
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1292,7 +1292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mirror: 1
-  enemyCnt: 4
   ControlPoint: {fileID: 2285420865789773122}
   Objs: {fileID: 7962523735805080433}
 --- !u!1 &3585855160950021547
@@ -1393,7 +1392,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 1
-  arrivePos: 6
+  arrivePos: 24
 --- !u!61 &5228456173345615202
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1539,7 +1538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 0
-  arrivePos: 0
+  arrivePos: 4
 --- !u!61 &4668174879148357843
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1685,7 +1684,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 0
-  arrivePos: 2
+  arrivePos: 14
 --- !u!61 &8738971281265545863
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1831,7 +1830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 1
-  arrivePos: 7
+  arrivePos: 25
 --- !u!61 &1261371424254920274
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3666,7 +3665,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bc: {fileID: 0}
   type: 1
-  arrivePos: 5
+  arrivePos: 33
 --- !u!61 &3636844170268814378
 BoxCollider2D:
   m_ObjectHideFlags: 0
