@@ -29,29 +29,42 @@ public class SpawnEnemy : MonoBehaviour
         spawnTimeRate = _spawnTimeRate;
     }
 
-    // arrivePoints : 도착 지점 오브젝트들 담긴 리스트 
-    public void SetSpawnObjs(List<GameObject> arrivePoints)
-    {
-        arrivePos_List = arrivePoints;
-
-        for(int i = 0; i < arrivePoints.Count; i++)
-        {
-            objs.Add(Resources.Load("BezierController") as GameObject);
-        }
-    }
-
-
-    // 조절점 설정, LevelManager에서 조절점 리스트 받아옴  
-    public void SetBezierControlPoint(List<KeyValuePair<float, float>> lists)
-    {
-        controlPoints = lists;
-    }
 
     public void SetEnemySpeed(float _speed)
     {
         enemySpeed = _speed;
     }
     
+    ///// new 
+    public void SetObjs(GameObject pattern, bool mirror)
+    {
+        // ControlPoints
+        List<KeyValuePair<float, float>> cps = new List<KeyValuePair<float, float>>();
+
+        foreach (Transform child in pattern.GetComponent<PatternInfo>().ControlPoint.transform)
+        {
+            if (!mirror)
+            {
+                cps.Add(new KeyValuePair<float, float>(child.transform.position.x, child.transform.position.y));
+            }
+            else
+            {
+                cps.Add(new KeyValuePair<float, float>(child.transform.position.x * -1, child.transform.position.y));
+            }
+        }
+        controlPoints = cps;
+
+        // ArrivePos
+        List<GameObject> aps = new List<GameObject>();
+        foreach (Transform child in pattern.GetComponent<PatternInfo>().Objs.transform)
+        {
+            int idx = child.GetComponent<BezierObjManager>().arrivePos;
+            GameObject obj = LevelManager.singleton.arrivePos[idx];
+            aps.Add(obj);
+            objs.Add(Resources.Load("BezierController") as GameObject);
+        }
+        arrivePos_List = aps;
+    }
 
     // objs의 idx번째 소환 
     void StartSpawn(int idx)

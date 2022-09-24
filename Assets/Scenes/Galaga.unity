@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3395,11 +3395,7 @@ MonoBehaviour:
   spawnEnemy: {fileID: 1589184122}
   enemiesList: []
   patterns:
-  - {fileID: 744101787097094417, guid: 2624f14c5383e1a4cb109ccb0b0e0a92, type: 3}
-  - {fileID: 5156353063436275056, guid: 647a1792b9e4abc4fb465770c0467d6f, type: 3}
-  - {fileID: 5820954932001670931, guid: 32cc51479bad63e4ba65db4abb1c35f0, type: 3}
-  - {fileID: 744101787097094417, guid: ba1c56340fbf8214baa70c6a1595e937, type: 3}
-  - {fileID: 364407298612346651, guid: 2dd5f4f8fe22a814dad57f41f925d41c, type: 3}
+  - {fileID: 3582336682901415318, guid: 0e17c463c58ed433186aab268714e129, type: 3}
 --- !u!1 &1589667579
 GameObject:
   m_ObjectHideFlags: 0

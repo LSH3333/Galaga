@@ -63,7 +63,7 @@ public class LevelManager : MonoBehaviour
         if (arrivePosLeft > 0 && t >= 1 && patternIdx < patterns.Length)
         {
             t = 0;
-            OneWave(patterns[patternIdx].GetComponent<PatternInfo>().enemyCnt, patterns[patternIdx++]);
+            OneWave(patterns[patternIdx++]);
         }
 
         // arrivePos 꽉참 (모두 소환 완료) 
@@ -118,12 +118,11 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    // arrivePoints : 도착 지점 오브젝트 레퍼런스  
-    // controlPoints : 조절점들 위치
+
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
-    // 도착지점들을 리스트로 전달하면 해당 도착지점의들의 x,y 값들을 SpawnEnemy에 전달함
-    // 리스트 idxs의 크기만큼 적들 소환됨  
-    private void SetWave(List<GameObject> arrivePoints, List<KeyValuePair<float, float>> controlPoints, float spawnTimeRate, float enemySpeed)
+    // enemySpeed : 클수록 적들 이동 속도 빨라짐
+    // pattern의 PatternInfo.cs에 담긴 정보 따라 소환됨 
+    private void SetWave(GameObject pattern, float spawnTimeRate, float enemySpeed)
     {
         // SpawnEnemy 인스턴스 만들어서 wave 소환하도록 함 
         GameObject seResource = Resources.Load("SpawnEnemy") as GameObject;
@@ -131,26 +130,14 @@ public class LevelManager : MonoBehaviour
         SpawnEnemy se = instanitated.GetComponent<SpawnEnemy>();
 
         se.SetSpawnTimeRate(spawnTimeRate);
-        se.SetBezierControlPoint(controlPoints);
         se.SetEnemySpeed(enemySpeed);
-        se.SetSpawnObjs(arrivePoints); // 
+        se.SetObjs(pattern, false);
         se.StartSpawn(true);
     }
 
-    // cnt : 하나의 wave에 적들의 수 
-    private void OneWave(int cnt, GameObject pattern)
-    {        
-        List<GameObject> enemies = GetRandomIdxList(cnt);
-        List<KeyValuePair<float, float>> controlPoints = GetPatternControlPoints(pattern, false);
-        SetWave(enemies, controlPoints, spawnRate, speed);
-
-        // 대칭 소환 
-        if (pattern.GetComponent<PatternInfo>().mirror)
-        {
-            List<GameObject> mirrorEnemies = GetRandomIdxList(cnt);
-            List<KeyValuePair<float, float>> mirrorControlPoints = GetPatternControlPoints(pattern, true);
-            SetWave(mirrorEnemies, mirrorControlPoints, spawnRate, speed);
-        }
+    private void OneWave(GameObject pattern)
+    {
+        SetWave(pattern, spawnRate, speed);
     }
 
     // pattern의 조절점의 x,y 좌표 List에 저장 후 리턴  
