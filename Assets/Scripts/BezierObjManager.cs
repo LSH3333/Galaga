@@ -23,13 +23,11 @@ public class BezierObjManager : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        SetType();        
     }
 
 
 
-
-    private void SetType()
+    public void SetType(Type type)
     {
         if(type == Type.Bee)
         {

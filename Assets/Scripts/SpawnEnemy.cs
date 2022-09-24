@@ -9,6 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     private List<GameObject> objs = new List<GameObject>();
     List<GameObject> arrivePos_List;
     List<KeyValuePair<float, float>> controlPoints;
+    List<Type> types = new List<Type>();
 
     private float time;
     private int idx;
@@ -40,7 +41,6 @@ public class SpawnEnemy : MonoBehaviour
     {
         // ControlPoints
         List<KeyValuePair<float, float>> cps = new List<KeyValuePair<float, float>>();
-
         foreach (Transform child in pattern.GetComponent<PatternInfo>().ControlPoint.transform)
         {
             if (!mirror)
@@ -56,14 +56,45 @@ public class SpawnEnemy : MonoBehaviour
 
         // ArrivePos
         List<GameObject> aps = new List<GameObject>();
-        foreach (Transform child in pattern.GetComponent<PatternInfo>().Objs.transform)
+        if(!mirror)
         {
-            int idx = child.GetComponent<BezierObjManager>().arrivePos;
-            GameObject obj = LevelManager.singleton.arrivePos[idx];
-            aps.Add(obj);
-            objs.Add(Resources.Load("BezierController") as GameObject);
+            foreach (Transform child in pattern.GetComponent<PatternInfo>().Objs.transform)
+            {
+                int idx = child.GetComponent<BezierObjManager>().arrivePos;
+                GameObject obj = LevelManager.singleton.arrivePos[idx];
+                aps.Add(obj);
+                objs.Add(Resources.Load("BezierController") as GameObject);
+            }
         }
+        else
+        {
+            foreach(Transform child in pattern.transform.Find("MirrorObjs").transform)
+            {
+                int idx = child.GetComponent<BezierObjManager>().arrivePos;
+                GameObject obj = LevelManager.singleton.arrivePos[idx];
+                aps.Add(obj);
+                objs.Add(Resources.Load("BezierController") as GameObject);
+            }
+        }        
         arrivePos_List = aps;
+
+
+        // type 
+        if(!mirror)
+        {
+            foreach (Transform child in pattern.GetComponent<PatternInfo>().Objs.transform)
+            {
+                types.Add(child.GetComponent<BezierObjManager>().type);
+            }
+        }
+        else
+        {
+            foreach (Transform child in pattern.transform.Find("MirrorObjs").transform)
+            {
+                types.Add(child.GetComponent<BezierObjManager>().type);
+            }
+        }
+        
     }
 
     // objs의 idx번째 소환 
@@ -73,6 +104,8 @@ public class SpawnEnemy : MonoBehaviour
         BezierController bc = instantiated.GetComponent<BezierController>();
         LevelManager.singleton.enemiesList.Add(bc); // 소환한 적 레퍼런스 저장 
 
+        bc.obj.GetComponent<BezierObjManager>().type = types[idx];
+        bc.obj.GetComponent<BezierObjManager>().SetType(types[idx]);
         bc.ArrivePoint = arrivePos_List[idx];
 
         bc.T_increase = enemySpeed;

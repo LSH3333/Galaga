@@ -71,58 +71,13 @@ public class LevelManager : MonoBehaviour
         {
 
         }
-
     }
-
-    // 남은 도착자리 탐색해서 인덱스 리턴 
-    private int GetRandomPosIdx()
-    {               
-        while(arrivePosLeft > 0)
-        {
-            int res = Random.Range(0, arrivePos.Length);
-            if(!markArrivePos[res])
-            {
-                markArrivePos[res] = true;
-                arrivePosLeft--;
-                return res;
-            }
-        }
-        return -1;
-    }
-
-    // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴
-    // cnt : 하나의 wave에 적들의 수 
-    private List<GameObject> GetRandomIdxList(int cnt)
-    {
-        List<GameObject> ret = new List<GameObject>();
-        for(int i = 0; i < cnt; i++)
-        {
-            int idx = GetRandomPosIdx();
-            if (idx == -1) break; 
-            ret.Add(arrivePos[idx]);
-        }
-
-        return ret;
-    }
-
-    private List<GameObject> GetRandomIdxList2(PatternInfo pattern)
-    {
-        List<GameObject> ret = new List<GameObject>();
-        foreach(Transform x in pattern.transform.Find("Objs"))
-        {
-            int idx = x.GetComponent<BezierObjManager>().arrivePos;
-            ret.Add(arrivePos[idx]);
-        }
-
-        return ret;
-    }
-
 
 
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // enemySpeed : 클수록 적들 이동 속도 빨라짐
     // pattern의 PatternInfo.cs에 담긴 정보 따라 소환됨 
-    private void SetWave(GameObject pattern, float spawnTimeRate, float enemySpeed)
+    private void SetWave(GameObject pattern, float spawnTimeRate, float enemySpeed, bool mirror)
     {
         // SpawnEnemy 인스턴스 만들어서 wave 소환하도록 함 
         GameObject seResource = Resources.Load("SpawnEnemy") as GameObject;
@@ -131,34 +86,18 @@ public class LevelManager : MonoBehaviour
 
         se.SetSpawnTimeRate(spawnTimeRate);
         se.SetEnemySpeed(enemySpeed);
-        se.SetObjs(pattern, false);
+        se.SetObjs(pattern, mirror);
         se.StartSpawn(true);
     }
 
     private void OneWave(GameObject pattern)
     {
-        SetWave(pattern, spawnRate, speed);
-    }
+        SetWave(pattern, spawnRate, speed, false);
 
-    // pattern의 조절점의 x,y 좌표 List에 저장 후 리턴  
-    private List<KeyValuePair<float, float>> GetPatternControlPoints(GameObject pattern, bool mirror)
-    {
-        List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
-        
-        foreach(Transform child in pattern.GetComponent<PatternInfo>().ControlPoint.transform)
+        if (pattern.GetComponent<PatternInfo>().mirror)
         {
-            if(!mirror)
-            {
-                controlPoints.Add(new KeyValuePair<float, float>(child.transform.position.x, child.transform.position.y));
-            }
-            else
-            {
-                controlPoints.Add(new KeyValuePair<float, float>(child.transform.position.x * -1, child.transform.position.y));
-            }
-            
+            SetWave(pattern, spawnRate, speed, true);
         }
-
-        return controlPoints;
     }
 
    
