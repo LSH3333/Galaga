@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 // 적의 본체 obj 
 public class BezierObjManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class BezierObjManager : MonoBehaviour
 
     public Type type;
     private int hp;
+    // 도착 지점
+    public int arrivePos;
+
 
     private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
     private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);

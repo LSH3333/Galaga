@@ -90,21 +90,6 @@ public class LevelManager : MonoBehaviour
         return -1;
     }
 
-    //private int GetRandomEnemyIdx()
-    //{
-    //    while (movingEnemyLeft > 0)
-    //    {
-    //        int res = Random.Range(0, 55);
-    //        if (!movingEnemy[res])
-    //        {
-    //            movingEnemy[res] = true;
-    //            movingEnemyLeft--;
-    //            return res;
-    //        }
-    //    }
-    //    return -1;
-    //}
-
     // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴
     // cnt : 하나의 wave에 적들의 수 
     private List<GameObject> GetRandomIdxList(int cnt)
@@ -114,6 +99,18 @@ public class LevelManager : MonoBehaviour
         {
             int idx = GetRandomPosIdx();
             if (idx == -1) break; 
+            ret.Add(arrivePos[idx]);
+        }
+
+        return ret;
+    }
+
+    private List<GameObject> GetRandomIdxList2(PatternInfo pattern)
+    {
+        List<GameObject> ret = new List<GameObject>();
+        foreach(Transform x in pattern.transform.Find("Objs"))
+        {
+            int idx = x.GetComponent<BezierObjManager>().arrivePos;
             ret.Add(arrivePos[idx]);
         }
 
@@ -132,10 +129,11 @@ public class LevelManager : MonoBehaviour
         GameObject seResource = Resources.Load("SpawnEnemy") as GameObject;
         GameObject instanitated = Instantiate(seResource);
         SpawnEnemy se = instanitated.GetComponent<SpawnEnemy>();
+
         se.SetSpawnTimeRate(spawnTimeRate);
         se.SetBezierControlPoint(controlPoints);
         se.SetEnemySpeed(enemySpeed);
-        se.SetSpawnObjs(arrivePoints);
+        se.SetSpawnObjs(arrivePoints); // 
         se.StartSpawn(true);
     }
 
@@ -159,8 +157,8 @@ public class LevelManager : MonoBehaviour
     private List<KeyValuePair<float, float>> GetPatternControlPoints(GameObject pattern, bool mirror)
     {
         List<KeyValuePair<float, float>> controlPoints = new List<KeyValuePair<float, float>>();
-
-        foreach(Transform child in pattern.transform)
+        
+        foreach(Transform child in pattern.GetComponent<PatternInfo>().ControlPoint.transform)
         {
             if(!mirror)
             {

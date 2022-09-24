@@ -40,6 +40,7 @@ public class SpawnEnemy : MonoBehaviour
         }
     }
 
+
     // 조절점 설정, LevelManager에서 조절점 리스트 받아옴  
     public void SetBezierControlPoint(List<KeyValuePair<float, float>> lists)
     {
