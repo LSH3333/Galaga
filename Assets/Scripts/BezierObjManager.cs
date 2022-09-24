@@ -3,7 +3,46 @@
 // 적의 본체 obj 
 public class BezierObjManager : MonoBehaviour
 {
+    private SpriteRenderer spriteRenderer;
     public BezierController bc;
+
+    public Type type;
+    private int hp;
+
+    private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
+    private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+    private Color green = new Color(50f / 255f, 255f / 255f, 0f / 255f);
+    private Color blue = new Color(0f / 255f, 125f / 255f, 255f / 255f);
+
+
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        SetType();        
+    }
+
+
+
+
+    private void SetType()
+    {
+        if(type == Type.Bee)
+        {
+            hp = 1;
+            spriteRenderer.color = yellow;
+        }
+        else if(type == Type.Butterfly)
+        {
+            hp = 1;
+            spriteRenderer.color = red;
+        }
+        else if(type == Type.Boss)
+        {
+            hp = 2;
+            spriteRenderer.color = green;
+        }
+    }
 
     // ArrivePos를 따라 좌우로 움직임 
     private void FollowArrivePos()

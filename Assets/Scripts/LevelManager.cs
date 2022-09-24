@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum Type
+{
+    Bee,
+    Butterfly,
+    Boss
+} 
+
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager singleton;
@@ -83,20 +90,20 @@ public class LevelManager : MonoBehaviour
         return -1;
     }
 
-    private int GetRandomEnemyIdx()
-    {
-        while (movingEnemyLeft > 0)
-        {
-            int res = Random.Range(0, 55);
-            if (!movingEnemy[res])
-            {
-                movingEnemy[res] = true;
-                movingEnemyLeft--;
-                return res;
-            }
-        }
-        return -1;
-    }
+    //private int GetRandomEnemyIdx()
+    //{
+    //    while (movingEnemyLeft > 0)
+    //    {
+    //        int res = Random.Range(0, 55);
+    //        if (!movingEnemy[res])
+    //        {
+    //            movingEnemy[res] = true;
+    //            movingEnemyLeft--;
+    //            return res;
+    //        }
+    //    }
+    //    return -1;
+    //}
 
     // 중복되지 않는 랜덤 (도착 지점)가 담긴 리스트 리턴
     // cnt : 하나의 wave에 적들의 수 
