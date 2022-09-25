@@ -55,8 +55,12 @@ public class BezierObjManager : MonoBehaviour
 
     private void Update()
     {
-        if (bc.ArrivePoint != null && bc.Arrived) // bc.Arrived = true시 obj가 도착지점 도달한것
-            FollowArrivePos();            
+        // bc.Arrived = true시 obj가 도착지점 도달한것
+        if (bc.ArrivePoint != null && bc.Arrived)
+        {
+            FollowArrivePos();
+        }
+            
     }
 
 

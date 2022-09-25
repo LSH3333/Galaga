@@ -49,19 +49,11 @@ public class ArrivePosManager : MonoBehaviour
         MoveOneFrame(moveLeft);
     }
 
-    // 퍼지듯이 이동 
-    /*private void MoveSpread()
-    {       
-        transform.position = Vector3.MoveTowards(transform.position, targetPos,  Time.deltaTime * 0.3f);
-
-        transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * 0.3f * -1);
-    }*/
 
     private void Update()
     {
         MoveLeftAndRight();
 
-        //MoveSpread();
         
     }
 

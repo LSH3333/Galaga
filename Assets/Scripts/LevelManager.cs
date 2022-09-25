@@ -15,15 +15,9 @@ public class LevelManager : MonoBehaviour
 
     // 적들 도착 위치 
     public GameObject[] arrivePos;
-    // true면 해당 칸 이미 적이 자리 차지함 
-    private bool[] markArrivePos;
     // 남은 도착 위치 갯수 0이면 남은 자리가 없다는것 
     private int arrivePosLeft;
 
-    
-    // true시 이동 할당된 enemy 
-    private bool[] movingEnemy = new bool[55];
-    private int movingEnemyLeft;
 
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
@@ -51,8 +45,6 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         arrivePosLeft = arrivePos.Length;
-        markArrivePos = new bool[arrivePos.Length];
-        movingEnemyLeft = movingEnemy.Length;
     }
     
     private void Update()
