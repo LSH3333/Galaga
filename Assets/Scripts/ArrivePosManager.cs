@@ -9,8 +9,7 @@ public class ArrivePosManager : MonoBehaviour
     private Vector3 moveVector; // Vector 연산위해 
     private bool moveLeft = true; // true시 obj 왼쪽 이동 
 
-    //private Vector3 targetPos = new Vector3(0f, 4.5f, 0f);
-    //private float t = 0f;
+
 
     private void Start()
     {

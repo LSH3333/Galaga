@@ -22,12 +22,16 @@ public class BezierController : MonoBehaviour
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
     private float speed = 4f;
-    // 최종 도착지점에 도착했음, true시 BezierObjManager에 의해 hovering 상태 됨 
-    private bool arrived = false;
 
-    public bool Arrived { get => arrived; set => arrived = value; }
     public GameObject ArrivePoint { get => arrivePoint; set => arrivePoint = value; }
     public float T_increase { get => t_increase; set => t_increase = value; }
+
+    // 1: 베지어 곡선 따라 이동 중 
+    // 2: 마지막 컨트롤 포인트에서 도착지점으로 이동중 
+    // 3: 도착지점 도착
+    // 4: Attacking 
+    public int status = 1;
+
 
 
     private void Awake()
@@ -140,8 +144,9 @@ public class BezierController : MonoBehaviour
 
     private void StartHovering()
     {
-        if (!arrived)
+        if (status != 3)
         {
+            status = 2;
             obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
             MoveToArrivePos();
         }
@@ -149,8 +154,34 @@ public class BezierController : MonoBehaviour
         // obj가 최종 도착지점에 도착했음
         if (obj.transform.position == ArrivePoint.transform.position)
         {
-            arrived = true;
+            status = 3;
         }
+    }
+
+    // 공격 패턴 지정 
+    private void SetAttackControlPoints()
+    {
+        GameObject o = Resources.Load("Bee_Attack1") as GameObject;
+        Transform cps = o.transform.Find("ControlPoints");
+        int cnt = o.transform.Find("ControlPoints").transform.childCount;
+        controlPoints = new Transform[cnt];
+        print("cnt: " + cnt);
+        int i = 0;
+        foreach(Transform x in cps)
+        {
+            print(x);
+            print(x.position.x + " " + x.position.y);
+            // 여기서 문제 있음 
+            controlPoints[i++].transform.position = new Vector2(x.position.x, x.position.y);
+        }
+    }
+
+    public void StartAttack()
+    {
+        if (status == 4) return;
+        SetAttackControlPoints(); 
+        status = 4;
+        t = 0;
     }
 
     ////////////////////////////////////////////
@@ -164,6 +195,7 @@ public class BezierController : MonoBehaviour
         if (t >= 1)
         {
             StartHovering();
+            status = 2;
         }
         else // 베지어 곡선 따라 이동 중  
         {

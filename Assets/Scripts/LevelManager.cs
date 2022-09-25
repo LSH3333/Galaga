@@ -52,16 +52,16 @@ public class LevelManager : MonoBehaviour
         t += Time.deltaTime * timeSpeed;
 
         // 소환중  
-        if (arrivePosLeft > 0 && t >= 1 && patternIdx < patterns.Length)
+        if (t >= 1 && patternIdx < patterns.Length)
         {
             t = 0;
             OneWave(patterns[patternIdx++]);
         }
 
         // arrivePos 꽉참 (모두 소환 완료) 
-        if (arrivePosLeft <= 0)
+        if (patternIdx >= patterns.Length)
         {
-
+            enemiesList[0].StartAttack();
         }
     }
 
