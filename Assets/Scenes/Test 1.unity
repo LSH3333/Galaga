@@ -1276,6 +1276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 286180428}
+  - component: {fileID: 286180429}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -1297,6 +1298,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &286180429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286180427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 289aeb2929c38164d82d87406b9c50d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &487594717
 GameObject:
   m_ObjectHideFlags: 0
@@ -4453,13 +4466,14 @@ GameObject:
   - component: {fileID: 9086356073459096981}
   - component: {fileID: 7317097871739880234}
   - component: {fileID: 492875775901530105}
+  - component: {fileID: 492875775901530106}
   m_Layer: 0
   m_Name: PATTERN
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &492875775901530105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4498,7 +4512,45 @@ MonoBehaviour:
   - {x: 3.4438e-41, y: 1.8417322e-36, z: 3.4438e-41}
   - {x: 1.8408712e-36, y: 3.4438e-41, z: 1.840148e-36}
   - {x: 3.4438e-41, y: 1.8411467e-36, z: 3.4438e-41}
+  arrivePoint: {fileID: 0}
   status: 1
+--- !u!114 &492875775901530106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 492875775901530104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33ca58c17e22b24eb580a527aa4cac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlPoints:
+  - {fileID: 7620573316710722887}
+  - {fileID: 2528462365727860606}
+  - {fileID: 8302310967319298488}
+  - {fileID: 7616133021252426968}
+  - {fileID: 7121749191348778428}
+  - {fileID: 4678907754604532550}
+  - {fileID: 5589694357219015788}
+  - {fileID: 5392568999942812233}
+  - {fileID: 6801959705118417422}
+  - {fileID: 7567668020877805530}
+  - {fileID: 3375968904510915399}
+  - {fileID: 8678561667307657072}
+  - {fileID: 2092539896603968564}
+  - {fileID: 555639764}
+  - {fileID: 862557972}
+  - {fileID: 167716719}
+  - {fileID: 714718270}
+  - {fileID: 819849595}
+  - {fileID: 825469348}
+  - {fileID: 1567417587}
+  - {fileID: 699872094}
+  - {fileID: 762428795}
+  - {fileID: 569123161}
+  - {fileID: 546531883}
 --- !u!23 &541300423068008336
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7297,6 +7349,7 @@ MonoBehaviour:
   - {x: 1.8414567e-36, y: 3.4438e-41, z: 1.8402513e-36}
   - {x: 3.4438e-41, y: 1.8422832e-36, z: 3.4438e-41}
   - {x: 1.8424382e-36, y: 3.4438e-41, z: 1.8422488e-36}
+  arrivePoint: {fileID: 0}
   status: 1
 --- !u!120 &5058876197534983336
 LineRenderer:
@@ -8857,7 +8910,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &6194007539319887661
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,11 +12,10 @@ public class BezierController : MonoBehaviour
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
-    //public List<Transform> controlPoints;
     public List<Vector3> controlPoints;
 
     // 도착 지점 오브젝트 
-    private GameObject arrivePoint;
+    public GameObject arrivePoint;
 
 
     // 곡선 이동 완료후 자리로 돌아가는 속도 
@@ -132,13 +131,20 @@ public class BezierController : MonoBehaviour
         GameObject o = Resources.Load(attackPattern) as GameObject;
         Transform cps = o.transform.Find("ControlPoints");
 
+        print("arrivePoint: " + arrivePoint.transform.position);        
+
         controlPoints = new List<Vector3>();
         foreach(Transform x in cps)
         {
-            controlPoints.Add(x.position);
+            print("x.position: " + x.position);
+            print("add: " + arrivePoint.transform.position + x.position);
+            controlPoints.Add(arrivePoint.transform.position + x.position);
         }
         // 도착지점에 도달하도록 
         controlPoints.Add(arrivePoint.transform.position);
+
+
+        
     }
 
     public void StartAttack(string attackPattern)

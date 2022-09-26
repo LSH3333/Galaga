@@ -4,11 +4,10 @@ using UnityEngine;
 public class DrawGizmos : MonoBehaviour
 {
     // 조절점들 
-    public List<Transform> controlPoints;
+    public List<Transform> controlPoints = new List<Transform>();
 
     private void Awake()
     {
-        controlPoints = new List<Transform>();
     }
 
     // 두 점 p1, p2을 잇는 선분 위의 점 t값에 따라 이동시킨 지점 리턴 
@@ -52,8 +51,9 @@ public class DrawGizmos : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if (controlPoints == null || controlPoints.Count <= 0) return;
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i].position);
+        foreach (var x in controlPoints) points.Add(x.position);
 
         for (float t = 0; t <= 1; t += 0.05f)
         {
