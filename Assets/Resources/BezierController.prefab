@@ -3550,22 +3550,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 5709764873150542338}
-  controlPoints:
-  - {fileID: 6585871587861366244}
-  - {fileID: 6771431952662364725}
-  - {fileID: 8079012202209638916}
-  - {fileID: 5257024489871594128}
-  - {fileID: 7509305603547504663}
-  - {fileID: 6620393644252413009}
-  - {fileID: 4742708341083147341}
-  - {fileID: 5173858913668077003}
-  - {fileID: 6231096591646456648}
-  - {fileID: 445729514206743974}
-  - {fileID: 3984301162506471690}
-  - {fileID: 6702327666812468100}
-  - {fileID: 7748695342469000546}
-  cppps: []
-  cpCnt: 7
+  controlPoints: []
+  arrivePoint: {fileID: 0}
   status: 1
 --- !u!1 &9012273693781023845
 GameObject:

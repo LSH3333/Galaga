@@ -111,7 +111,7 @@ public class SpawnEnemy : MonoBehaviour
         bc.T_increase = enemySpeed;
         for (int i = 0; i < controlPoints.Count; i++)
         {            
-            bc.controlPoints[i] = new Vector3(controlPoints[i].Key, controlPoints[i].Value, 0f);                       
+            bc.controlPoints.Add(new Vector3(controlPoints[i].Key, controlPoints[i].Value, 0f));
         }
     }
 

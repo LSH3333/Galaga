@@ -34,7 +34,7 @@ public class BezierController : MonoBehaviour
 
     private void Awake()
     {
-
+        controlPoints = new List<Vector3>();
     }
 
     private void Start()
@@ -99,6 +99,8 @@ public class BezierController : MonoBehaviour
     {
         List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i]);
+        // 움직이는 도착지점 갱신 
+        points.Add(ArrivePoint.transform.position);
 
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points, t);
@@ -131,20 +133,14 @@ public class BezierController : MonoBehaviour
         GameObject o = Resources.Load(attackPattern) as GameObject;
         Transform cps = o.transform.Find("ControlPoints");
 
-        print("arrivePoint: " + arrivePoint.transform.position);        
-
         controlPoints = new List<Vector3>();
         foreach(Transform x in cps)
         {
-            print("x.position: " + x.position);
-            print("add: " + arrivePoint.transform.position + x.position);
+            // 도착지점 arrviePoint의 벡터에 패턴지점 x.position 더해서 패턴의 시작지점이 도착지점이 되도록함 
             controlPoints.Add(arrivePoint.transform.position + x.position);
         }
         // 도착지점에 도달하도록 
         controlPoints.Add(arrivePoint.transform.position);
-
-
-        
     }
 
     public void StartAttack(string attackPattern)
