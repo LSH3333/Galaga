@@ -159,28 +159,29 @@ public class BezierController : MonoBehaviour
     }
 
     // 공격 패턴 지정 
-    private void SetAttackControlPoints()
+    private void SetAttackControlPoints(string attackPattern)
     {
-        GameObject o = Resources.Load("Bee_Attack1") as GameObject;
+        GameObject o = Resources.Load(attackPattern) as GameObject;
         Transform cps = o.transform.Find("ControlPoints");
         int cnt = o.transform.Find("ControlPoints").transform.childCount;
         controlPoints = new Transform[cnt];
-        print("cnt: " + cnt);
+
         int i = 0;
         foreach(Transform x in cps)
         {
             print(x);
             print(x.position.x + " " + x.position.y);
-            // 여기서 문제 있음 
+            controlPoints[i] = new GameObject().GetComponent<Transform>();
             controlPoints[i++].transform.position = new Vector2(x.position.x, x.position.y);
         }
     }
 
-    public void StartAttack()
+    public void StartAttack(string attackPattern)
     {
         if (status == 4) return;
-        SetAttackControlPoints(); 
+        SetAttackControlPoints(attackPattern); 
         status = 4;
+        t_increase = 0.2f; // move speed 
         t = 0;
     }
 

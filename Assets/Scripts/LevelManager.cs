@@ -61,7 +61,7 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if (patternIdx >= patterns.Length)
         {
-            enemiesList[0].StartAttack();
+            enemiesList[0].StartAttack("Bee_Attack1");
         }
     }
 
