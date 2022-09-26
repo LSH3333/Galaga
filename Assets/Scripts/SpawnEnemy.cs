@@ -109,7 +109,6 @@ public class SpawnEnemy : MonoBehaviour
         bc.ArrivePoint = arrivePos_List[idx];
 
         bc.T_increase = enemySpeed;
-        bc.cpCnt = controlPoints.Count;
         for (int i = 0; i < controlPoints.Count; i++)
         {            
             bc.controlPoints[i].transform.position = new Vector3(controlPoints[i].Key, controlPoints[i].Value, 0f);                       

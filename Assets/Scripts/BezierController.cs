@@ -12,9 +12,8 @@ public class BezierController : MonoBehaviour
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
-    public Transform[] controlPoints;
-    // 베지어 곡선에 실제로 영향 미치는 조절점 갯수 
-    public int cpCnt;
+    //public Transform[] controlPoints;
+    public List<Transform> controlPoints;
 
     // 도착 지점 오브젝트 
     private GameObject arrivePoint;
@@ -100,7 +99,7 @@ public class BezierController : MonoBehaviour
     private void MoveBezierCurve(float t)
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < cpCnt; i++) points.Add(controlPoints[i].position);
+        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i].position);
 
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points, t);
@@ -132,7 +131,7 @@ public class BezierController : MonoBehaviour
     private void OnDrawGizmos()
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < controlPoints.Length; i++) points.Add(controlPoints[i].position);
+        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i].position);
 
         for (float t = 0; t <= 1; t += 0.05f)
         {
@@ -164,15 +163,11 @@ public class BezierController : MonoBehaviour
         GameObject o = Resources.Load(attackPattern) as GameObject;
         Transform cps = o.transform.Find("ControlPoints");
         int cnt = o.transform.Find("ControlPoints").transform.childCount;
-        controlPoints = new Transform[cnt];
 
-        int i = 0;
+        controlPoints = new List<Transform>();
         foreach(Transform x in cps)
         {
-            print(x);
-            print(x.position.x + " " + x.position.y);
-            controlPoints[i] = new GameObject().GetComponent<Transform>();
-            controlPoints[i++].transform.position = new Vector2(x.position.x, x.position.y);
+            controlPoints.Add(x);
         }
     }
 
@@ -181,7 +176,7 @@ public class BezierController : MonoBehaviour
         if (status == 4) return;
         SetAttackControlPoints(attackPattern); 
         status = 4;
-        t_increase = 0.2f; // move speed 
+        t_increase = 0.1f; // move speed 
         t = 0;
     }
 

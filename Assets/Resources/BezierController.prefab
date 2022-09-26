@@ -3564,7 +3564,9 @@ MonoBehaviour:
   - {fileID: 3984301162506471690}
   - {fileID: 6702327666812468100}
   - {fileID: 7748695342469000546}
+  cppps: []
   cpCnt: 7
+  status: 1
 --- !u!1 &9012273693781023845
 GameObject:
   m_ObjectHideFlags: 0
