@@ -12,8 +12,8 @@ public class BezierController : MonoBehaviour
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
-    //public Transform[] controlPoints;
-    public List<Transform> controlPoints;
+    //public List<Transform> controlPoints;
+    public List<Vector3> controlPoints;
 
     // 도착 지점 오브젝트 
     private GameObject arrivePoint;
@@ -99,7 +99,7 @@ public class BezierController : MonoBehaviour
     private void MoveBezierCurve(float t)
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i].position);
+        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i]);
 
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points, t);
@@ -131,7 +131,7 @@ public class BezierController : MonoBehaviour
     private void OnDrawGizmos()
     {
         List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i].position);
+        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i]);
 
         for (float t = 0; t <= 1; t += 0.05f)
         {
@@ -164,11 +164,12 @@ public class BezierController : MonoBehaviour
         Transform cps = o.transform.Find("ControlPoints");
         int cnt = o.transform.Find("ControlPoints").transform.childCount;
 
-        controlPoints = new List<Transform>();
+        controlPoints = new List<Vector3>();
         foreach(Transform x in cps)
         {
-            controlPoints.Add(x);
+            controlPoints.Add(x.position);
         }
+
     }
 
     public void StartAttack(string attackPattern)
@@ -176,7 +177,7 @@ public class BezierController : MonoBehaviour
         if (status == 4) return;
         SetAttackControlPoints(attackPattern); 
         status = 4;
-        t_increase = 0.1f; // move speed 
+        t_increase = 0.2f; // move speed 
         t = 0;
     }
 
