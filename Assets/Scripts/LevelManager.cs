@@ -15,9 +15,6 @@ public class LevelManager : MonoBehaviour
 
     // 적들 도착 위치 
     public GameObject[] arrivePos;
-    // 남은 도착 위치 갯수 0이면 남은 자리가 없다는것 
-    private int arrivePosLeft;
-
 
     public GameObject BC; // BezierController Prefab
     public SpawnEnemy spawnEnemy;
@@ -33,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public GameObject[] patterns;
     private int patternIdx = 0;
 
+    private bool[] enemiesAttacking = new bool[100];
 
     private void Awake()
     {
@@ -44,7 +42,6 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        arrivePosLeft = arrivePos.Length;
     }
     
     private void Update()
@@ -61,7 +58,12 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if (patternIdx >= patterns.Length)
         {
-            enemiesList[0].StartAttack("Bee_Attack1");
+            // 1회만 명령 내리도록 
+            if(!enemiesAttacking[0])
+            {
+                enemiesAttacking[0] = true;
+                enemiesList[0].StartAttack("Bee_Attack1");
+            }            
         }
     }
 

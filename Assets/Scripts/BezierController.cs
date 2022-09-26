@@ -27,7 +27,7 @@ public class BezierController : MonoBehaviour
 
     // 1: 베지어 곡선 따라 이동 중 
     // 2: 마지막 컨트롤 포인트에서 도착지점으로 이동중 
-    // 3: 도착지점 도착
+    // 3: 도착지점 도착 (Hovering) 
     // 4: Attacking 
     public int status = 1;
 
@@ -162,22 +162,21 @@ public class BezierController : MonoBehaviour
     {
         GameObject o = Resources.Load(attackPattern) as GameObject;
         Transform cps = o.transform.Find("ControlPoints");
-        int cnt = o.transform.Find("ControlPoints").transform.childCount;
 
         controlPoints = new List<Vector3>();
         foreach(Transform x in cps)
         {
             controlPoints.Add(x.position);
         }
-
+        // 도착지점에 도달하도록 
+        controlPoints.Add(arrivePoint.transform.position);
     }
 
     public void StartAttack(string attackPattern)
     {
-        if (status == 4) return;
         SetAttackControlPoints(attackPattern); 
         status = 4;
-        t_increase = 0.2f; // move speed 
+        t_increase = 0.15f; // move speed 
         t = 0;
     }
 
