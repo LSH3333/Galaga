@@ -7208,6 +7208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5058876197508039974}
   - component: {fileID: 5058876197508039975}
+  - component: {fileID: 5058876197508039969}
   m_Layer: 0
   m_Name: BezierController
   m_TagString: Untagged
@@ -7215,6 +7216,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &5058876197508039969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5058876197508039968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33ca58c17e22b24eb580a527aa4cac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlPoints:
+  - {fileID: 5058876196642261246}
+  - {fileID: 5058876197534983339}
+  - {fileID: 5058876198015705048}
+  - {fileID: 5058876198189716999}
+  - {fileID: 780749591}
+  - {fileID: 134776886}
+  - {fileID: 50570708}
+  - {fileID: 213616945}
+  - {fileID: 1559184719}
+  - {fileID: 35348504}
+  - {fileID: 695665440}
+  - {fileID: 487594718}
+  - {fileID: 39481550}
 --- !u!4 &5058876197508039974
 Transform:
   m_ObjectHideFlags: 0
@@ -8823,13 +8850,46 @@ GameObject:
   m_Component:
   - component: {fileID: 3259403638249864513}
   - component: {fileID: 3938696242016756734}
+  - component: {fileID: 6194007539319887661}
   m_Layer: 0
   m_Name: Bee_Attack1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &6194007539319887661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194007539319887660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c33ca58c17e22b24eb580a527aa4cac8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controlPoints:
+  - {fileID: 2286096689237741018}
+  - {fileID: 4741538746165047585}
+  - {fileID: 5224189175048788636}
+  - {fileID: 281088679427037415}
+  - {fileID: 8648935823721956303}
+  - {fileID: 7886874758075739453}
+  - {fileID: 8612319349110541302}
+  - {fileID: 1851357599823481950}
+  - {fileID: 5012687130346955613}
+  - {fileID: 4050473429134154088}
+  - {fileID: 9184831567419226889}
+  - {fileID: 5833509187605083327}
+  - {fileID: 3602560532060416242}
+  - {fileID: 2534154914812598415}
+  - {fileID: 6162892073968269585}
+  - {fileID: 4847319849545489262}
+  - {fileID: 6914647127730454756}
+  - {fileID: 6900889327890425721}
+  - {fileID: 4595752379813150436}
 --- !u!114 &6203923256058671459
 MonoBehaviour:
   m_ObjectHideFlags: 0

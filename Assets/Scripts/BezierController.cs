@@ -108,38 +108,7 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
-
-    /////////////////////// Render Gizmo 
-    Vector3 dfsRenderGizmo(ref List<Vector3> points, float t)
-    {
-        // 점이 하나 남으면 종료 
-        if (points.Count == 1)
-        {
-            Gizmos.DrawSphere(points[0], 0.1f);
-            return points[0];
-        }
-
-        List<Vector3> newPoints = new List<Vector3>();
-        for (int i = 0; i < points.Count - 1; i++)
-        {
-            newPoints.Add(MovePosition(points[i], points[i + 1], t));
-        }
-        return dfsRenderGizmo(ref newPoints, t);
-    }
-
-
-    private void OnDrawGizmos()
-    {
-        List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i]);
-
-        for (float t = 0; t <= 1; t += 0.05f)
-        {
-            Vector3 newPoint = dfsRenderGizmo(ref points, t);
-        }
-    }
-
-    ///////////////////////
+   
 
     private void StartHovering()
     {
