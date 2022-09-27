@@ -30,9 +30,6 @@ public class LevelManager : MonoBehaviour
     public GameObject[] patterns;
     private int patternIdx = 0;
 
-    private bool[] enemiesAttacking = new bool[100];
-
-    public List<GameObject> attackPatterns;
 
     private void Awake()
     {
@@ -44,6 +41,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
+        bee_cool = SetRandomCool();
     }
     
     private void Update()
@@ -61,24 +59,25 @@ public class LevelManager : MonoBehaviour
         if (patternIdx >= patterns.Length)
         {
             OrderAttackBee();
-
-            // 1회만 명령 내리도록 
-            //if(!enemiesAttacking[0])
-            //{
-            //    enemiesAttacking[0] = true;
-            //    enemiesList[0].StartAttack();
-            //}            
+            
         }
     }
 
+    private float SetRandomCool()
+    {
+        return Random.Range(cool_min, cool_max);
+    }
+
+    float cool_min = 5f, cool_max = 7f;
     float bee_time = 0f;
-    float bee_cool = 10f;
+    float bee_cool = 5f;
+    List<BezierController> attackingBees;
     private void OrderAttackBee()
     {
         bee_time += Time.deltaTime;
-        print(bee_time);
         if (bee_time <= bee_cool) return;
         bee_time = 0f;
+        bee_cool = SetRandomCool(); 
 
         List<BezierController> bees = new List<BezierController>();
         foreach(var x in enemiesList)
@@ -92,6 +91,8 @@ public class LevelManager : MonoBehaviour
 
         FindOrderTarget(bees).StartAttack();
     }
+
+
 
     // lists 적들 중 공격 명령 내릴 객체 리턴함 
     private BezierController FindOrderTarget(List<BezierController> lists)
