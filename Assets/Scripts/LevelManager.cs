@@ -60,16 +60,61 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if (patternIdx >= patterns.Length)
         {
+            OrderAttackBee();
+
             // 1회만 명령 내리도록 
-            if(!enemiesAttacking[0])
-            {
-                enemiesAttacking[0] = true;
-                enemiesList[0].StartAttack("Bee_Attack1");
-            }            
+            //if(!enemiesAttacking[0])
+            //{
+            //    enemiesAttacking[0] = true;
+            //    enemiesList[0].StartAttack();
+            //}            
         }
     }
 
+    float bee_time = 0f;
+    float bee_cool = 10f;
+    private void OrderAttackBee()
+    {
+        bee_time += Time.deltaTime;
+        print(bee_time);
+        if (bee_time <= bee_cool) return;
+        bee_time = 0f;
 
+        List<BezierController> bees = new List<BezierController>();
+        foreach(var x in enemiesList)
+        {
+            if (x == null) continue; // destroyed
+            if(x.obj.GetComponent<BezierObjManager>().type == Type.Bee)
+            {
+                bees.Add(x);
+            }
+        }
+
+        FindOrderTarget(bees).StartAttack();
+    }
+
+    // lists 적들 중 공격 명령 내릴 객체 리턴함 
+    private BezierController FindOrderTarget(List<BezierController> lists)
+    {
+        BezierController leftObj = lists[0];
+        BezierController rightObj = lists[0];
+
+        foreach(var x in lists)
+        {
+            if(x.arrivePoint.transform.position.x < leftObj.arrivePoint.transform.position.x)
+            {
+                leftObj = x;
+            }
+            if(x.arrivePoint.transform.position.x > rightObj.arrivePoint.transform.position.x)
+            {
+                rightObj = x;
+            }
+        }
+
+        int leftOrRight = Random.Range(0, 2);
+        if (leftOrRight == 0) return leftObj;
+        else return rightObj;
+    }
 
 
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 

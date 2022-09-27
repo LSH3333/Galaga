@@ -128,7 +128,7 @@ public class BezierController : MonoBehaviour
     }
 
     // 공격 패턴 지정 
-    private void SetAttackControlPoints(string attackPattern)
+    private void SetAttackControlPoints()
     {
         Transform cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern.transform.Find("ControlPoints");
 
@@ -142,9 +142,9 @@ public class BezierController : MonoBehaviour
         controlPoints.Add(arrivePoint.transform.position);
     }
 
-    public void StartAttack(string attackPattern)
+    public void StartAttack()
     {
-        SetAttackControlPoints(attackPattern); 
+        SetAttackControlPoints(); 
         status = 4;
         t_increase = 0.15f; // move speed 
         t = 0;
