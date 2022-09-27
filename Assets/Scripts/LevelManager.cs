@@ -71,7 +71,7 @@ public class LevelManager : MonoBehaviour
     float cool_min = 5f, cool_max = 7f;
     float bee_time = 0f;
     float bee_cool = 5f;
-    List<BezierController> attackingBees;
+    // 죽으면 바로 다른 개체가 공격하도록 수정 필요? 
     private void OrderAttackBee()
     {
         bee_time += Time.deltaTime;
@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
         List<BezierController> bees = new List<BezierController>();
         foreach(var x in enemiesList)
         {
-            if (x == null) continue; // destroyed
+            if (x == null || x.status == 4) continue; // destroyed || attacking 
             if(x.obj.GetComponent<BezierObjManager>().type == Type.Bee)
             {
                 bees.Add(x);
