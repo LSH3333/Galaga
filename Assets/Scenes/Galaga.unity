@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -166,6 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &29936695
 TextMesh:
   serializedVersion: 3
@@ -272,6 +274,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &139581856
 TextMesh:
   serializedVersion: 3
@@ -378,6 +382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &167740858
 TextMesh:
   serializedVersion: 3
@@ -484,6 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &177436045
 TextMesh:
   serializedVersion: 3
@@ -673,6 +681,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &344747661
 TextMesh:
   serializedVersion: 3
@@ -779,6 +789,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &432498395
 TextMesh:
   serializedVersion: 3
@@ -885,6 +897,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &448818588
 TextMesh:
   serializedVersion: 3
@@ -991,6 +1005,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &456040620
 TextMesh:
   serializedVersion: 3
@@ -1097,6 +1113,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &490566358
 TextMesh:
   serializedVersion: 3
@@ -1203,6 +1221,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &502231833
 TextMesh:
   serializedVersion: 3
@@ -1309,6 +1329,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &529274102
 TextMesh:
   serializedVersion: 3
@@ -1415,6 +1437,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &576029930
 TextMesh:
   serializedVersion: 3
@@ -1521,6 +1545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &618825416
 TextMesh:
   serializedVersion: 3
@@ -1627,6 +1653,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &622377904
 TextMesh:
   serializedVersion: 3
@@ -1733,6 +1761,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &680904508
 TextMesh:
   serializedVersion: 3
@@ -1839,6 +1869,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &721614960
 TextMesh:
   serializedVersion: 3
@@ -1945,6 +1977,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &745568159
 TextMesh:
   serializedVersion: 3
@@ -2051,6 +2085,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &763672671
 TextMesh:
   serializedVersion: 3
@@ -2303,6 +2339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &825096289
 TextMesh:
   serializedVersion: 3
@@ -2409,6 +2447,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &828533105
 TextMesh:
   serializedVersion: 3
@@ -2515,6 +2555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &830419505
 TextMesh:
   serializedVersion: 3
@@ -2621,6 +2663,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &840109928
 TextMesh:
   serializedVersion: 3
@@ -2727,6 +2771,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &880526337
 TextMesh:
   serializedVersion: 3
@@ -2833,6 +2879,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &899468608
 TextMesh:
   serializedVersion: 3
@@ -2939,6 +2987,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1169256944
 TextMesh:
   serializedVersion: 3
@@ -3045,6 +3095,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1174239817
 TextMesh:
   serializedVersion: 3
@@ -3151,6 +3203,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1266585477
 TextMesh:
   serializedVersion: 3
@@ -3257,6 +3311,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1297209131
 TextMesh:
   serializedVersion: 3
@@ -3363,6 +3419,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1360744668
 TextMesh:
   serializedVersion: 3
@@ -3561,6 +3619,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1566858197
 TextMesh:
   serializedVersion: 3
@@ -3667,6 +3727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1567533594
 TextMesh:
   serializedVersion: 3
@@ -3834,6 +3896,7 @@ MonoBehaviour:
   - {fileID: 5156353063436275056, guid: 7749203906157814f8e7cf22978ab9c9, type: 3}
   - {fileID: 744101787097094417, guid: ba1c56340fbf8214baa70c6a1595e937, type: 3}
   - {fileID: 364407298612346651, guid: 2dd5f4f8fe22a814dad57f41f925d41c, type: 3}
+  attackPatterns: []
 --- !u!1 &1589667579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3879,6 +3942,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1589667582
 TextMesh:
   serializedVersion: 3
@@ -3985,6 +4050,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1645967052
 TextMesh:
   serializedVersion: 3
@@ -4091,6 +4158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1659493138
 TextMesh:
   serializedVersion: 3
@@ -4197,6 +4266,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1711913963
 TextMesh:
   serializedVersion: 3
@@ -4303,6 +4374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1743452106
 TextMesh:
   serializedVersion: 3
@@ -4479,6 +4552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1887766997
 TextMesh:
   serializedVersion: 3
@@ -4585,6 +4660,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1915096691
 TextMesh:
   serializedVersion: 3
@@ -4691,6 +4768,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &1967836393
 TextMesh:
   serializedVersion: 3
@@ -4797,6 +4876,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+    type: 3}
 --- !u!102 &2137220095
 TextMesh:
   serializedVersion: 3

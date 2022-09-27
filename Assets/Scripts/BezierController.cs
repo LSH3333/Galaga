@@ -130,8 +130,7 @@ public class BezierController : MonoBehaviour
     // 공격 패턴 지정 
     private void SetAttackControlPoints(string attackPattern)
     {
-        GameObject o = Resources.Load(attackPattern) as GameObject;
-        Transform cps = o.transform.Find("ControlPoints");
+        Transform cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern.transform.Find("ControlPoints");
 
         controlPoints = new List<Vector3>();
         foreach(Transform x in cps)

@@ -9,7 +9,8 @@ public class ArrivePosManager : MonoBehaviour
     private Vector3 moveVector; // Vector 연산위해 
     private bool moveLeft = true; // true시 obj 왼쪽 이동 
 
-
+    // 이 ArrivePos 위치의 Obj의 attack pattern 
+    public GameObject attackPattern;
 
     private void Start()
     {

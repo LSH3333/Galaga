@@ -32,6 +32,8 @@ public class LevelManager : MonoBehaviour
 
     private bool[] enemiesAttacking = new bool[100];
 
+    public List<GameObject> attackPatterns;
+
     private void Awake()
     {
         if (singleton == null)
@@ -66,6 +68,8 @@ public class LevelManager : MonoBehaviour
             }            
         }
     }
+
+
 
 
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
