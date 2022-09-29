@@ -44,10 +44,9 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             bee_cools[i] = SetRandomCool();
+            butterfly_cools[i] = SetRandomCool();
+            boss_cools[i] = SetRandomBossCool();
         }
-        butterfly_cool = SetRandomCool();
-        boss_cool = SetRandomBossCool();
-
         
     }
 
@@ -63,7 +62,10 @@ public class LevelManager : MonoBehaviour
             OneWave(patterns[patternIdx++]);
         }
 
-        if (patternIdx >= patterns.Length) startAttack += Time.deltaTime;
+        if (patternIdx >= patterns.Length)
+        {
+            startAttack += Time.deltaTime;
+        }
 
         // arrivePos 꽉참 (모두 소환 완료) 
         if (patternIdx >= patterns.Length && startAttack > 3.5f)
@@ -121,56 +123,100 @@ public class LevelManager : MonoBehaviour
                 attacking.StartAttack();
             }
         }
-
     }
 
-    float butterfly_time = 0f;
-    float butterfly_cool = 5f;
+
+    float[] butterfly_times = { 0f, 0f };
+    float[] butterfly_cools = { 5f, 5f };
+    BezierController[] butterfly_attacking = { null, null };
     private void OrderButterflyAttack()
     {
-        butterfly_time += Time.deltaTime;
-        if (butterfly_time <= butterfly_cool) return;
-        butterfly_time = 0f;
-        butterfly_cool = SetRandomCool();
-
-        List<BezierController> butterflies = new List<BezierController>();
-        foreach (var x in enemiesList)
+        // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
+        for (int i = 0; i < 2; i++)
         {
-            if (x == null || x.status == 4) continue; // destroyed || attacking 
-            if (x.obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
+            if (butterfly_attacking[i] == null || !butterfly_attacking[i].obj.activeInHierarchy)
             {
-                butterflies.Add(x);
+                butterfly_times[i] = butterfly_cools[i];
             }
         }
 
-        FindOrderTarget(butterflies).StartAttack();
+        // 시간 흐름 
+        for (int i = 0; i < 2; i++)
+        {
+            butterfly_times[i] += Time.deltaTime;
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (butterfly_times[i] > butterfly_cools[i])
+            {
+                butterfly_times[i] = 0f;
+                butterfly_cools[i] = SetRandomCool();
+
+                List<BezierController> butterflies = new List<BezierController>();
+                foreach (var x in enemiesList)
+                {
+                    if (x == null || x.status == 4) continue; // destroyed || attacking 
+                    if (x.obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
+                    {
+                        butterflies.Add(x);
+                    }
+                }
+
+                BezierController attacking = FindOrderTarget(butterflies);
+                butterfly_attacking[i] = attacking;
+                attacking.StartAttack();
+            }
+        }
     }
 
-    float boss_cool_min = 8f, boss_cool_max = 12f;
-    float boss_time = 0f;
-    float boss_cool = 5f;
 
+    float boss_cool_min = 8f, boss_cool_max = 12f;
+    float[] boss_times = { 0f, 0f };
+    float[] boss_cools = { 5f, 5f };
+    BezierController[] boss_attacking = { null, null };
     // Boss는 두가지 행동 패턴이 있다 (아직 구현 안함) 
     // 1. Butterfly를 끌고가서 공격하는 행동
     // 2. 빔을 쏴서 player를 끌고가는 행동  
     private void OrderBossAttack()
     {
-        boss_time += Time.deltaTime;
-        if (boss_time <= boss_cool) return;
-        boss_time = 0f;
-        boss_cool = SetRandomBossCool();
-
-        List<BezierController> bosses = new List<BezierController>();
-        foreach (var x in enemiesList)
+        // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
+        for (int i = 0; i < 2; i++)
         {
-            if (x == null || x.status == 4) continue; // destroyed || attacking 
-            if (x.obj.GetComponent<BezierObjManager>().type == Type.Boss)
+            if (boss_attacking[i] == null || !boss_attacking[i].obj.activeInHierarchy)
             {
-                bosses.Add(x);
+                boss_times[i] = boss_cools[i];
             }
         }
 
-        FindOrderTarget(bosses).StartAttack();
+        // 시간 흐름 
+        for (int i = 0; i < 2; i++)
+        {
+            boss_times[i] += Time.deltaTime;
+        }
+
+        for (int i = 0; i < 2; i++)
+        {
+            if (boss_times[i] > boss_cools[i])
+            {
+                boss_times[i] = 0f;
+                boss_cools[i] = SetRandomBossCool();
+
+                List<BezierController> bosses = new List<BezierController>();
+                foreach (var x in enemiesList)
+                {
+                    if (x == null || x.status == 4) continue; // destroyed || attacking 
+                    if (x.obj.GetComponent<BezierObjManager>().type == Type.Boss)
+                    {
+                        bosses.Add(x);
+                    }
+                }
+
+                BezierController attacking = FindOrderTarget(bosses);
+                boss_attacking[i] = attacking;
+                attacking.StartAttack();
+            }
+        }
     }
 
     private float SetRandomBossCool()
