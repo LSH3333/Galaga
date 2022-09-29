@@ -41,9 +41,14 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-        bee_cool = SetRandomCool();
+        for (int i = 0; i < 2; i++)
+        {
+            bee_cools[i] = SetRandomCool();
+        }
         butterfly_cool = SetRandomCool();
         boss_cool = SetRandomBossCool();
+
+        
     }
     
     private void Update()
@@ -71,28 +76,37 @@ public class LevelManager : MonoBehaviour
     
     
 
-    float cool_min = 5f, cool_max = 7f;
-    float bee_time = 0f;
-    float bee_cool = 5f;
-    // 죽으면 바로 다른 개체가 공격하도록 수정 필요? 
+    float cool_min = 7f, cool_max = 10f;
+    float[] bee_times = { 0f, 0f };
+    float[] bee_cools = { 5f, 5f };
     private void OrderAttackBee()
     {
-        bee_time += Time.deltaTime;
-        if (bee_time <= bee_cool) return;
-        bee_time = 0f;
-        bee_cool = SetRandomCool(); 
-
-        List<BezierController> bees = new List<BezierController>();
-        foreach(var x in enemiesList)
+        for(int i = 0; i < 2; i++)
         {
-            if (x == null || x.status == 4) continue; // destroyed || attacking 
-            if(x.obj.GetComponent<BezierObjManager>().type == Type.Bee)
+            bee_times[i] += Time.deltaTime;
+        }
+
+        for(int i = 0; i < 2; i++)
+        {
+            if(bee_times[i] > bee_cools[i])
             {
-                bees.Add(x);
+                bee_times[i] = 0f;
+                bee_cools[i] = SetRandomCool();
+
+                List<BezierController> bees = new List<BezierController>();
+                foreach (var x in enemiesList)
+                {
+                    if (x == null || x.status == 4) continue; // destroyed || attacking 
+                    if (x.obj.GetComponent<BezierObjManager>().type == Type.Bee)
+                    {
+                        bees.Add(x);
+                    }
+                }
+
+                FindOrderTarget(bees).StartAttack();
             }
         }
 
-        FindOrderTarget(bees).StartAttack();
     }
 
     float butterfly_time = 0f;
