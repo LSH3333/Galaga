@@ -49,8 +49,19 @@ public class DrawGizmos : MonoBehaviour
     }
 
 
+    bool find = false;
     private void OnDrawGizmos()
-    {
+    {        
+        if(!find)
+        {
+            find = true;
+            foreach (Transform x in gameObject.transform.Find("ControlPoints"))
+            {
+                controlPoints.Add(x);
+            }
+        }
+        
+
         if (controlPoints == null || controlPoints.Count <= 0) return;
         List<Vector3> points = new List<Vector3>();
         foreach (var x in controlPoints) points.Add(x.position);

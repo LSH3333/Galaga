@@ -89,7 +89,7 @@ public class LevelManager : MonoBehaviour
     private void OrderBeeAttack()
     {
         // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
-        if(bee_attacking[0] != null)
+        if(bee_attacking[0] != null && bee_attacking[1] != null)
         {
             for (int i = 0; i < bee_attacking.Length; i++)
             {
@@ -138,7 +138,7 @@ public class LevelManager : MonoBehaviour
     private void OrderButterflyAttack()
     {
         // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
-        if (butterfly_attacking[0] != null)
+        if (butterfly_attacking[0] != null && butterfly_attacking[1] != null)
         {
             for (int i = 0; i < butterfly_attacking.Length; i++)
             {
@@ -190,7 +190,7 @@ public class LevelManager : MonoBehaviour
     private void OrderBossAttack()
     {
         // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
-        if (boss_attacking[0] != null)
+        if (boss_attacking[0] != null && boss_attacking[1] != null)
         {
             for (int i = 0; i < boss_attacking.Length; i++)
             {

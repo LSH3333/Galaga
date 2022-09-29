@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+  attackPattern: {fileID: 568094835337752681, guid: 505647936e378c9489f45a2a21032c6c,
     type: 3}
 --- !u!102 &167740858
 TextMesh:
@@ -897,7 +897,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
+  attackPattern: {fileID: 150729495952582342, guid: e9986b4cc9b0b514882128ac600f3c82,
     type: 3}
 --- !u!102 &448818588
 TextMesh:
@@ -1977,7 +1977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 6619453834605039869, guid: a86ed61273f3040b293787569f42e685,
+  attackPattern: {fileID: 5955875883761388123, guid: cf0a246965d086b458fce544ef47eb51,
     type: 3}
 --- !u!102 &745568159
 TextMesh:
@@ -2879,7 +2879,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 6619453834605039869, guid: a86ed61273f3040b293787569f42e685,
+  attackPattern: {fileID: 2158788986240467588, guid: b0fa1b6ecc03f2d4293b16e93628be6b,
     type: 3}
 --- !u!102 &899468608
 TextMesh:
@@ -3896,6 +3896,9 @@ MonoBehaviour:
   - {fileID: 5156353063436275056, guid: 7749203906157814f8e7cf22978ab9c9, type: 3}
   - {fileID: 744101787097094417, guid: ba1c56340fbf8214baa70c6a1595e937, type: 3}
   - {fileID: 364407298612346651, guid: 2dd5f4f8fe22a814dad57f41f925d41c, type: 3}
+  bee_attacking:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1589667579
 GameObject:
   m_ObjectHideFlags: 0
@@ -3941,7 +3944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 99380168083774783, guid: d520829d17ddb44aa850de8781152ef0,
+  attackPattern: {fileID: 5438698213138227945, guid: d520829d17ddb44aa850de8781152ef0,
     type: 3}
 --- !u!102 &1589667582
 TextMesh:
@@ -4265,7 +4268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 6619453834605039869, guid: a86ed61273f3040b293787569f42e685,
+  attackPattern: {fileID: 703864014152213592, guid: b4f2450bc41ef884c9f5640cf026237b,
     type: 3}
 --- !u!102 &1711913963
 TextMesh:
