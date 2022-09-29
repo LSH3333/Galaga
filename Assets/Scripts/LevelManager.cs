@@ -42,6 +42,8 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         bee_cool = SetRandomCool();
+        butterfly_cool = SetRandomCool();
+        boss_cool = SetRandomBossCool();
     }
     
     private void Update()
@@ -59,14 +61,15 @@ public class LevelManager : MonoBehaviour
         if (patternIdx >= patterns.Length)
         {
             OrderAttackBee();
-            
+            OrderButterflyAttack();
+            OrderBossAttack(); 
         }
     }
 
-    private float SetRandomCool()
-    {
-        return Random.Range(cool_min, cool_max);
-    }
+
+    ////////////////////////////////////////////////
+    
+    
 
     float cool_min = 5f, cool_max = 7f;
     float bee_time = 0f;
@@ -92,9 +95,66 @@ public class LevelManager : MonoBehaviour
         FindOrderTarget(bees).StartAttack();
     }
 
+    float butterfly_time = 0f;
+    float butterfly_cool = 5f;
+    private void OrderButterflyAttack()
+    {
+        butterfly_time += Time.deltaTime;
+        if (butterfly_time <= butterfly_cool) return;
+        butterfly_time = 0f;
+        butterfly_cool = SetRandomCool();
 
+        List<BezierController> butterflies = new List<BezierController>();
+        foreach (var x in enemiesList)
+        {
+            if (x == null || x.status == 4) continue; // destroyed || attacking 
+            if (x.obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
+            {
+                butterflies.Add(x);
+            }
+        }
 
-    // lists 적들 중 공격 명령 내릴 객체 리턴함 
+        FindOrderTarget(butterflies).StartAttack();
+    }
+
+    float boss_cool_min = 8f, boss_cool_max = 12f;
+    float boss_time = 0f;
+    float boss_cool = 5f;
+
+    // Boss는 두가지 행동 패턴이 있다 (아직 구현 안함) 
+    // 1. Butterfly를 끌고가서 공격하는 행동
+    // 2. 빔을 쏴서 player를 끌고가는 행동  
+    private void OrderBossAttack()
+    {
+        boss_time += Time.deltaTime;
+        if (boss_time <= boss_cool) return;
+        boss_time = 0f;
+        boss_cool = SetRandomBossCool();
+
+        List<BezierController> bosses = new List<BezierController>();
+        foreach (var x in enemiesList)
+        {
+            if (x == null || x.status == 4) continue; // destroyed || attacking 
+            if (x.obj.GetComponent<BezierObjManager>().type == Type.Boss)
+            {
+                bosses.Add(x);
+            }
+        }
+
+        FindOrderTarget(bosses).StartAttack();
+    }
+
+    private float SetRandomBossCool()
+    {
+        return Random.Range(boss_cool_min, boss_cool_max);
+    }
+
+    private float SetRandomCool()
+    {
+        return Random.Range(cool_min, cool_max);
+    }
+
+    // lists 적들 중 공격 명령 내릴 객체 리턴함 (제일 좌측 or 우측에서 선별) 
     private BezierController FindOrderTarget(List<BezierController> lists)
     {
         BezierController leftObj = lists[0];
@@ -117,6 +177,7 @@ public class LevelManager : MonoBehaviour
         else return rightObj;
     }
 
+    ////////////////////////////////////////////////
 
     // spawnTimeRate : 작을수록 적들 빨리 소환됨 
     // enemySpeed : 클수록 적들 이동 속도 빨라짐
