@@ -84,12 +84,18 @@ public class LevelManager : MonoBehaviour
     float[] bee_times = { 0f, 0f };
     float[] bee_cools = { 5f, 5f };
     BezierController[] bee_attacking = { null, null };
+    bool bee_init = false;
     private void OrderBeeAttack()
     {
         // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
         for(int i = 0; i < 2; i++)
         {
-            if(bee_attacking[i] == null || !bee_attacking[i].obj.activeInHierarchy)
+            if(!bee_init)
+            {
+                bee_init = true;
+                bee_times[i] = 0f;
+            }
+            else if(bee_attacking[i] == null || !bee_attacking[i].obj.activeInHierarchy)
             {
                 bee_times[i] = bee_cools[i];
             }
