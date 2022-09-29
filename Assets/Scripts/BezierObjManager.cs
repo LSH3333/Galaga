@@ -11,7 +11,7 @@ public class BezierObjManager : MonoBehaviour
     private int hp;
     // 도착 지점
     public int arrivePos;
-
+    public bool destroyed = false;
 
     private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
     private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);
@@ -68,6 +68,7 @@ public class BezierObjManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "bullet")
         {
+            destroyed = true;
             Destroy(collision.gameObject);
             //Destroy(gameObject);
             gameObject.SetActive(false);
