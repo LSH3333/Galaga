@@ -82,7 +82,7 @@ public class LevelManager : MonoBehaviour
     ////////////////////////////////////////////////
     
     
-    float cool_min = 4f, cool_max = 7f;
+    float cool_min = 6f, cool_max = 10f;
     float[] bee_times = { 0f, 0f };
     float[] bee_cools = { 5f, 5f };
     public BezierController[] bee_attacking = { null, null };
