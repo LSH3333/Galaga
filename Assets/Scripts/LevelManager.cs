@@ -30,6 +30,8 @@ public class LevelManager : MonoBehaviour
     public GameObject[] patterns;
     private int patternIdx = 0;
 
+    // hit sound 
+    public AudioSource hitSound;
 
     private void Awake()
     {

@@ -13,6 +13,8 @@ public class BezierObjManager : MonoBehaviour
     public int arrivePos;
     public bool destroyed = false;
 
+    
+
     private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
     private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);
     private Color green = new Color(50f / 255f, 255f / 255f, 0f / 255f);
@@ -66,11 +68,13 @@ public class BezierObjManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // bullet에 맞음 
         if (collision.gameObject.tag == "bullet")
         {
             hp--;
             if(hp <= 0)
             {
+                LevelManager.singleton.hitSound.Play();
                 destroyed = true;
                 Destroy(collision.gameObject);
                 gameObject.SetActive(false);
