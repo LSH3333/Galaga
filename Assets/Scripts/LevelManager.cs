@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager singleton;
 
+    public GameObject player;
+
     // 적들 도착 위치 
     public GameObject[] arrivePos;
 
@@ -37,6 +39,8 @@ public class LevelManager : MonoBehaviour
     
 
     // 레벨 상태 
+    // 0: 게임 진행 상태 
+    // 1: player 사망 상태 
     public int levelStatus = 0;
     
 
@@ -54,15 +58,14 @@ public class LevelManager : MonoBehaviour
         for (int i = 0; i < 2; i++)
         {
             bee_cools[i] = SetRandomCool();
-            //bee_attacking[i] = Instantiate(Resources.Load("BezierController") as GameObject).GetComponent<BezierController>();
-
             butterfly_cools[i] = SetRandomCool();
             boss_cools[i] = SetRandomBossCool();
         }
         
     }
 
-    private float startAttack = 0f; 
+    private float startAttack = 0f;
+    private float statusTime = 0f;
     private void Update()
     {
         t += Time.deltaTime * timeSpeed;
@@ -88,6 +91,16 @@ public class LevelManager : MonoBehaviour
                 OrderButterflyAttack();
                 OrderBossAttack();
             }            
+            else if(levelStatus == 1)
+            {
+                statusTime += Time.deltaTime;
+                if(statusTime > 8f)
+                {
+                    PlayerResurrection();
+                    
+
+                }
+            }
         }
     }
 
@@ -328,13 +341,20 @@ public class LevelManager : MonoBehaviour
         hitSound.Play();
     }
 
-    public void PlayerDead(Vector3 pos)
+    public void PlayerDead(GameObject player)
     {
-
-        GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
+        GameObject effect = Instantiate(hitEffect, player.transform.position, Quaternion.identity);
         Destroy(effect, 3f);
         levelStatus = 1;
         playerhitSound.Play();
+        player.SetActive(false);
     }
 
+    private void PlayerResurrection()
+    {
+        statusTime = 0f;
+        levelStatus = 0;
+        player.transform.position = new Vector2(0f, -3.9f); // 초기 위치 
+        player.SetActive(true);
+    }
 }

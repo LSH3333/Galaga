@@ -72,8 +72,7 @@ public class PlayerManager : MonoBehaviour
     {
 		if(collision.gameObject.tag == "enemy")
         {
-            LevelManager.singleton.PlayerDead(gameObject.transform.position);
-			gameObject.SetActive(false);
+            LevelManager.singleton.PlayerDead(gameObject);
 		}
     }
 
