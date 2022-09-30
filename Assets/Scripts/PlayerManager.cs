@@ -7,10 +7,13 @@ public class PlayerManager : MonoBehaviour
 	private Vector3 movement;
 	public GameObject bullet;
 
-	private float bulletCoolTime;
-	public float bulletCoolSpeed = .5f;
+	private float bulletCoolTime; // 값 작을수록 shoot 쿨타임 빨리 돌아옴 
+	public float bulletCoolSpeed = 3f; 
 	public int bulletTotalCnt = 2; // bulletCoolTime 동안 쏠수 있는 탄환의 수 
-	private int bulletCnt; 
+	private int bulletCnt;
+
+	// shoot sound 
+	public AudioSource shootSound;
 	
 
 	private void Awake()
@@ -37,13 +40,15 @@ public class PlayerManager : MonoBehaviour
 				if (bulletCnt == bulletTotalCnt) startTime = true;
 
 				Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
+				// sound
+				shootSound.Play();
 				bulletCnt--;
 			}
 		}
 
 		if(startTime) bulletCoolTime += Time.deltaTime * bulletCoolSpeed;
 		// 쿨 다됨 
-		if(bulletCoolTime > 1)
+		if(bulletCoolTime > .5f)
         {
 			bulletCoolTime = 0;
 			startTime = false;
