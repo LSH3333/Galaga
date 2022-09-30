@@ -3997,6 +3997,7 @@ MonoBehaviour:
   - {fileID: 744101787097094417, guid: ba1c56340fbf8214baa70c6a1595e937, type: 3}
   - {fileID: 364407298612346651, guid: 2dd5f4f8fe22a814dad57f41f925d41c, type: 3}
   hitSound: {fileID: 1589184125}
+  hitEffect: {fileID: 125362, guid: a6a2b53243ced7e4fbad66739b8bbece, type: 3}
   bee_attacking:
   - {fileID: 0}
   - {fileID: 0}

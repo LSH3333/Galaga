@@ -32,6 +32,10 @@ public class LevelManager : MonoBehaviour
 
     // hit sound 
     public AudioSource hitSound;
+    public GameObject hitEffect;
+
+
+
 
     private void Awake()
     {
@@ -126,9 +130,12 @@ public class LevelManager : MonoBehaviour
                     }
                 }
 
-                BezierController attacking = FindOrderTarget(bees);
-                bee_attacking[i] = attacking;
-                attacking.StartAttack();
+                if(bees.Count > 0)
+                {
+                    BezierController attacking = FindOrderTarget(bees);
+                    bee_attacking[i] = attacking;
+                    attacking.StartAttack();
+                }                
             }
         }
     }
@@ -174,9 +181,12 @@ public class LevelManager : MonoBehaviour
                     }
                 }
 
-                BezierController attacking = FindOrderTarget(butterflies);
-                butterfly_attacking[i] = attacking;
-                attacking.StartAttack();
+                if(butterflies.Count > 0)
+                {
+                    BezierController attacking = FindOrderTarget(butterflies);
+                    butterfly_attacking[i] = attacking;
+                    attacking.StartAttack();
+                }                
             }
         }
     }
@@ -226,9 +236,13 @@ public class LevelManager : MonoBehaviour
                     }
                 }
 
-                BezierController attacking = FindOrderTarget(bosses);
-                boss_attacking[i] = attacking;
-                attacking.StartAttack();
+                if(bosses.Count > 0)
+                {
+                    BezierController attacking = FindOrderTarget(bosses);
+                    boss_attacking[i] = attacking;
+                    attacking.StartAttack();
+                }
+                
             }
         }
     }
@@ -242,6 +256,9 @@ public class LevelManager : MonoBehaviour
     {
         return Random.Range(cool_min, cool_max);
     }
+
+
+    /// ////////////////////////////////////////////////////
 
     // lists 적들 중 공격 명령 내릴 객체 리턴함 (제일 좌측 or 우측에서 선별) 
     private BezierController FindOrderTarget(List<BezierController> lists)
@@ -294,5 +311,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-   
+    ////////////////////////////////////////////////
+
+    
+    public void EnemyDead(Vector3 pos)
+    {
+        GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
+        Destroy(effect, 3f);
+    }
+
 }
