@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager singleton;
 
+    private int playerHP = 2;
     public GameObject player;
 
     // 적들 도착 위치 
@@ -93,12 +94,17 @@ public class LevelManager : MonoBehaviour
             }            
             else if(levelStatus == 1)
             {
-                statusTime += Time.deltaTime;
-                if(statusTime > 8f)
+                if(playerHP > 0) // 게임 계속 진행 가능 
                 {
-                    PlayerResurrection();
-                    
-
+                    statusTime += Time.deltaTime;
+                    if (statusTime > 8f)
+                    {
+                        PlayerResurrection();
+                    }
+                }
+                else // playerHP 모두 소진 
+                {
+                    // GAME OVER 
                 }
             }
         }
@@ -345,13 +351,14 @@ public class LevelManager : MonoBehaviour
     {
         GameObject effect = Instantiate(hitEffect, player.transform.position, Quaternion.identity);
         Destroy(effect, 3f);
+        playerHP--;
         levelStatus = 1;
         playerhitSound.Play();
         player.SetActive(false);
     }
 
     private void PlayerResurrection()
-    {
+    {        
         statusTime = 0f;
         levelStatus = 0;
         player.transform.position = new Vector2(0f, -3.9f); // 초기 위치 

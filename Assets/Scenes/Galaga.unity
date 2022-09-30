@@ -3947,6 +3947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fdc5a1f7ec5b4ca79bf2a8111190f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 801238645}
   arrivePos:
   - {fileID: 1589667579}
   - {fileID: 899468605}
