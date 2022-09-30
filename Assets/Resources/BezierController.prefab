@@ -2019,7 +2019,7 @@ GameObject:
   - component: {fileID: 2264887306556062659}
   m_Layer: 0
   m_Name: Obj
-  m_TagString: Untagged
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2104,7 +2104,6 @@ MonoBehaviour:
   type: 0
   arrivePos: 0
   destroyed: 0
-  hitSound: {fileID: 2264887306556062659}
 --- !u!61 &8491675445742384492
 BoxCollider2D:
   m_ObjectHideFlags: 0

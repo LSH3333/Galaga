@@ -320,4 +320,10 @@ public class LevelManager : MonoBehaviour
         Destroy(effect, 3f);
     }
 
+    public void PlayerDead(Vector3 pos)
+    {
+        GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
+        Destroy(effect, 3f);
+    }
+
 }

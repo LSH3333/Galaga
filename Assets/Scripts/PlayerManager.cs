@@ -2,7 +2,7 @@
 
 public class PlayerManager : MonoBehaviour
 {
-	public float speed = 20f;
+	public float speed = 3f;
 	private Rigidbody2D rb;
 	private Vector3 movement;
 	public GameObject bullet;
@@ -68,6 +68,14 @@ public class PlayerManager : MonoBehaviour
 		rb.MovePosition(transform.position + (movement * speed * Time.deltaTime));
 	}
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+		if(collision.gameObject.tag == "enemy")
+        {
+            LevelManager.singleton.PlayerDead(gameObject.transform.position);
+			gameObject.SetActive(false);
+		}
+    }
 
 
 }
