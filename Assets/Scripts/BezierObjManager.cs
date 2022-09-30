@@ -74,7 +74,6 @@ public class BezierObjManager : MonoBehaviour
             hp--;
             if(hp <= 0)
             {
-                LevelManager.singleton.hitSound.Play();
                 LevelManager.singleton.EnemyDead(gameObject.transform.position);
                 destroyed = true;
                 Destroy(collision.gameObject);

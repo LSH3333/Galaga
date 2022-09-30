@@ -32,9 +32,13 @@ public class LevelManager : MonoBehaviour
 
     // hit sound 
     public AudioSource hitSound;
+    public AudioSource playerhitSound;
     public GameObject hitEffect;
+    
 
-
+    // 레벨 상태 
+    public int levelStatus = 0;
+    
 
 
     private void Awake()
@@ -78,9 +82,12 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if (patternIdx >= patterns.Length && startAttack > 2f)
         {
-            OrderBeeAttack();
-            OrderButterflyAttack();
-            OrderBossAttack(); 
+            if(levelStatus == 0)
+            {
+                OrderBeeAttack();
+                OrderButterflyAttack();
+                OrderBossAttack();
+            }            
         }
     }
 
@@ -318,12 +325,16 @@ public class LevelManager : MonoBehaviour
     {
         GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(effect, 3f);
+        hitSound.Play();
     }
 
     public void PlayerDead(Vector3 pos)
     {
+
         GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(effect, 3f);
+        levelStatus = 1;
+        playerhitSound.Play();
     }
 
 }
