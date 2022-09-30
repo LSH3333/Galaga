@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
 
 	private float bulletCoolTime;
 	public float bulletCoolSpeed = .5f;
-	private int bulletTotalCnt = 3; // bulletCoolTime 동안 쏠수 있는 탄환의 수 
+	public int bulletTotalCnt = 2; // bulletCoolTime 동안 쏠수 있는 탄환의 수 
 	private int bulletCnt; 
 	
 
@@ -25,10 +25,10 @@ public class PlayerManager : MonoBehaviour
 	{		
 		// move input
 		movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
+		if (movement.x > Camera.main.orthographicSize / 2) return;
 
-		
 		// bullet
-        // 일정 시간 동안 bulletTotalCnt 개의 탄만 쏠수 있음 
+		// 일정 시간 동안 bulletTotalCnt 개의 탄만 쏠수 있음 
 		if (Input.GetKeyDown("space"))
         {
 			if (bulletCnt > 0)
@@ -53,7 +53,11 @@ public class PlayerManager : MonoBehaviour
 	}
 
 	void FixedUpdate()
-	{		
+	{
+		Vector2 nextPos = transform.position + (movement * speed * Time.deltaTime);
+		if (nextPos.x > Camera.main.orthographicSize / 2 || 
+			nextPos.x < Camera.main.orthographicSize / 2 * -1) return;
+
 
 		// 좌우 이동 
 		rb.MovePosition(transform.position + (movement * speed * Time.deltaTime));
