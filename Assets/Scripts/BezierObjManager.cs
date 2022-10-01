@@ -74,11 +74,16 @@ public class BezierObjManager : MonoBehaviour
             hp--;
             if(hp <= 0)
             {
-                LevelManager.singleton.EnemyDead(gameObject.transform.position);
-                destroyed = true;
-                Destroy(collision.gameObject);
+                LevelManager.singleton.EnemyHit(gameObject.transform.position);
+                destroyed = true;                
                 gameObject.SetActive(false);
-            }            
+            }
+            else
+            {
+                spriteRenderer.color = blue;
+            }
+
+            Destroy(collision.gameObject);
         }
     }
 }
