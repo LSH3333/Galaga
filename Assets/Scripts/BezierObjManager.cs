@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 // 적의 본체 obj 
@@ -59,7 +60,13 @@ public class BezierObjManager : MonoBehaviour
     // enemy shoot bullet 
     public void OrderShoot()
     {
-        Instantiate(enemyBullet);
+        StartCoroutine("DelayShoot");
+    }
+
+    IEnumerator DelayShoot()
+    {
+        yield return new WaitForSeconds(1f);
+        Instantiate(enemyBullet, gameObject.transform.position, Quaternion.identity);
     }
 
 

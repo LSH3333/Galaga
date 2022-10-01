@@ -26,7 +26,8 @@ public class LevelManager : MonoBehaviour
    
     private float t, timeSpeed = 0.2f;
 
-    // 소환된 적들 레퍼런스 
+    // 소환된 적들 레퍼런스
+    [HideInInspector]
     public List<BezierController> enemiesList = new List<BezierController>();
 
     // 패턴의 조절점들 식별용 오브젝트 
@@ -41,7 +42,8 @@ public class LevelManager : MonoBehaviour
 
     // 레벨 상태 
     // 0: 게임 진행 상태 
-    // 1: player 사망 상태 
+    // 1: player 사망 상태
+    [HideInInspector]
     public int levelStatus = 0;
     
 
