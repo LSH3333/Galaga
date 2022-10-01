@@ -36,7 +36,7 @@ public class SpawnEnemy : MonoBehaviour
         enemySpeed = _speed;
     }
     
-    ///// new 
+    ///// LevelManager에서 전달받은 pattern 기반으로 소환할 obj들 세팅함 
     public void SetObjs(GameObject pattern, bool mirror)
     {
         // ControlPoints

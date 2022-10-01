@@ -4,14 +4,10 @@ using UnityEngine;
 
 public class TestClass : MonoBehaviour
 {
-    public GameObject[] objs = { null, null };
+    public GameObject enemyBullet;
 
     private void Start()
     {
-        if(objs[0].transform.Find("child") == null)
-        {
-            print("null");
-        }
-            
+        Instantiate(enemyBullet);
     }
 }

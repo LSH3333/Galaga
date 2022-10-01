@@ -86,12 +86,17 @@ public class LevelManager : MonoBehaviour
         // arrivePos 꽉참 (모두 소환 완료) 
         if (patternIdx >= patterns.Length && startAttack > 2f)
         {
+            // 게임 진행중 상태 
             if(levelStatus == 0)
             {
                 OrderBeeAttack();
                 OrderButterflyAttack();
                 OrderBossAttack();
-            }            
+
+                // 여기서 랜덤한 공격중인 개체에게 공격 명령 내리도록
+                
+            }
+            // player 사망 상태 
             else if(levelStatus == 1)
             {
                 if(playerHP > 0) // 게임 계속 진행 가능 

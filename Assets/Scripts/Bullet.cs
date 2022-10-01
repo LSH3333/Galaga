@@ -25,8 +25,6 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
 	{
-
-		// 좌우 이동 
 		rb.MovePosition(transform.position + (movement * bulletSpeed * Time.deltaTime));		
 	}
 

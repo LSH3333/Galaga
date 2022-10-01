@@ -13,7 +13,8 @@ public class BezierObjManager : MonoBehaviour
     public int arrivePos;
     public bool destroyed = false;
 
-    
+    // bullet
+    public GameObject enemyBullet;
 
     private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
     private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);
@@ -54,6 +55,12 @@ public class BezierObjManager : MonoBehaviour
         Vector3 arrviePos = bc.ArrivePoint.transform.position;
         gameObject.transform.position = arrviePos;
     }
+
+    public void OrderShoot()
+    {
+        Instantiate(enemyBullet);
+    }
+
 
     private void Update()
     {
