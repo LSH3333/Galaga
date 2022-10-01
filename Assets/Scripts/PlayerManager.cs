@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-		if(collision.gameObject.tag == "enemy")
+		if(collision.gameObject.tag == "enemy" || collision.gameObject.tag == "enemyBullet")
         {
             LevelManager.singleton.PlayerDead(gameObject);
 		}

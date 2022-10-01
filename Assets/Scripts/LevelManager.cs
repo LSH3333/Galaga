@@ -94,7 +94,7 @@ public class LevelManager : MonoBehaviour
                 OrderBossAttack();
 
                 // 여기서 랜덤한 공격중인 개체에게 공격 명령 내리도록
-                
+
             }
             // player 사망 상태 
             else if(levelStatus == 1)
@@ -117,8 +117,8 @@ public class LevelManager : MonoBehaviour
 
 
     ////////////////////////////////////////////////
-    
-    
+
+
     float cool_min = 6f, cool_max = 10f;
     float[] bee_times = { 0f, 0f };
     float[] bee_cools = { 5f, 5f };

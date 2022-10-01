@@ -56,6 +56,7 @@ public class BezierObjManager : MonoBehaviour
         gameObject.transform.position = arrviePos;
     }
 
+    // enemy shoot bullet 
     public void OrderShoot()
     {
         Instantiate(enemyBullet);
@@ -75,7 +76,7 @@ public class BezierObjManager : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // bullet에 맞음 
+        // bullet에 맞음
         if (collision.gameObject.tag == "bullet")
         {
             hp--;

@@ -2104,6 +2104,8 @@ MonoBehaviour:
   type: 0
   arrivePos: 0
   destroyed: 0
+  enemyBullet: {fileID: 6842871240075476175, guid: 7e48dc9ac66f74b7f86791da225eccd2,
+    type: 3}
 --- !u!61 &8491675445742384492
 BoxCollider2D:
   m_ObjectHideFlags: 0

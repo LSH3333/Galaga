@@ -142,12 +142,20 @@ public class BezierController : MonoBehaviour
         controlPoints.Add(arrivePoint.transform.position);
     }
 
+    public int bulletPercentageMax = 3;
     public void StartAttack()
     {
         SetAttackControlPoints(); 
         status = 4;
         t_increase = 0.15f; // move speed 
         t = 0;
+
+        // 1 / bulletPercentageMax 의 확률로 enemy가 bullet shoot 하도록 함 
+        int range = Random.Range(0, bulletPercentageMax);
+        if(range == 0)
+        {
+            obj.GetComponent<BezierObjManager>().OrderShoot();
+        }
     }
 
     ////////////////////////////////////////////
