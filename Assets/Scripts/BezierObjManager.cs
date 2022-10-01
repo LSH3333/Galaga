@@ -60,7 +60,10 @@ public class BezierObjManager : MonoBehaviour
     // enemy shoot bullet 
     public void OrderShoot()
     {
-        StartCoroutine("DelayShoot");
+        if(gameObject.activeInHierarchy)
+        {
+            StartCoroutine("DelayShoot");
+        }        
     }
 
     IEnumerator DelayShoot()

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float bulletSpeed = .2f;
+    public float bulletSpeed = 20f;
     private Rigidbody2D rb;
     private Vector3 targetPosition;
 
@@ -14,6 +14,8 @@ public class EnemyBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         // bullet 소환시 player가 있던 위치를 향하도록함  
         targetPosition = GameObject.Find("Player").transform.position;
+        rb.velocity = (targetPosition - transform.position) * bulletSpeed;
+
     }
 
     private void Update()
@@ -27,7 +29,6 @@ public class EnemyBullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(transform.position + (targetPosition * bulletSpeed * Time.deltaTime)); ;        
     }
 
 }

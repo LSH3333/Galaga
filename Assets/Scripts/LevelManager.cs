@@ -124,7 +124,7 @@ public class LevelManager : MonoBehaviour
     float cool_min = 6f, cool_max = 10f;
     float[] bee_times = { 0f, 0f };
     float[] bee_cools = { 5f, 5f };
-    public BezierController[] bee_attacking = { null, null };
+    BezierController[] bee_attacking = { null, null };
     private void OrderBeeAttack()
     {
         // 공격 중인 개체가 파괴되었다면 시간을 쿨타임시간 지나도록 설정해 다시 공격 개체 선정하도록함 
