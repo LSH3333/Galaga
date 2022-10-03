@@ -119,16 +119,18 @@ public class BezierController : MonoBehaviour
             if(status == 4 && obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
             {
                 obj.transform.position = new Vector2(0f, 5f);
+                
             }
             // status=2 마지막 컨트롤 포인트에서 도착지점으로 이동중 ... 
             status = 2;
-            obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
+            //obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
             MoveToArrivePos();            
         }
 
         // obj가 최종 도착지점에 도착했음
-        else if (obj.transform.position == ArrivePoint.transform.position)
+        if (obj.transform.position == ArrivePoint.transform.position)
         {
+            obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
             status = 3;
         }
     }
