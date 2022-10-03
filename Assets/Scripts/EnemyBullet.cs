@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public float bulletSpeed = 20f;
+    public float bulletSpeed = .5f;
     private Rigidbody2D rb;
     private Vector3 targetPosition;
 

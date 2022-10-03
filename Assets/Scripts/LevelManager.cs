@@ -20,7 +20,6 @@ public class LevelManager : MonoBehaviour
     public GameObject[] arrivePos;
 
     public GameObject BC; // BezierController Prefab
-    public SpawnEnemy spawnEnemy;
 
     private float speed = 0.4f, spawnRate = 0.1f; 
    
@@ -120,8 +119,8 @@ public class LevelManager : MonoBehaviour
 
     ////////////////////////////////////////////////
 
-
-    float cool_min = 6f, cool_max = 10f;
+    // enemy 공격 쿨의 최솟값 최댓값  
+    public float cool_min = 6f, cool_max = 10f;
     float[] bee_times = { 0f, 0f };
     float[] bee_cools = { 5f, 5f };
     BezierController[] bee_attacking = { null, null };
@@ -225,7 +224,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-    float boss_cool_min = 8f, boss_cool_max = 12f;
+    public float boss_cool_min = 8f, boss_cool_max = 12f;
     float[] boss_times = { 0f, 0f };
     float[] boss_cools = { 5f, 5f };
     BezierController[] boss_attacking = { null, null };
