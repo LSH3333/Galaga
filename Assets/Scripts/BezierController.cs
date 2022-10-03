@@ -6,10 +6,10 @@ using UnityEngine;
 public class BezierController : MonoBehaviour
 {
     // 증가되는 t 값 
-    //private float t;
     // 증가 값, 클수록 적의 움직임이 빠름  
-    private float t_increase;
+    public float t_increase;
     public float t = 0;
+
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
@@ -123,7 +123,6 @@ public class BezierController : MonoBehaviour
             }
             // status=2 마지막 컨트롤 포인트에서 도착지점으로 이동중 ... 
             status = 2;
-            //obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
             MoveToArrivePos();            
         }
 
