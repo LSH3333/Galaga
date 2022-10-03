@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2762,7 +2762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 968026535395619941, guid: 8c6dadf43558c0845b49e4218a4351fc,
+  attackPattern: {fileID: 5969038830756619515, guid: 0b5848382d807444ea4bbebceda86a21,
     type: 3}
 --- !u!102 &840109928
 TextMesh:
@@ -3977,7 +3977,6 @@ MonoBehaviour:
   - {fileID: 880526334}
   - {fileID: 456040617}
   BC: {fileID: 8891872207755545182, guid: d1387661cd81ed44aae2d6b8afff08f6, type: 3}
-  spawnEnemy: {fileID: 0}
   enemiesList: []
   patterns:
   - {fileID: 3582336682901415318, guid: 0e17c463c58ed433186aab268714e129, type: 3}
@@ -3989,9 +3988,10 @@ MonoBehaviour:
   playerhitSound: {fileID: 1589184126}
   hitEffect: {fileID: 125362, guid: a6a2b53243ced7e4fbad66739b8bbece, type: 3}
   levelStatus: 0
-  bee_attacking:
-  - {fileID: 0}
-  - {fileID: 0}
+  cool_min: 10
+  cool_max: 15
+  boss_cool_min: 18
+  boss_cool_max: 25
 --- !u!82 &1589184125
 AudioSource:
   m_ObjectHideFlags: 0

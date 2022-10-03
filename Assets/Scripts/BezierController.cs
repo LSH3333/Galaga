@@ -9,6 +9,7 @@ public class BezierController : MonoBehaviour
     //private float t;
     // 증가 값, 클수록 적의 움직임이 빠름  
     private float t_increase;
+    public float t = 0;
     // 움직이는 대상 
     public GameObject obj;
     // 조절점들 
@@ -100,7 +101,6 @@ public class BezierController : MonoBehaviour
         List<Vector3> points = new List<Vector3>();
         for (int i = 0; i < controlPoints.Count; i++) points.Add(controlPoints[i]);
         // 움직이는 도착지점 갱신 
-        points.Add(ArrivePoint.transform.position);
 
         // newPoint 에는 점의 다음 위치정보 
         Vector3 newPoint = dfs(ref points, t);
@@ -113,15 +113,21 @@ public class BezierController : MonoBehaviour
 
     private void StartHovering()
     {
+        // 아직 도착지점 도달하지 않았다면 도착 지점으로 이동하도록 함 
         if (status != 3)
-        {
+        {        
+            if(status == 4 && obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
+            {
+                obj.transform.position = new Vector2(0f, 5f);
+            }
+            // status=2 마지막 컨트롤 포인트에서 도착지점으로 이동중 ... 
             status = 2;
             obj.transform.rotation = Quaternion.Euler(0, 0, 90f);
-            MoveToArrivePos();
+            MoveToArrivePos();            
         }
 
         // obj가 최종 도착지점에 도착했음
-        if (obj.transform.position == ArrivePoint.transform.position)
+        else if (obj.transform.position == ArrivePoint.transform.position)
         {
             status = 3;
         }
@@ -138,8 +144,12 @@ public class BezierController : MonoBehaviour
             // 도착지점 arrviePoint의 벡터에 패턴지점 x.position 더해서 패턴의 시작지점이 도착지점이 되도록함 
             controlPoints.Add(arrivePoint.transform.position + x.position);
         }
-        // 도착지점에 도달하도록 
-        controlPoints.Add(arrivePoint.transform.position);
+
+        // bee라면 도착지점에 도달하도록  
+        if (obj.GetComponent<BezierObjManager>().type == Type.Bee)
+        {            
+            controlPoints.Add(arrivePoint.transform.position);
+        }        
     }
 
     public int bulletPercentageMax = 3;
@@ -160,11 +170,9 @@ public class BezierController : MonoBehaviour
 
     ////////////////////////////////////////////
 
-    float t = 0;
+    
     private void Update()
     {
-        t += Time.deltaTime * t_increase;
-
         // 곡선 이동 완료
         if (t >= 1)
         {
@@ -173,6 +181,7 @@ public class BezierController : MonoBehaviour
         }
         else // 베지어 곡선 따라 이동 중  
         {
+            t += Time.deltaTime * t_increase;
             MoveBezierCurve(t);
         }
     }
