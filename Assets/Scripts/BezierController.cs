@@ -118,8 +118,7 @@ public class BezierController : MonoBehaviour
         {        
             if(status == 4 && obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
             {
-                obj.transform.position = new Vector2(0f, 5f);
-                
+                obj.transform.position = new Vector2(0f, 5f);                
             }
             // status=2 마지막 컨트롤 포인트에서 도착지점으로 이동중 ... 
             status = 2;
@@ -158,7 +157,16 @@ public class BezierController : MonoBehaviour
     {
         SetAttackControlPoints(); 
         status = 4;
-        t_increase = 0.15f; // move speed 
+        Type type = obj.GetComponent<BezierObjManager>().type;
+        if (type == Type.Bee || type == Type.Boss)
+        {
+            t_increase = 0.15f; // move speed 
+        }
+        else if(type == Type.Butterfly)
+        {
+            t_increase = 0.3f;
+        }
+        
         t = 0;
 
         // 1 / bulletPercentageMax 의 확률로 enemy가 bullet shoot 하도록 함 
