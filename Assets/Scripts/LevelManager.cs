@@ -85,17 +85,16 @@ public class LevelManager : MonoBehaviour
         }
 
         // arrivePos 꽉참 (모두 소환 완료) 
-        if (patternIdx >= patterns.Length && startAttack > 2f)
+        if (patternIdx >= patterns.Length && startAttack > 5f)
         {
             // 게임 진행중 상태 
             if(levelStatus == 0)
             {
+                SetInitAttack();
+
                 OrderBeeAttack();
                 OrderButterflyAttack();
                 OrderBossAttack();
-
-                // 여기서 랜덤한 공격중인 개체에게 공격 명령 내리도록
-
             }
             // player 사망 상태 
             else if(levelStatus == 1)
@@ -119,10 +118,23 @@ public class LevelManager : MonoBehaviour
 
     ////////////////////////////////////////////////
 
+    private bool initAttack = true;
+    private void SetInitAttack()
+    {
+        if (!initAttack) return;
+        initAttack = false;
+        for(int i = 0; i < 2; i++)
+        {
+            bee_times[i] = cool_min - 2f;
+            butterfly_times[i] = cool_min - 2f;
+            boss_times[i] = cool_min - 2f;
+        }
+    }
+
     // enemy 공격 쿨의 최솟값 최댓값  
-    public float cool_min = 6f, cool_max = 10f;
+    public float cool_min = 2f, cool_max = 2f;
     float[] bee_times = { 0f, 0f };
-    float[] bee_cools = { 5f, 5f };
+    float[] bee_cools = { 5f, 5f };    
     BezierController[] bee_attacking = { null, null };
     private void OrderBeeAttack()
     {
@@ -138,7 +150,6 @@ public class LevelManager : MonoBehaviour
             }
         }
         
-
         // 시간 흐름 
         for (int i = 0; i < 2; i++)
         {
