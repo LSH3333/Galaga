@@ -95,6 +95,7 @@ public class LevelManager : MonoBehaviour
                 OrderBeeAttack();
                 OrderButterflyAttack();
                 OrderBossAttack();
+
             }
             // player 사망 상태 
             else if(levelStatus == 1)
@@ -127,7 +128,7 @@ public class LevelManager : MonoBehaviour
         {
             bee_times[i] = cool_min - 2f;
             butterfly_times[i] = cool_min - 2f;
-            boss_times[i] = cool_min - 2f;
+            boss_times[i] = boss_cool_min - 2f;
         }
     }
 

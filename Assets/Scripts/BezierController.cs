@@ -109,17 +109,27 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
-   
+
 
     private void StartHovering()
     {
         // 아직 도착지점 도달하지 않았다면 도착 지점으로 이동하도록 함 
         if (status != 3)
-        {        
-            if(status == 4 && obj.GetComponent<BezierObjManager>().type == Type.Butterfly)
+        {
+            Type type = obj.GetComponent<BezierObjManager>().type;
+            if (status == 4)
             {
-                obj.transform.position = new Vector2(0f, 5f);                
+                if(type == Type.Butterfly)
+                {
+                    obj.transform.position = new Vector2(0f, 5f);
+                }
+               /* else if (type == Type.Boss)
+                {
+                    print("return");
+                    return;
+                }*/
             }
+
             // status=2 마지막 컨트롤 포인트에서 도착지점으로 이동중 ... 
             status = 2;
             MoveToArrivePos();            
@@ -158,7 +168,7 @@ public class BezierController : MonoBehaviour
         SetAttackControlPoints(); 
         status = 4;
         Type type = obj.GetComponent<BezierObjManager>().type;
-        if (type == Type.Bee || type == Type.Boss)
+        if (type == Type.Bee)
         {
             t_increase = 0.15f; // move speed 
         }
@@ -166,6 +176,11 @@ public class BezierController : MonoBehaviour
         {
             t_increase = 0.3f;
         }
+        else if(type == Type.Boss)
+        {
+            t_increase = 0.15f;
+        }
+
         
         t = 0;
 

@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 185512675696217909, guid: a6d2d6239c98c8043a10ca45e35b11ab,
+  attackPattern: {fileID: 7610127528232191524, guid: 6d47a762faef8c34386fdc5bf733cbc7,
     type: 3}
 --- !u!102 &490566358
 TextMesh:
@@ -2214,7 +2214,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801238645}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
