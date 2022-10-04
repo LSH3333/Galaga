@@ -3988,10 +3988,10 @@ MonoBehaviour:
   playerhitSound: {fileID: 1589184126}
   hitEffect: {fileID: 125362, guid: a6a2b53243ced7e4fbad66739b8bbece, type: 3}
   levelStatus: 0
-  cool_min: 10
-  cool_max: 15
-  boss_cool_min: 18
-  boss_cool_max: 25
+  cool_min: 4
+  cool_max: 10
+  boss_cool_min: 4
+  boss_cool_max: 10
 --- !u!82 &1589184125
 AudioSource:
   m_ObjectHideFlags: 0
