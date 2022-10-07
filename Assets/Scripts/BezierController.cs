@@ -115,11 +115,17 @@ public class BezierController : MonoBehaviour
     {
         beaming = true;
         obj.transform.rotation = Quaternion.Euler(0, 0, -90f);
+
+        GameObject beam = LevelManager.singleton.bossBeam;
+        Vector2 spawnPos = new Vector2(obj.transform.position.x, obj.transform.position.y - 0.5f);
+        Instantiate(beam, spawnPos, Quaternion.identity);
+
         StartCoroutine("BeamShooting");
     }
     IEnumerator BeamShooting()
     {
-        yield return new WaitForSeconds(4f);
+        // 빔 쏘면서 머무는 시간 
+        yield return new WaitForSeconds(8f);
         beaming = false;
         RotateDir(arrivePoint.transform.position);
         status = 2;

@@ -44,7 +44,8 @@ public class LevelManager : MonoBehaviour
     // 1: player 사망 상태
     [HideInInspector]
     public int levelStatus = 0;
-    
+
+    public GameObject bossBeam;
 
 
     private void Awake()
