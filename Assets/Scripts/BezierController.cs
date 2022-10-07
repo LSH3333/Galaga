@@ -214,7 +214,7 @@ public class BezierController : MonoBehaviour
         }
         else if(type == Type.Boss)
         {
-            t_increase = 0.15f;
+            t_increase = 0.3f;
         }
 
         

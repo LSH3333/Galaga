@@ -1005,7 +1005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 12961806612325401, guid: ae48432cc9350c740a2a4698cba1c6c5,
+  attackPattern: {fileID: 1499822649623673698, guid: 6bebcfed2c0c7f84c9aa7e57e2b04786,
     type: 3}
 --- !u!102 &456040620
 TextMesh:
@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 7610127528232191524, guid: 6d47a762faef8c34386fdc5bf733cbc7,
+  attackPattern: {fileID: 4872461313320630165, guid: 6dbff71f9f10d8343b517c48cfb093bc,
     type: 3}
 --- !u!102 &490566358
 TextMesh:
@@ -1437,7 +1437,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 7647720302618129966, guid: 3bc7aa23e76a9af43b696931ab004e88,
+  attackPattern: {fileID: 7874928850602705587, guid: 3a615d17d642aac479c408083d981539,
     type: 3}
 --- !u!102 &576029930
 TextMesh:
@@ -2870,7 +2870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d367aa5ec838e414ba56ecb2f35f7ec6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackPattern: {fileID: 4513602323839712390, guid: 3cc35f9a693e4b4449f0221c3584d1d6,
+  attackPattern: {fileID: 216341889735919839, guid: d3eb01bc56fa4c3409a971429bc827dd,
     type: 3}
 --- !u!102 &880526337
 TextMesh:
@@ -3990,8 +3990,8 @@ MonoBehaviour:
   levelStatus: 0
   cool_min: 4
   cool_max: 10
-  boss_cool_min: 4
-  boss_cool_max: 10
+  boss_cool_min: 10
+  boss_cool_max: 30
 --- !u!82 &1589184125
 AudioSource:
   m_ObjectHideFlags: 0
