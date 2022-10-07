@@ -30,12 +30,13 @@ public class BezierController : MonoBehaviour
     // 3: 도착지점 도착 (Hovering) 
     // 4: Attacking 
     public int status = 1;
-
+    private BezierObjManager bezierObjManager;
 
 
     private void Awake()
     {
         controlPoints = new List<Vector3>();
+        bezierObjManager = obj.GetComponent<BezierObjManager>();
     }
 
     private void Start()
@@ -109,6 +110,21 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
+    bool beaming = false;
+    private void BossBeamAttack()
+    {
+        beaming = true;
+        obj.transform.rotation = Quaternion.Euler(0, 0, -90f);
+        StartCoroutine("BeamShooting");
+    }
+    IEnumerator BeamShooting()
+    {
+        yield return new WaitForSeconds(4f);
+        beaming = false;
+        RotateDir(arrivePoint.transform.position);
+        status = 2;
+    }
+
     // int status 
     // 1: 베지어 곡선 따라 이동 중 
     // 2: 마지막 컨트롤 포인트에서 도착지점으로 이동중 
@@ -116,7 +132,7 @@ public class BezierController : MonoBehaviour
     // 4: Attacking 
     private void StartHovering()
     {
-        Type type = obj.GetComponent<BezierObjManager>().type;
+        Type type = bezierObjManager.type;
         
 
         if(status == 1)
@@ -145,6 +161,12 @@ public class BezierController : MonoBehaviour
             }
             else if (type == Type.Boss)
             {
+                // beam attack
+                if(!beaming)
+                {
+                    BossBeamAttack();
+                }
+
                 return;
             }
         }

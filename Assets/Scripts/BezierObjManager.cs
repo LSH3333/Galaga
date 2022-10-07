@@ -73,14 +73,11 @@ public class BezierObjManager : MonoBehaviour
     }
 
 
+    
+
     private void Update()
     {
-        // status == 3 : 도착지점 도달 
-        if(bc.status == 3)
-        {
-            //FollowArrivePos();
-        }
-            
+        
     }
 
 
