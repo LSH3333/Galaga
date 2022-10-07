@@ -11,6 +11,11 @@ public class BeamManager : MonoBehaviour
     private float child2_t = 3f;
     private float end_t = 8f;
 
+    private void Awake()
+    {
+        child2.GetComponent<BoxCollider2D>().enabled = false;
+    }
+
     private void Update()
     {
         t += Time.deltaTime;
@@ -26,6 +31,7 @@ public class BeamManager : MonoBehaviour
         if(t >= child2_t)
         {
             child2.GetComponent<SpriteRenderer>().enabled = true;
+            child2.GetComponent<BoxCollider2D>().enabled = true;
         }
         if(t >= end_t)
         {

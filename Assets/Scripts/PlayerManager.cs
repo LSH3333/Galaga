@@ -74,6 +74,11 @@ public class PlayerManager : MonoBehaviour
         {
             LevelManager.singleton.PlayerDead(gameObject);
 		}
+
+		if (collision.gameObject.tag == "beam")
+        {
+			print("Beam hit");
+        }
     }
 
 
