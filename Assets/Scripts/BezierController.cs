@@ -109,30 +109,44 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
-
-
+    // int status 
+    // 1: 베지어 곡선 따라 이동 중 
+    // 2: 마지막 컨트롤 포인트에서 도착지점으로 이동중 
+    // 3: 도착지점 도착 (Hovering) 
+    // 4: Attacking 
     private void StartHovering()
     {
-        // 아직 도착지점 도달하지 않았다면 도착 지점으로 이동하도록 함 
-        if (status != 3)
-        {
-            Type type = obj.GetComponent<BezierObjManager>().type;
-            if (status == 4)
-            {
-                if(type == Type.Butterfly)
-                {
-                    obj.transform.position = new Vector2(0f, 5f);
-                }
-               /* else if (type == Type.Boss)
-                {
-                    print("return");
-                    return;
-                }*/
-            }
+        Type type = obj.GetComponent<BezierObjManager>().type;
+        
 
-            // status=2 마지막 컨트롤 포인트에서 도착지점으로 이동중 ... 
+        if(status == 1)
+        {
             status = 2;
+        }
+        // 아직 도착지점 도달하지 않았다면 도착 지점으로 이동하도록 함
+        else if (status == 2)
+        {
             MoveToArrivePos();            
+        }
+        else if(status == 3)
+        {
+            MoveToArrivePos();
+        }
+        else if(status == 4)
+        {
+            if(type == Type.Bee)
+            {
+                status = 2;
+            }
+            else if (type == Type.Butterfly)
+            {
+                obj.transform.position = new Vector2(0f, 5f);
+                status = 2;
+            }
+            else if (type == Type.Boss)
+            {
+                return;
+            }
         }
 
         // obj가 최종 도착지점에 도착했음
@@ -201,7 +215,7 @@ public class BezierController : MonoBehaviour
         if (t >= 1)
         {
             StartHovering();
-            status = 2;
+            //status = 2;
         }
         else // 베지어 곡선 따라 이동 중  
         {
