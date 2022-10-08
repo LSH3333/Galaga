@@ -73,12 +73,13 @@ public class PlayerManager : MonoBehaviour
     {
 		if(collision.gameObject.tag == "enemy" || collision.gameObject.tag == "enemyBullet")
         {
-            LevelManager.singleton.PlayerDead(gameObject);
+			LevelManager.singleton.PlayerDead(gameObject, false); ;
 		}
 
+		// beam captured
 		if (collision.gameObject.tag == "beam")
         {
-			LevelManager.singleton.PlayerDead(gameObject);
+			LevelManager.singleton.PlayerDead(gameObject, true);
 			collision.gameObject.GetComponentInParent<BezierController>().SpawnBeamHitPlayer();
 		}
     }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum Type
 {
@@ -48,6 +49,7 @@ public class LevelManager : MonoBehaviour
     public GameObject bossBeam;
     public GameObject beamHitPlayer;
 
+    public GameObject readyText;
 
     private void Awake()
     {
@@ -367,13 +369,17 @@ public class LevelManager : MonoBehaviour
         hitSound.Play();
     }
 
-    public void PlayerDead(GameObject player)
+    public void PlayerDead(GameObject player, bool captured)
     {
-        GameObject effect = Instantiate(hitEffect, player.transform.position, Quaternion.identity);
-        Destroy(effect, 3f);
+        if(!captured)
+        {
+            GameObject effect = Instantiate(hitEffect, player.transform.position, Quaternion.identity);
+            Destroy(effect, 3f);
+            playerhitSound.Play();
+        }
+        
         playerHP--;
-        levelStatus = 1;
-        playerhitSound.Play();
+        levelStatus = 1;        
         player.SetActive(false);
     }
 
@@ -383,5 +389,18 @@ public class LevelManager : MonoBehaviour
         levelStatus = 0;
         player.transform.position = new Vector2(0f, -3.9f); // 초기 위치 
         player.SetActive(true);
+
+        SetText();
+    }
+
+    private void SetText()
+    {
+        readyText.SetActive(true);
+        StartCoroutine("_SetText");
+    }
+    IEnumerator _SetText()
+    {
+        yield return new WaitForSeconds(2f);
+        readyText.SetActive(false);
     }
 }
