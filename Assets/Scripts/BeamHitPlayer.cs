@@ -8,22 +8,48 @@ public class BeamHitPlayer : MonoBehaviour
     private float moveSpeed = 3f;
     private Vector3 goalPos;
 
+    private int status = 0;
+
     private void Update()
     {
-        goalPos = bc.obj.transform.position;
-        goalPos.y += .3f;
-        if (Vector3.Distance(transform.position, goalPos) > .1f)
+        if(status == 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, goalPos, Time.deltaTime * moveSpeed);
-            transform.rotation = Quaternion.Euler(0f, 0f, rot);
-            rot += 10f;
+            goalPos = bc.obj.transform.position;
+            goalPos.y += .3f;
+            if (Vector3.Distance(transform.position, goalPos) > .1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, goalPos, Time.deltaTime * moveSpeed);
+                transform.rotation = Quaternion.Euler(0f, 0f, rot);
+                rot += 10f;
+            }
+            else
+            {
+                transform.position = goalPos;
+                transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            }
         }
-        else
+       else if (status == 1)
         {
-            transform.position = goalPos;
-            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            goalPos = LevelManager.singleton.player.transform.position;
+            goalPos.x += .25f;
+            if (Vector3.Distance(transform.position, goalPos) > .1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, goalPos, Time.deltaTime * moveSpeed);
+                transform.rotation = Quaternion.Euler(0f, 0f, rot);
+                rot += 10f;
+            }
+            else
+            {
+                status = 2;
+                Destroy(gameObject);
+                LevelManager.singleton.player.GetComponent<PlayerManager>().SetChildPlayer();
+            }
         }
+    }
 
+    public void JoinPlayer()
+    {
         
+        status = 1;
     }
 }

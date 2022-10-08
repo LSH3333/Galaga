@@ -14,12 +14,19 @@ public class PlayerManager : MonoBehaviour
 
 	// shoot sound 
 	public AudioSource shootSound;
-	
+
+	public GameObject childPlayer;
 
 	private void Awake()
     {
 		bulletCnt = bulletTotalCnt;
 		rb = GetComponent<Rigidbody2D>();
+    }
+
+	// child player active 
+	public void SetChildPlayer()
+    {
+		childPlayer.SetActive(true);
     }
 
 
@@ -28,6 +35,7 @@ public class PlayerManager : MonoBehaviour
 	{		
 		// move input
 		movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
+		// 화면 밖으로 못 나가도록 
 		if (movement.x > Camera.main.orthographicSize / 2) return;
 
 		// bullet
@@ -40,6 +48,12 @@ public class PlayerManager : MonoBehaviour
 				if (bulletCnt == bulletTotalCnt) startTime = true;
 
 				Instantiate(bullet, gameObject.transform.position, Quaternion.identity);
+				// child player에도 bullet 나가도록 
+				if(childPlayer.activeInHierarchy)
+                {
+					Instantiate(bullet, childPlayer.transform.position, Quaternion.identity);
+				}					
+
 				// sound
 				shootSound.Play();
 				bulletCnt--;
@@ -73,7 +87,8 @@ public class PlayerManager : MonoBehaviour
     {
 		if(collision.gameObject.tag == "enemy" || collision.gameObject.tag == "enemyBullet")
         {
-			LevelManager.singleton.PlayerDead(gameObject, false); ;
+			LevelManager.singleton.PlayerDead(gameObject, false);
+			childPlayer.SetActive(false);
 		}
 
 		// beam captured

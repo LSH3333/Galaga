@@ -76,11 +76,16 @@ public class BezierObjManager : MonoBehaviour
             hp--;
             if(hp <= 0)
             {
+                // beamHitPlayer 갖고 있는 boss가 죽을때 
+                if(type == Type.Boss && bc.beamHitPlayerObj != null)
+                {
+                    bc.beamHitPlayerObj.GetComponent<BeamHitPlayer>().JoinPlayer();
+                }
                 LevelManager.singleton.EnemyHit(gameObject.transform.position);
                 destroyed = true;             
                 bc.gameObject.SetActive(false);
             }
-            else
+            else // boss 
             {
                 spriteRenderer.color = blue;
             }

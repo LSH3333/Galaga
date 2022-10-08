@@ -364,6 +364,7 @@ public class LevelManager : MonoBehaviour
     
     public void EnemyHit(Vector3 pos)
     {
+        print("ENEMY HIT");
         GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(effect, 3f);
         hitSound.Play();
@@ -385,8 +386,6 @@ public class LevelManager : MonoBehaviour
 
     private void PlayerResurrection()
     {        
-        statusTime = 0f;
-        levelStatus = 0;
         player.transform.position = new Vector2(0f, -3.9f); // 초기 위치 
         player.SetActive(true);
 
@@ -402,5 +401,7 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         readyText.SetActive(false);
+        levelStatus = 0;
+        statusTime = 0f;
     }
 }
