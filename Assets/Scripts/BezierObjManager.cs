@@ -50,17 +50,11 @@ public class BezierObjManager : MonoBehaviour
         }
     }
 
-    // ArrivePos를 따라 좌우로 움직임 
-    private void FollowArrivePos()
-    {
-        Vector3 arrviePos = bc.ArrivePoint.transform.position;
-        gameObject.transform.position = arrviePos;
-    }
 
     // enemy shoot bullet 
     public void OrderShoot()
     {
-        if(gameObject.activeInHierarchy)
+        if(gameObject.activeInHierarchy && LevelManager.singleton.player.activeInHierarchy)
         {
             StartCoroutine("DelayShoot");
         }        

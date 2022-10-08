@@ -115,10 +115,11 @@ public class BezierController : MonoBehaviour
     {
         beaming = true;
         obj.transform.rotation = Quaternion.Euler(0, 0, -90f);
-
+        // beam 소환  
         GameObject beam = LevelManager.singleton.bossBeam;
         Vector2 spawnPos = new Vector2(obj.transform.position.x, obj.transform.position.y - 0.5f);
-        Instantiate(beam, spawnPos, Quaternion.identity);
+        GameObject instaniated = Instantiate(beam, spawnPos, Quaternion.identity);
+        instaniated.transform.SetParent(gameObject.transform);
 
         StartCoroutine("BeamShooting");
     }
@@ -129,6 +130,15 @@ public class BezierController : MonoBehaviour
         beaming = false;
         RotateDir(arrivePoint.transform.position);
         status = 2;
+    }
+    
+    public void SpawnBeamHitPlayer()
+    {
+        GameObject beamHitPlayer = LevelManager.singleton.beamHitPlayer;
+        beamHitPlayer.GetComponent<BeamHitPlayer>().bc = this;
+        Instantiate(beamHitPlayer,
+            LevelManager.singleton.player.transform.position, Quaternion.identity);
+          
     }
 
     // int status 

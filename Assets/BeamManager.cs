@@ -13,7 +13,7 @@ public class BeamManager : MonoBehaviour
 
     private void Awake()
     {
-        child2.GetComponent<BoxCollider2D>().enabled = false;
+        gameObject.GetComponent<BoxCollider2D>().enabled = false;
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class BeamManager : MonoBehaviour
         if(t >= child2_t)
         {
             child2.GetComponent<SpriteRenderer>().enabled = true;
-            child2.GetComponent<BoxCollider2D>().enabled = true;
+            gameObject.GetComponent<BoxCollider2D>().enabled = true;
         }
         if(t >= end_t)
         {

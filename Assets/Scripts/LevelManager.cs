@@ -46,6 +46,7 @@ public class LevelManager : MonoBehaviour
     public int levelStatus = 0;
 
     public GameObject bossBeam;
+    public GameObject beamHitPlayer;
 
 
     private void Awake()

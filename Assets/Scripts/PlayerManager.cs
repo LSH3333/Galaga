@@ -68,6 +68,7 @@ public class PlayerManager : MonoBehaviour
 		rb.MovePosition(transform.position + (movement * speed * Time.deltaTime));
 	}
 
+	// 공격 받음 
     private void OnTriggerEnter2D(Collider2D collision)
     {
 		if(collision.gameObject.tag == "enemy" || collision.gameObject.tag == "enemyBullet")
@@ -77,8 +78,9 @@ public class PlayerManager : MonoBehaviour
 
 		if (collision.gameObject.tag == "beam")
         {
-			print("Beam hit");
-        }
+			LevelManager.singleton.PlayerDead(gameObject);
+			collision.gameObject.GetComponentInParent<BezierController>().SpawnBeamHitPlayer();
+		}
     }
 
 
