@@ -67,13 +67,6 @@ public class BezierObjManager : MonoBehaviour
     }
 
 
-    
-
-    private void Update()
-    {
-        
-    }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -84,8 +77,8 @@ public class BezierObjManager : MonoBehaviour
             if(hp <= 0)
             {
                 LevelManager.singleton.EnemyHit(gameObject.transform.position);
-                destroyed = true;                
-                gameObject.SetActive(false);
+                destroyed = true;             
+                bc.gameObject.SetActive(false);
             }
             else
             {

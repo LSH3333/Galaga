@@ -105,7 +105,7 @@ public class LevelManager : MonoBehaviour
                 if(playerHP > 0) // 게임 계속 진행 가능 
                 {
                     statusTime += Time.deltaTime;
-                    if (statusTime > 8f)
+                    if (statusTime > 12f) // 이 시간 이후 플레이어 되살아남 
                     {
                         PlayerResurrection();
                     }
@@ -242,8 +242,8 @@ public class LevelManager : MonoBehaviour
     float[] boss_times = { 0f, 0f };
     float[] boss_cools = { 5f, 5f };
     BezierController[] boss_attacking = { null, null };
-    // Boss는 두가지 행동 패턴이 있다 (아직 구현 안함) 
-    // 1. Butterfly를 끌고가서 공격하는 행동
+    // Boss는 두가지 행동 패턴이 있다 
+    // 1. Butterfly를 끌고가서 공격하는 행동 (아직 구현 안함) 
     // 2. 빔을 쏴서 player를 끌고가는 행동  
     private void OrderBossAttack()
     {

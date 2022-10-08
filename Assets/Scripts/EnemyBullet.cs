@@ -12,10 +12,16 @@ public class EnemyBullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        // bullet 소환시 player가 있던 위치를 향하도록함  
-        targetPosition = GameObject.Find("Player").transform.position;
+        // bullet 소환시 player가 있던 위치를 향하도록함        
+        if(LevelManager.singleton.player.activeInHierarchy)
+        {
+            targetPosition = LevelManager.singleton.player.transform.position;            
+        }
+        else
+        {
+            targetPosition = new Vector3(0f, -3.9f, 0f);
+        }
         rb.velocity = (targetPosition - transform.position) * bulletSpeed;
-
     }
 
     private void Update()
