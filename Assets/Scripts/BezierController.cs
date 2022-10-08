@@ -32,6 +32,9 @@ public class BezierController : MonoBehaviour
     public int status = 1;
     private BezierObjManager bezierObjManager;
 
+    public GameObject beamHitPlayerObj;
+
+
 
     private void Awake()
     {
@@ -110,6 +113,9 @@ public class BezierController : MonoBehaviour
         obj.transform.position = newPoint;
     }
 
+    
+    /// ////////////////////////////////////// Boss Beam Attack 
+    
     bool beaming = false;
     private void BossBeamAttack()
     {
@@ -136,10 +142,12 @@ public class BezierController : MonoBehaviour
     {
         GameObject beamHitPlayer = LevelManager.singleton.beamHitPlayer;
         beamHitPlayer.GetComponent<BeamHitPlayer>().bc = this;
-        Instantiate(beamHitPlayer,
+        beamHitPlayerObj = Instantiate(beamHitPlayer,
             LevelManager.singleton.player.transform.position, Quaternion.identity);
-          
+        
     }
+
+    /// //////////////////////////////////////
 
     // int status 
     // 1: 베지어 곡선 따라 이동 중 
@@ -178,9 +186,13 @@ public class BezierController : MonoBehaviour
             else if (type == Type.Boss)
             {
                 // beam attack
-                if(!beaming)
+                if (!beaming && beamHitPlayerObj == null)
                 {
                     BossBeamAttack();
+                }
+                else if(!beaming)
+                {
+                    status = 2;
                 }
 
                 return;
@@ -198,8 +210,16 @@ public class BezierController : MonoBehaviour
     // 공격 패턴 지정 
     private void SetAttackControlPoints()
     {
-        Transform cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern.transform.Find("ControlPoints");
-
+        Transform cps;
+        if (beamHitPlayerObj == null)
+        {
+            cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern.transform.Find("ControlPoints");
+        }
+        else // boss가 beam hit player 갖고 있는 boss 일 경우 두번째 패턴으로 공격 
+        {
+            cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern2.transform.Find("ControlPoints");
+        }
+            
         controlPoints = new List<Vector3>();
         foreach(Transform x in cps)
         {
@@ -229,8 +249,15 @@ public class BezierController : MonoBehaviour
             t_increase = 0.3f;
         }
         else if(type == Type.Boss)
-        {
-            t_increase = 0.3f;
+        {            
+            if(beamHitPlayerObj != null)
+            {
+                t_increase = 0.15f;
+            }
+            else
+            {
+                t_increase = 0.3f;
+            }
         }
 
         

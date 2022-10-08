@@ -13,7 +13,7 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager singleton;
 
-    private int playerHP = 2;
+    private int playerHP = 3;
     public GameObject player;
 
     // 적들 도착 위치 

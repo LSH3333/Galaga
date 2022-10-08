@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// boss beam 맞은 player 
 public class BeamHitPlayer : MonoBehaviour
 {
     public BezierController bc;
@@ -7,17 +8,10 @@ public class BeamHitPlayer : MonoBehaviour
     private float moveSpeed = 3f;
     private Vector3 goalPos;
 
-    private void Start()
-    {
-        
-    }
-
     private void Update()
     {
-        
-
         goalPos = bc.obj.transform.position;
-        goalPos.y += .5f;
+        goalPos.y += .3f;
         if (Vector3.Distance(transform.position, goalPos) > .1f)
         {
             transform.position = Vector3.MoveTowards(transform.position, goalPos, Time.deltaTime * moveSpeed);

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311915, g: 0.3807396, b: 0.35872662, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -168,6 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 3670863837043683170, guid: 2aa1028b482e35149a42e32f9a579fe7,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &29936695
 TextMesh:
   serializedVersion: 3
@@ -276,6 +277,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 4386563349830780946, guid: d11528f4bca90894894f2b44fc778acc,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &139581856
 TextMesh:
   serializedVersion: 3
@@ -384,6 +386,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 568094835337752681, guid: 505647936e378c9489f45a2a21032c6c,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &167740858
 TextMesh:
   serializedVersion: 3
@@ -492,6 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 2960261821399549170, guid: 16ae5d5f60a85a94cafec14af24c6a8c,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &177436045
 TextMesh:
   serializedVersion: 3
@@ -683,6 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 2984003632096104115, guid: 50e8e970b63bb7a41833374df3ecb4b2,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &344747661
 TextMesh:
   serializedVersion: 3
@@ -791,6 +796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 6851598050774256414, guid: 995fdaf312c6e3a44b52aab0f2d9911a,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &432498395
 TextMesh:
   serializedVersion: 3
@@ -899,6 +905,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 150729495952582342, guid: e9986b4cc9b0b514882128ac600f3c82,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &448818588
 TextMesh:
   serializedVersion: 3
@@ -1006,6 +1013,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 1499822649623673698, guid: 6bebcfed2c0c7f84c9aa7e57e2b04786,
+    type: 3}
+  attackPattern2: {fileID: 3063772743116288876, guid: 5994de5163613c247ab08e49ec655718,
     type: 3}
 --- !u!102 &456040620
 TextMesh:
@@ -1115,6 +1124,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 4872461313320630165, guid: 6dbff71f9f10d8343b517c48cfb093bc,
     type: 3}
+  attackPattern2: {fileID: 185161085329788821, guid: f62eee74b60b5a042b747454b91f0e57,
+    type: 3}
 --- !u!102 &490566358
 TextMesh:
   serializedVersion: 3
@@ -1223,6 +1234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 6619453834605039869, guid: a86ed61273f3040b293787569f42e685,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &502231833
 TextMesh:
   serializedVersion: 3
@@ -1331,6 +1343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 4149264411107964948, guid: 9534eb770e735074491a448c0d8d7af1,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &529274102
 TextMesh:
   serializedVersion: 3
@@ -1438,6 +1451,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 7874928850602705587, guid: 3a615d17d642aac479c408083d981539,
+    type: 3}
+  attackPattern2: {fileID: 5120232935107879976, guid: 0c2b866ce3627ea41ad139b323994d70,
     type: 3}
 --- !u!102 &576029930
 TextMesh:
@@ -1547,6 +1562,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 3096531489299657435, guid: 5df39520ecbad72459be51a8dfc30ce3,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &618825416
 TextMesh:
   serializedVersion: 3
@@ -1655,6 +1671,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5330501558441429303, guid: 22b76c636fc65484abfd60ff906c3c79,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &622377904
 TextMesh:
   serializedVersion: 3
@@ -1763,6 +1780,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 7070382721389872260, guid: 39eba74ea23697442971e611d9c78631,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &680904508
 TextMesh:
   serializedVersion: 3
@@ -1871,6 +1889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 7732823050496731774, guid: dfca671b2b4440f4f962f879d61b8a0f,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &721614960
 TextMesh:
   serializedVersion: 3
@@ -1979,6 +1998,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5955875883761388123, guid: cf0a246965d086b458fce544ef47eb51,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &745568159
 TextMesh:
   serializedVersion: 3
@@ -2087,6 +2107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5467135502092517902, guid: e3ac6813b5f06d24fb409a5632956ec5,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &763672671
 TextMesh:
   serializedVersion: 3
@@ -2214,7 +2235,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801238645}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -2440,6 +2461,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 3971931368435506256, guid: b2fa10087d4171f4b9477e283fa28d63,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &825096289
 TextMesh:
   serializedVersion: 3
@@ -2548,6 +2570,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 8227603940606409983, guid: 0348ae0cc8fe8014688f3ecc0ce67a07,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &828533105
 TextMesh:
   serializedVersion: 3
@@ -2656,6 +2679,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 7960640379234712588, guid: 6cb67ca69fee060488c0dc9eaee38d63,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &830419505
 TextMesh:
   serializedVersion: 3
@@ -2764,6 +2788,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 6278924641879785437, guid: fe7b5fe39c3ed1646b3c2507c624a22e,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &840109928
 TextMesh:
   serializedVersion: 3
@@ -2871,6 +2896,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 216341889735919839, guid: d3eb01bc56fa4c3409a971429bc827dd,
+    type: 3}
+  attackPattern2: {fileID: 7734506896715589979, guid: d12163ae81276cd4eb2b20c85090219d,
     type: 3}
 --- !u!102 &880526337
 TextMesh:
@@ -2980,6 +3007,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 2158788986240467588, guid: b0fa1b6ecc03f2d4293b16e93628be6b,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &899468608
 TextMesh:
   serializedVersion: 3
@@ -3088,6 +3116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 6475342251054390956, guid: 28069bf3fd849cf4cb6bcee5eee994e1,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1169256944
 TextMesh:
   serializedVersion: 3
@@ -3196,6 +3225,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 3860669262042612304, guid: 2849ff8835907f540a2397a524e42f1f,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1174239817
 TextMesh:
   serializedVersion: 3
@@ -3304,6 +3334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5973982908097762667, guid: 52b7a08a6496d40fc9d72f8995ef907c,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1266585477
 TextMesh:
   serializedVersion: 3
@@ -3412,6 +3443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5905549382088803467, guid: 843c6afa630d8c942b2c1783a71ddfae,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1297209131
 TextMesh:
   serializedVersion: 3
@@ -3520,6 +3552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 8059808532810895922, guid: 7b3f38cfb6141144caa927b7b312a462,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1360744668
 TextMesh:
   serializedVersion: 3
@@ -3628,6 +3661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 4942836942563803056, guid: fa888da0809e5a640913f21361450c85,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1566858197
 TextMesh:
   serializedVersion: 3
@@ -3736,6 +3770,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 4544062351771431812, guid: 26abb57f69e50494397c10569e48e49b,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1567533594
 TextMesh:
   serializedVersion: 3
@@ -4143,6 +4178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5438698213138227945, guid: d520829d17ddb44aa850de8781152ef0,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1589667582
 TextMesh:
   serializedVersion: 3
@@ -4251,6 +4287,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 1500784668524862047, guid: 1b3cb3e604d4e4a429dec8b805840f0b,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1645967052
 TextMesh:
   serializedVersion: 3
@@ -4359,6 +4396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5524456643780602996, guid: 7bfe207b2c6e4454aae5be43e2c9006f,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1659493138
 TextMesh:
   serializedVersion: 3
@@ -4467,6 +4505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 703864014152213592, guid: b4f2450bc41ef884c9f5640cf026237b,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1711913963
 TextMesh:
   serializedVersion: 3
@@ -4575,6 +4614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 2472585645485847535, guid: 959596cfd15976b449b4b9bb88e3f3cf,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1743452106
 TextMesh:
   serializedVersion: 3
@@ -4753,6 +4793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 8507328484676045468, guid: f1f3759fe48e55a4f9f602dfb8794135,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1887766997
 TextMesh:
   serializedVersion: 3
@@ -4861,6 +4902,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 6940387015877849619, guid: fff8c70eba67bec4d8da5c2d91376e30,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1915096691
 TextMesh:
   serializedVersion: 3
@@ -4969,6 +5011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 7609632412858128282, guid: 55b8079feacc1554e80f8b90e680b3a8,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &1967836393
 TextMesh:
   serializedVersion: 3
@@ -5077,6 +5120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackPattern: {fileID: 5783974451535252516, guid: 3dfde654930debf44a8cf992748777ea,
     type: 3}
+  attackPattern2: {fileID: 0}
 --- !u!102 &2137220095
 TextMesh:
   serializedVersion: 3

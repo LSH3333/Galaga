@@ -11,6 +11,7 @@ public class ArrivePosManager : MonoBehaviour
 
     // 이 ArrivePos 위치의 Obj의 attack pattern 
     public GameObject attackPattern;
+    public GameObject attackPattern2; // boss용 attack pattern 
 
     private void Start()
     {
