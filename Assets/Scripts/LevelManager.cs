@@ -364,7 +364,6 @@ public class LevelManager : MonoBehaviour
     
     public void EnemyHit(Vector3 pos)
     {
-        print("ENEMY HIT");
         GameObject effect = Instantiate(hitEffect, pos, Quaternion.identity);
         Destroy(effect, 3f);
         hitSound.Play();
