@@ -8,6 +8,8 @@ public class BeamHitPlayer : MonoBehaviour
     private float moveSpeed = 3f;
     private Vector3 goalPos;
 
+    // 0: 보스 빔 맞고 보스에 붙어 있는 상태
+    // 1: 플레이어에게 구출된 상태 
     private int status = 0;
 
     private void Update()
@@ -16,7 +18,7 @@ public class BeamHitPlayer : MonoBehaviour
         {
             goalPos = bc.obj.transform.position;
             goalPos.y += .3f;
-            if (Vector3.Distance(transform.position, goalPos) > .1f)
+            if (Vector3.Distance(transform.position, goalPos) > .3f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, goalPos, Time.deltaTime * moveSpeed);
                 transform.rotation = Quaternion.Euler(0f, 0f, rot);
