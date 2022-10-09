@@ -77,7 +77,6 @@ public class PlayerManager : MonoBehaviour
 		if (nextPos.x > Camera.main.orthographicSize / 2 || 
 			nextPos.x < Camera.main.orthographicSize / 2 * -1) return;
 
-
 		// 좌우 이동 
 		rb.MovePosition(transform.position + (movement * speed * Time.deltaTime));
 	}
@@ -87,8 +86,17 @@ public class PlayerManager : MonoBehaviour
     {
 		if(collision.gameObject.tag == "enemy" || collision.gameObject.tag == "enemyBullet")
         {
-			LevelManager.singleton.PlayerDead(gameObject, false);
-			childPlayer.SetActive(false);
+			if(!childPlayer.activeInHierarchy)
+            {
+				LevelManager.singleton.PlayerDead(gameObject, false);
+				childPlayer.SetActive(false);
+			}
+			else // child player active 상태 
+            {
+				LevelManager.singleton.DeadEffect(gameObject);
+				gameObject.transform.position = childPlayer.transform.position;
+				childPlayer.SetActive(false);				
+            }			
 		}
 
 		// beam captured

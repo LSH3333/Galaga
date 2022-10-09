@@ -380,13 +380,18 @@ public class LevelManager : MonoBehaviour
         hitSound.Play();
     }
 
+    public void DeadEffect(GameObject pos)
+    {
+        GameObject effect = Instantiate(hitEffect, pos.transform.position, Quaternion.identity);
+        Destroy(effect, 3f);
+        playerhitSound.Play();
+    }
+
     public void PlayerDead(GameObject player, bool captured)
     {
         if(!captured)
         {
-            GameObject effect = Instantiate(hitEffect, player.transform.position, Quaternion.identity);
-            Destroy(effect, 3f);
-            playerhitSound.Play();
+            DeadEffect(player);
         }
         
         playerHP--;
