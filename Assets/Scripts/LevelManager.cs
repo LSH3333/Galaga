@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
     public GameObject bossBeam;
     public GameObject beamHitPlayer;
 
+    public GameObject levelText;
     public GameObject readyText;
     public GameObject gameOverText;
     private int score;
@@ -56,9 +57,6 @@ public class LevelManager : MonoBehaviour
 
     private int hearthIdx = 0;
     public Image[] hearthImage; 
-
-
-
 
 
     private void Awake()
@@ -77,7 +75,8 @@ public class LevelManager : MonoBehaviour
             butterfly_cools[i] = SetRandomCool();
             boss_cools[i] = SetRandomBossCool();
         }
-        
+
+        levelText.SetActive(true);
     }
 
     private float startAttack = 0f;
@@ -89,6 +88,7 @@ public class LevelManager : MonoBehaviour
         // 소환중  
         if (t >= 1 && patternIdx < patterns.Length)
         {
+            if (levelText.activeInHierarchy) levelText.SetActive(false);
             t = 0;
             OneWave(patterns[patternIdx++]);
         }
