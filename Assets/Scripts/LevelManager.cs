@@ -51,6 +51,13 @@ public class LevelManager : MonoBehaviour
 
     public GameObject readyText;
 
+    private int hearthIdx = 0;
+    public Image[] hearthImage; 
+
+
+
+
+
     private void Awake()
     {
         if (singleton == null)
@@ -387,7 +394,8 @@ public class LevelManager : MonoBehaviour
     {        
         player.transform.position = new Vector2(0f, -3.9f); // 초기 위치 
         player.SetActive(true);
-
+        hearthImage[hearthIdx++].enabled = false;        
+        statusTime = 0f;
         SetText();
     }
 
@@ -400,7 +408,6 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         readyText.SetActive(false);
-        levelStatus = 0;
-        statusTime = 0f;
+        levelStatus = 0;        
     }
 }
