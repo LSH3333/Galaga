@@ -50,6 +50,9 @@ public class LevelManager : MonoBehaviour
     public GameObject beamHitPlayer;
 
     public GameObject readyText;
+    public GameObject gameOverText;
+    private int score;
+    public Text scoreText;
 
     private int hearthIdx = 0;
     public Image[] hearthImage; 
@@ -121,7 +124,8 @@ public class LevelManager : MonoBehaviour
                 }
                 else // playerHP 모두 소진 
                 {
-                    // GAME OVER 
+                    // GAME OVER
+                    gameOverText.SetActive(true);
                 }
             }
         }
@@ -409,5 +413,18 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         readyText.SetActive(false);
         levelStatus = 0;        
+    }
+
+
+    public void AddScore(Type type)
+    {
+        int _score = 0;
+        if (type == Type.Bee) _score = 10;
+        else if (type == Type.Butterfly) _score = 20;
+        else _score = 30;
+        score += _score;
+        string str = score.ToString();
+        while(str.Length < 5) str = "0" + str;
+        scoreText.text = str;
     }
 }

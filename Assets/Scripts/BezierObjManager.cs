@@ -84,6 +84,7 @@ public class BezierObjManager : MonoBehaviour
                 LevelManager.singleton.EnemyHit(gameObject.transform.position);
                 destroyed = true;             
                 bc.gameObject.SetActive(false);
+                LevelManager.singleton.AddScore(type);
             }
             else // boss 
             {
