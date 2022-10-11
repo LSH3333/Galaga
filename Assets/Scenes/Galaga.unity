@@ -2661,7 +2661,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 801238645}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -4595,6 +4595,7 @@ MonoBehaviour:
   cool_max: 10
   boss_cool_min: 10
   boss_cool_max: 30
+  bossBeamAttacking: 0
 --- !u!82 &1589184125
 AudioSource:
   m_ObjectHideFlags: 0
