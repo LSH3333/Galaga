@@ -156,8 +156,7 @@ public class BezierController : MonoBehaviour
     // 4: Attacking 
     private void StartHovering()
     {
-        Type type = bezierObjManager.type;
-        
+        Type type = bezierObjManager.type;        
 
         if(status == 1)
         {
@@ -185,22 +184,30 @@ public class BezierController : MonoBehaviour
             }
             else if (type == Type.Boss)
             {
-                // beam attack
-                if (!beaming &&
-                    LevelManager.singleton.player.GetComponent<PlayerManager>().childPlayer.activeInHierarchy)
+                // beam attack 하는 pattern1 보스 
+                if(thisBossBeamAttacking)
                 {
-                    status = 2;
-                }
-                else if (!beaming && beamHitPlayerObj == null)
-                {
-                    BossBeamAttack();
-                }                
-                else if(!beaming)
-                {
-                    status = 2;
-                }
+                    // beam
+                    if (!beaming)
+                    {
+                        if (LevelManager.singleton.player.GetComponent<PlayerManager>().childPlayer.activeInHierarchy)
+                        {
+                            status = 2;
+                        }
+                        else if (beamHitPlayerObj == null)
+                        {
+                            BossBeamAttack();
+                        }
+                    }
 
-                return;
+                    return;
+                }
+                // beam attack 하지 않는 pattern2 보스  
+                else
+                {
+
+                }
+                
             }
         }
 
@@ -212,24 +219,30 @@ public class BezierController : MonoBehaviour
         }
     }
 
+    private bool thisBossBeamAttacking = false;
     // 공격 패턴 지정 
     private void SetAttackControlPoints()
     {
         Transform cps;
-        if (bezierObjManager.type == Type.Boss &&
-            LevelManager.singleton.player.GetComponent<PlayerManager>().childPlayer.activeInHierarchy)
+        if(bezierObjManager.type == Type.Boss)
         {
-            cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern2.transform.Find("ControlPoints");
+            if(beamHitPlayerObj == null)
+            {
+                cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern.transform.Find("ControlPoints");
+                thisBossBeamAttacking = true;
+            }
+            else
+            {
+                cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern2.transform.Find("ControlPoints");
+                thisBossBeamAttacking = false;
+            }
         }
-        else if (beamHitPlayerObj == null)
+        else
         {
             cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern.transform.Find("ControlPoints");
-        }        
-        else // boss가 beam hit player 갖고 있는 boss 일 경우 두번째 패턴으로 공격 
-        {
-            cps = arrivePoint.GetComponent<ArrivePosManager>().attackPattern2.transform.Find("ControlPoints");
         }
-            
+
+
         controlPoints = new List<Vector3>();
         foreach(Transform x in cps)
         {
@@ -290,7 +303,6 @@ public class BezierController : MonoBehaviour
         if (t >= 1)
         {
             StartHovering();
-            //status = 2;
         }
         else // 베지어 곡선 따라 이동 중  
         {
