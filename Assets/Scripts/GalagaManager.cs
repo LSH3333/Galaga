@@ -16,6 +16,11 @@ public class GalagaManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        AudioListener.volume = 0.3f;
+    }
+
     public void RestartScene()
     {
         // Get the current active scene
