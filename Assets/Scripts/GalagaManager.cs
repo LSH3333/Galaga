@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GalagaManager : MonoBehaviour
 {
@@ -15,6 +16,13 @@ public class GalagaManager : MonoBehaviour
         }
     }
 
+    public void RestartScene()
+    {
+        // Get the current active scene
+        Scene currentScene = SceneManager.GetActiveScene();
 
+        // Reload the current active scene
+        SceneManager.LoadScene(currentScene.name);
+    }
 
 }

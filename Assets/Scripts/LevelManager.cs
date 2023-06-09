@@ -51,7 +51,7 @@ public class LevelManager : MonoBehaviour
 
     public GameObject levelText;
     public GameObject readyText;
-    public GameObject gameOverText;
+    public GameObject gameOver;    
     private int score;
     public Text scoreText;
 
@@ -125,7 +125,8 @@ public class LevelManager : MonoBehaviour
                 else // playerHP 모두 소진 
                 {
                     // GAME OVER
-                    gameOverText.SetActive(true);
+                    //gameOverText.SetActive(true);
+                    gameOver.SetActive(true);
                 }
             }
         }
