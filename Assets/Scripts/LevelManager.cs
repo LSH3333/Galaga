@@ -38,6 +38,8 @@ public class LevelManager : MonoBehaviour
     public AudioSource hitSound;
     public AudioSource playerhitSound;
     public GameObject hitEffect;
+
+    private int deadEnemyCnt = 0;
     
 
     // 레벨 상태 
@@ -125,7 +127,6 @@ public class LevelManager : MonoBehaviour
                 else // playerHP 모두 소진 
                 {
                     // GAME OVER
-                    //gameOverText.SetActive(true);
                     gameOver.SetActive(true);
                 }
             }
@@ -433,5 +434,13 @@ public class LevelManager : MonoBehaviour
         string str = score.ToString();
         while(str.Length < 5) str = "0" + str;
         scoreText.text = str;
+
+        deadEnemyCnt++;
+        // 적 모두 처치 시 
+        if(deadEnemyCnt == enemiesList.Count)
+        {
+            // GAME OVER
+            gameOver.SetActive(true);
+        }
     }
 }
