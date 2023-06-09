@@ -5,8 +5,14 @@ using UnityEngine;
 // 적의 본체 obj 
 public class BezierObjManager : MonoBehaviour
 {
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     public BezierController bc;
+    public Animator animator;
+
+    public RuntimeAnimatorController enemy1_controller;
+    public RuntimeAnimatorController enemy2_controller;
+    public RuntimeAnimatorController enemy3_controller;
+    public RuntimeAnimatorController enemy4_controller;
 
     public Type type;
     private int hp;
@@ -17,16 +23,16 @@ public class BezierObjManager : MonoBehaviour
     // bullet
     public GameObject enemyBullet;
 
-    private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
-    private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);
-    private Color green = new Color(50f / 255f, 255f / 255f, 0f / 255f);
-    private Color blue = new Color(0f / 255f, 125f / 255f, 255f / 255f);
-
+    //private Color yellow = new Color(255f/255f, 200f/255f, 0/255f);
+    //private Color red = new Color(255f / 255f, 0f / 255f, 0f / 255f);
+    //private Color green = new Color(50f / 255f, 255f / 255f, 0f / 255f);
+    //private Color blue = new Color(0f / 255f, 125f / 255f, 255f / 255f);
 
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        bc = GetComponentInParent<BezierController>();
     }
 
 
@@ -36,17 +42,17 @@ public class BezierObjManager : MonoBehaviour
         if(type == Type.Bee)
         {
             hp = 1;
-            spriteRenderer.color = yellow;
+            animator.runtimeAnimatorController = enemy1_controller;
         }
         else if(type == Type.Butterfly)
         {
             hp = 1;
-            spriteRenderer.color = red;
+            animator.runtimeAnimatorController = enemy2_controller;
         }
         else if(type == Type.Boss)
         {
             hp = 2;
-            spriteRenderer.color = green;
+            animator.runtimeAnimatorController = enemy3_controller;
         }
     }
 
@@ -86,9 +92,9 @@ public class BezierObjManager : MonoBehaviour
                 bc.gameObject.SetActive(false);
                 LevelManager.singleton.AddScore(type);
             }
-            else // boss 
+            else // boss hit 
             {
-                spriteRenderer.color = blue;
+                animator.runtimeAnimatorController = enemy4_controller;
             }
 
             Destroy(collision.gameObject);
