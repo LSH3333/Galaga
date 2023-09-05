@@ -33,6 +33,10 @@ public class PlayerManager : MonoBehaviour
 	bool startTime = false;
     void Update()
 	{		
+		if(LevelManager.singleton.levelStatus == 2)
+        {
+			return;
+        }
 		// move input
 		movement = new Vector2(Input.GetAxisRaw("Horizontal"), 0f);
 		// 화면 밖으로 못 나가도록 
@@ -73,6 +77,11 @@ public class PlayerManager : MonoBehaviour
 
 	void FixedUpdate()
 	{
+		if (LevelManager.singleton.levelStatus == 2)
+		{
+			return;
+		}
+
 		Vector2 nextPos = transform.position + (movement * speed * Time.deltaTime);
 		if (nextPos.x > Camera.main.orthographicSize / 2 || 
 			nextPos.x < Camera.main.orthographicSize / 2 * -1) return;

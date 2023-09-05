@@ -305,6 +305,11 @@ public class BezierController : MonoBehaviour
     
     private void Update()
     {
+        if(LevelManager.singleton.levelStatus == 2)
+        {
+            return;
+        }
+
         // 곡선 이동 완료
         if (t >= 1)
         {

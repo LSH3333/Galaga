@@ -25,6 +25,10 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
 	{
+		if (LevelManager.singleton.levelStatus == 2)
+		{
+			return;
+		}
 		rb.MovePosition(transform.position + (movement * bulletSpeed * Time.deltaTime));		
 	}
 

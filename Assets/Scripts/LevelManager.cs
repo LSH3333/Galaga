@@ -45,6 +45,7 @@ public class LevelManager : MonoBehaviour
     // 레벨 상태 
     // 0: 게임 진행 상태 
     // 1: player 사망 상태
+    // 2: pause 
     [HideInInspector]
     public int levelStatus = 0;
 
@@ -53,12 +54,15 @@ public class LevelManager : MonoBehaviour
 
     public GameObject levelText;
     public GameObject readyText;
-    public GameObject gameOver;    
+    public GameObject gameOver;
+    
     private int score;
     public Text scoreText;
 
     private int hearthIdx = 0;
-    public Image[] hearthImage; 
+    public Image[] hearthImage;
+    
+
 
 
     private void Awake()
@@ -85,6 +89,10 @@ public class LevelManager : MonoBehaviour
     private float statusTime = 0f;
     private void Update()
     {
+        if(levelStatus == 2)
+        {
+            return;
+        }
         t += Time.deltaTime * timeSpeed;
 
         // 소환중  
