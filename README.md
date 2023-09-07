@@ -1,9 +1,12 @@
 # Galaga
 
-<img src="https://github.com/LSH3333/Instaweb/assets/62237852/a2accc01-d3d1-432a-9021-bf3dbb0ed7e9.png" width="70%" height="70%"/>
+<img src="https://github.com/LSH3333/Galaga/assets/62237852/c46b3c31-a3c8-4f44-b895-c61c460785c0.png" width="40%" height="40%"/>
+
+<img src="https://github.com/LSH3333/Galaga/assets/62237852/c10f06e2-421b-441c-8da0-152d6aacb5a9.png" width="40%" height="40%"/>
 
 <br/>
 <br/>
+
 
 
 베지어 곡선을 이용한 적들의 곡선 이동 구현. 
