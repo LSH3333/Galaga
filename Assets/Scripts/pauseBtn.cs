@@ -42,7 +42,6 @@ public class pauseBtn : MonoBehaviour
 
     private void Update()
     {
-        print(timer);
         if(LevelManager.singleton.levelStatus == 2)
         {
             // Update the timer
