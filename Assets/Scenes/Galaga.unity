@@ -685,7 +685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 07eca9a1a43b8cd4cbfd05ec7eacf695, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1b33c4286fa92db4eb7222f19fe38e04, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5343,7 +5343,7 @@ MonoBehaviour:
   hitSound: {fileID: 1589184125}
   playerhitSound: {fileID: 1589184126}
   hitEffect: {fileID: 125362, guid: a6a2b53243ced7e4fbad66739b8bbece, type: 3}
-  levelStatus: 0
+  levelStatus: 2
   bossBeam: {fileID: 2830389950372273124, guid: 9ad74a3b2e01a8944bba09e0ff1b9be3,
     type: 3}
   beamHitPlayer: {fileID: 7398692831943530351, guid: 2681bce1dd5ae41eca3a755f40a55caa,

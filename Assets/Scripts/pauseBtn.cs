@@ -11,6 +11,11 @@ public class pauseBtn : MonoBehaviour
     public Sprite playSprite;
     public GameObject restartBtn;
 
+    // blink effect 
+    private float blinkInterval = 1f; 
+    private float timer;
+    private bool isVisible = true;
+
     private void Awake()
     {
         image = gameObject.GetComponent<Image>();
@@ -32,6 +37,35 @@ public class pauseBtn : MonoBehaviour
             LevelManager.singleton.levelStatus = 2;
             image.sprite = playSprite;
             restartBtn.SetActive(true);
+        }
+    }
+
+    private void Update()
+    {
+        print(timer);
+        if(LevelManager.singleton.levelStatus == 2)
+        {
+            // Update the timer
+            timer += Time.deltaTime;
+
+            // Check if it's time to toggle visibility
+            if (timer >= blinkInterval)
+            {
+                // Toggle visibility
+                isVisible = !isVisible;
+
+                if(isVisible)
+                {
+                    image.color = Color.white;
+                } 
+                else
+                {
+                    image.color = Color.gray;
+                }
+
+                // Reset the timer
+                timer = 0f;
+            }
         }
     }
 

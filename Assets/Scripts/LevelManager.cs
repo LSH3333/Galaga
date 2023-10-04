@@ -47,7 +47,7 @@ public class LevelManager : MonoBehaviour
     // 1: player 사망 상태
     // 2: pause 
     [HideInInspector]
-    public int levelStatus = 0;
+    public int levelStatus = 2;
 
     public GameObject bossBeam;
     public GameObject beamHitPlayer;
@@ -83,6 +83,7 @@ public class LevelManager : MonoBehaviour
         }
 
         levelText.SetActive(true);
+        levelStatus = 2;
     }
 
     private float startAttack = 0f;
