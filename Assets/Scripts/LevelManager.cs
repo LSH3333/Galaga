@@ -444,8 +444,8 @@ public class LevelManager : MonoBehaviour
         scoreText.text = str;
 
         deadEnemyCnt++;
-        // 적 모두 처치 시 
-        if(deadEnemyCnt == enemiesList.Count)
+        // 적 모두 소환 완료 && 모두 처치 시 
+        if(enemiesList.Count >= 40 && deadEnemyCnt == enemiesList.Count)
         {
             // GAME OVER
             gameOver.SetActive(true);
